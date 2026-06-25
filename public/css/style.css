@@ -1,0 +1,94 @@
+/* 
+    Estilos personalizados de WS-ROOMS
+    Aplicación de diseño premium basado en Bootstrap 5
+*/
+
+:root {
+    --primary-color: #4e73df;
+    --secondary-color: #858796;
+    --success-color: #1cc88a;
+    --info-color: #36b9cc;
+    --warning-color: #f6c23e;
+    --danger-color: #e74a3b;
+    --dark-color: #5a5c69;
+    --light-color: #f8f9fc;
+}
+
+body {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+}
+
+/* Modificaciones de Cards */
+.card {
+    border-radius: 0.75rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 2rem 0 rgba(58, 59, 69, 0.2);
+}
+
+/* Auth Cards Específico */
+.auth-card {
+    border-radius: 1.5rem;
+    overflow: hidden;
+}
+
+.auth-cover {
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+
+/* Botones Premium */
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #224abe;
+    border-color: #224abe;
+    box-shadow: 0 4px 10px rgba(78, 115, 223, 0.4);
+}
+
+/* Inputs de Formulario (Floating Labels) */
+.form-floating > .form-control {
+    border-radius: 0.5rem;
+    border: 1px solid #d1d3e2;
+}
+
+.form-floating > .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.25);
+}
+
+/* Utilidades de sombra */
+.shadow-sm {
+    box-shadow: 0 0.125rem 0.25rem 0 rgba(58, 59, 69, 0.2) !important;
+}
+
+.shadow {
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15) !important;
+}
+
+.text-gray-300 {
+    color: #dddfeb !important;
+}
+
+.text-gray-600 {
+    color: #858796 !important;
+}
+
+.text-gray-800 {
+    color: #5a5c69 !important;
+}
