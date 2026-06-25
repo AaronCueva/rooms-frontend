@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800"><?php echo htmlspecialchars($titulo ?? 'Gestión de Foros'); ?></h1>
+        <h1 class="h3 mb-0"><?php echo htmlspecialchars($titulo ?? 'Gestión de Foros'); ?></h1>
     </div>
 
     <!-- DataTales Example -->
@@ -41,7 +41,7 @@
                                     </td>
                                     <td>
                                         <div class="d-flex flex-column">
-                                            <small><i class="fas fa-comment me-1 text-secondary"></i> <?php echo htmlspecialchars($foro['total_comentarios'] ?? 0); ?> comentarios</small>
+                                            <small><i class="fas fa-comment me-1"></i> <?php echo htmlspecialchars($foro['total_comentarios'] ?? 0); ?> comentarios</small>
                                             <small><i class="fas fa-heart me-1 text-danger"></i> <?php echo htmlspecialchars($foro['total_reacciones'] ?? 0); ?> reacciones</small>
                                         </div>
                                     </td>
