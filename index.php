@@ -38,6 +38,7 @@ $router->post('/login', 'AuthController', 'authenticate');
 $router->get('/register', 'AuthController', 'register');
 $router->post('/register', 'AuthController', 'storeUser');
 $router->get('/logout', 'AuthController', 'logout');
+$router->get('/api/ubicaciones', 'AuthController', 'getUbicaciones');
 
 // Rutas de Administrador (Generales)
 $router->get('/admin', 'AdminController', 'dashboard');

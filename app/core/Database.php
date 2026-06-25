@@ -4,7 +4,8 @@ namespace App\Core;
 use PDO;
 use PDOException;
 
-class Database {
+class Database
+{
     private static $instance = null;
     private $conn;
 
@@ -14,24 +15,27 @@ class Database {
     private $username = "postgres.lokjiueialuwrulybgut";
     private $password = "g0UNVXoLuA8uaPtH";
 
-    private function __construct() {
+    private function __construct()
+    {
         try {
             $this->conn = new PDO("pgsql:host={$this->host};port={$this->port};dbname={$this->db_name}", $this->username, $this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        } catch(PDOException $exception) {
+        } catch (PDOException $exception) {
             die("Error de conexión a la base de datos: " . $exception->getMessage());
         }
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (self::$instance == null) {
             self::$instance = new Database();
         }
         return self::$instance;
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->conn;
     }
 }
