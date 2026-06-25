@@ -8,10 +8,10 @@ class Database {
     private static $instance = null;
     private $conn;
 
-    private $host = "db.lokjiueialuwrulybgut.supabase.co";
+    private $host = "aws-1-us-east-2.pooler.supabase.com";
     private $db_name = "postgres";
-    private $port = "5432";
-    private $username = "postgres";
+    private $port = "6543";
+    private $username = "postgres.lokjiueialuwrulybgut";
     private $password = "g0UNVXoLuA8uaPtH";
 
     private function __construct() {
