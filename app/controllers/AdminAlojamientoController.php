@@ -25,11 +25,30 @@ class AdminAlojamientoController extends Controller
     public function index()
     {
         $alojamientoModel = new Alojamiento();
-        $alojamientos = $alojamientoModel->getAll();
+        $catalogoModel = new Catalogo();
+
+        $pagina = max(1, (int)($_GET['pagina'] ?? 1));
+        $por_pagina = 10;
+
+        $filtros = [];
+        if (!empty($_GET['busqueda'])) $filtros['busqueda'] = $_GET['busqueda'];
+        if (isset($_GET['estado']) && $_GET['estado'] !== '') $filtros['estado'] = $_GET['estado'];
+
+        $total = $alojamientoModel->contar($filtros);
+        $total_paginas = max(1, ceil($total / $por_pagina));
+        $pagina = min($pagina, $total_paginas);
+
+        $alojamientos = $alojamientoModel->buscar($filtros, $pagina, $por_pagina);
+        $estados = $catalogoModel->obtenerPorReferencia('ESTADO_PUBLICACION');
 
         $data = [
             'titulo' => 'Gestión de Alojamientos',
             'alojamientos' => $alojamientos,
+            'estados' => $estados,
+            'pagina' => $pagina,
+            'total_paginas' => $total_paginas,
+            'total' => $total,
+            'filtros' => $filtros,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
