@@ -119,11 +119,11 @@
                                             <button type="button" class="btn-accion btn-accion-edit" title="Editar foro" onclick="abrirModalEditarForo('<?php echo $foro['foro_id']; ?>')">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <form action="/admin/foros/toggle-estado" method="POST" class="d-inline">
+                                            <form action="/admin/foros/toggle-estado" method="POST" class="d-inline form-confirm" data-title="<?php echo ($foro['habilitado'] == 1) ? '¿Ocultar foro?' : '¿Activar foro?'; ?>" data-text="<?php echo ($foro['habilitado'] == 1) ? 'El foro dejará de ser visible para los usuarios.' : 'El foro volverá a ser visible para los usuarios.'; ?>" data-icon="question" data-confirm-text="<?php echo ($foro['habilitado'] == 1) ? 'Sí, ocultar' : 'Sí, activar'; ?>">
                                                 <input type="hidden" name="id" value="<?php echo $foro['foro_id']; ?>">
                                                 <input type="hidden" name="estado" value="<?php echo ($foro['habilitado'] == 1) ? 0 : 1; ?>">
                                                 <?php if ($foro['habilitado'] == 1): ?>
-                                                    <button type="submit" class="btn-accion btn-accion-hide" title="Ocultar foro" onclick="return confirm('¿Estás seguro de ocultar este foro?');">
+                                                    <button type="submit" class="btn-accion btn-accion-hide" title="Ocultar foro">
                                                         <i class="fas fa-power-off"></i>
                                                     </button>
                                                 <?php else: ?>

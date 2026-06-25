@@ -129,7 +129,10 @@ class Foro {
     public function toggleEstado($id, $estadoHabilitado) {
         $query = "UPDATE foro SET habilitado = :estado WHERE foro_id = :id";
         $stmt = $this->db->prepare($query);
-        $stmt->execute([':estado' => $estadoHabilitado ? true : false, ':id' => $id]);
+        $estado = $estadoHabilitado ? 1 : 0;
+        $stmt->bindValue(':estado', $estado, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $id, PDO::PARAM_STR);
+        $stmt->execute();
         
         return $stmt->rowCount() > 0;
     }
