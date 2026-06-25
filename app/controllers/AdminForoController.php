@@ -177,8 +177,11 @@ class AdminForoController extends Controller
             if ($id) {
                 $foroModel = new Foro();
                 $foroModel->actualizar($id, $_POST);
+                $this->setFlash('success', 'Foro actualizado correctamente.');
+            } else {
+                $this->setFlash('error', 'Error al actualizar el foro.');
             }
-            $this->redirect('/admin/foros/ver?id=' . $id);
+            $this->redirect('/admin/foros');
         }
     }
 
@@ -217,6 +220,9 @@ class AdminForoController extends Controller
             if ($id && isset($_POST['mensaje'])) {
                 $comentarioModel = new ForoComentario();
                 $comentarioModel->actualizar($id, $_POST['mensaje']);
+                $this->setFlash('success', 'Comentario actualizado correctamente.');
+            } else {
+                $this->setFlash('error', 'Error al actualizar el comentario.');
             }
 
             $this->redirect('/admin/foros/ver?id=' . $foro_id);
@@ -232,6 +238,10 @@ class AdminForoController extends Controller
             if ($id) {
                 $foroModel = new Foro();
                 $foroModel->toggleEstado($id, $estado);
+                $nuevoEstado = $estado ? 'activado' : 'oculto';
+                $this->setFlash('success', "Foro $nuevoEstado correctamente.");
+            } else {
+                $this->setFlash('error', 'Error al cambiar el estado del foro.');
             }
         }
         
@@ -247,6 +257,9 @@ class AdminForoController extends Controller
             if ($comentario_id) {
                 $comentarioModel = new ForoComentario();
                 $comentarioModel->eliminar($comentario_id);
+                $this->setFlash('success', 'Comentario ocultado correctamente.');
+            } else {
+                $this->setFlash('error', 'Error al ocultar el comentario.');
             }
 
             if ($foro_id) {
@@ -266,6 +279,9 @@ class AdminForoController extends Controller
             if ($comentario_id) {
                 $comentarioModel = new ForoComentario();
                 $comentarioModel->restaurar($comentario_id);
+                $this->setFlash('success', 'Comentario restaurado correctamente.');
+            } else {
+                $this->setFlash('error', 'Error al restaurar el comentario.');
             }
 
             if ($foro_id) {
@@ -288,9 +304,13 @@ class AdminForoController extends Controller
 
                 if ($accion == 'banear') {
                     $usuarioModel->banear($usuario_id);
+                    $this->setFlash('success', 'Usuario baneado correctamente.');
                 } else {
                     $usuarioModel->desbanear($usuario_id);
+                    $this->setFlash('success', 'Usuario desbaneado correctamente.');
                 }
+            } else {
+                $this->setFlash('error', 'Error al cambiar el estado del usuario.');
             }
 
             $this->redirect('/admin/foros/ver?id=' . $foro_id);

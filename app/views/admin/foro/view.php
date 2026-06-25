@@ -11,11 +11,11 @@
             <button type="button" class="btn btn-sm btn-outline-primary shadow-sm" onclick="abrirModalEditarForo('<?php echo $foro['foro_id']; ?>')">
                 <i class="fas fa-edit fa-sm"></i> Editar Foro
             </button>
-            <form action="/admin/foros/toggle-estado" method="POST" class="d-inline">
+            <form action="/admin/foros/toggle-estado" method="POST" class="d-inline form-confirm" data-title="<?php echo ($foro['habilitado'] == 1) ? '¿Ocultar foro?' : '¿Activar foro?'; ?>" data-text="<?php echo ($foro['habilitado'] == 1) ? 'El foro dejará de ser visible para los usuarios.' : 'El foro volverá a ser visible para los usuarios.'; ?>" data-icon="question" data-confirm-text="<?php echo ($foro['habilitado'] == 1) ? 'Sí, ocultar' : 'Sí, activar'; ?>">
                 <input type="hidden" name="id" value="<?php echo $foro['foro_id']; ?>">
                 <input type="hidden" name="estado" value="<?php echo ($foro['habilitado'] == 1) ? 0 : 1; ?>">
                 <?php if ($foro['habilitado'] == 1): ?>
-                    <button type="submit" class="btn btn-sm btn-warning shadow-sm" onclick="return confirm('¿Estás seguro de ocultar este foro?');">
+                    <button type="submit" class="btn btn-sm btn-warning shadow-sm">
                         <i class="fas fa-power-off fa-sm text-white-50"></i> Ocultar Foro
                     </button>
                 <?php else: ?>
@@ -196,11 +196,11 @@ function renderComentario($comentario, $comentarios_hijos, $foro, $extraClass = 
         </div>
         <div class="d-flex align-items-center gap-2">
             <?php if ($comentario['comentarista_id'] != $_SESSION['usuario_id']): ?>
-                <form action="/admin/foros/ban-usuario" method="POST" class="d-inline m-0">
+                <form action="/admin/foros/ban-usuario" method="POST" class="d-inline m-0 form-confirm" data-title="<?php echo ($comentario['comentarista_habilitado'] ?? true) ? '¿Banear usuario?' : '¿Desbanear usuario?'; ?>" data-text="<?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'El usuario no podrá iniciar sesión ni comentar.' : 'El usuario volverá a poder iniciar sesión y comentar.'; ?>" data-icon="warning" data-confirm-text="<?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'Sí, banear' : 'Sí, desbanear'; ?>">
                     <input type="hidden" name="usuario_id" value="<?php echo $comentario['comentarista_id']; ?>">
                     <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
                     <input type="hidden" name="accion" value="<?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'banear' : 'desbanear'; ?>">
-                    <button type="submit" class="btn btn-sm <?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'btn-outline-dark' : 'btn-outline-success'; ?>" title="<?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'Banear usuario' : 'Desbanear usuario'; ?>" onclick="return confirm('<?php echo ($comentario['comentarista_habilitado'] ?? true) ? '¿Banear a este usuario? No podrá iniciar sesión.' : '¿Desbanear a este usuario? Volverá a poder iniciar sesión.'; ?>');">
+                    <button type="submit" class="btn btn-sm <?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'btn-outline-dark' : 'btn-outline-success'; ?>" title="<?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'Banear usuario' : 'Desbanear usuario'; ?>">
                         <i class="fas <?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'fa-gavel' : 'fa-check'; ?>"></i>
                     </button>
                 </form>
@@ -215,18 +215,18 @@ function renderComentario($comentario, $comentarios_hijos, $foro, $extraClass = 
             <i class="fas fa-edit"></i> Editar
         </button>
         <?php if ($comentarioHabilitado): ?>
-            <form action="/admin/foros/comentario/eliminar" method="POST" class="d-inline">
+            <form action="/admin/foros/comentario/eliminar" method="POST" class="d-inline form-confirm" data-title="¿Ocultar comentario?" data-text="Dejará de ser visible y podrás mostrarlo después." data-icon="question" data-confirm-text="Sí, ocultar">
                 <input type="hidden" name="comentario_id" value="<?php echo $comentario['foro_comentario_id']; ?>">
                 <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
-                <button type="submit" class="btn btn-sm btn-outline-warning" onclick="return confirm('¿Ocultar este comentario? Dejará de ser visible y podrás mostrarlo después.');">
+                <button type="submit" class="btn btn-sm btn-outline-warning">
                     <i class="fas fa-eye-slash me-1"></i> Ocultar
                 </button>
             </form>
         <?php else: ?>
-            <form action="/admin/foros/comentario/restaurar" method="POST" class="d-inline">
+            <form action="/admin/foros/comentario/restaurar" method="POST" class="d-inline form-confirm" data-title="¿Mostrar comentario?" data-text="Volverá a ser visible para todos." data-icon="question" data-confirm-text="Sí, mostrar">
                 <input type="hidden" name="comentario_id" value="<?php echo $comentario['foro_comentario_id']; ?>">
                 <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
-                <button type="submit" class="btn btn-sm btn-outline-info" onclick="return confirm('¿Mostrar este comentario? Volverá a ser visible para todos.');">
+                <button type="submit" class="btn btn-sm btn-outline-info">
                     <i class="fas fa-eye me-1"></i> Mostrar
                 </button>
             </form>

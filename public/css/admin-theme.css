@@ -792,3 +792,8 @@ h6,
 .modal-backdrop {
   z-index: 2999 !important;
 }
+
+/* SweetAlert por encima de absolutamente todo (Header, Sidebar, Modales) */
+.swal2-container {
+  z-index: 9999 !important;
+}
