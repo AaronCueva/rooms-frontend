@@ -779,6 +779,12 @@ h6,
   color: white;
 }
 
+.btn-accion-edit:hover {
+  background: var(--admin-primary);
+  border-color: var(--admin-primary);
+  color: white;
+}
+
 /* Modal Bootstrap por encima del topbar */
 .modal {
   z-index: 3000 !important;
