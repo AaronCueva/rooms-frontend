@@ -51,4 +51,29 @@ class Usuario
 
         return $stmt->execute();
     }
+
+    public function findById($id)
+    {
+        $query = "SELECT * FROM usuario WHERE usuario_id = :id LIMIT 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function banear($id)
+    {
+        $query = "UPDATE usuario SET habilitado = false WHERE usuario_id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+
+    public function desbanear($id)
+    {
+        $query = "UPDATE usuario SET habilitado = true WHERE usuario_id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
 }

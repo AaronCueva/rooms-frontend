@@ -46,8 +46,11 @@ $router->get('/admin', 'AdminController', 'dashboard');
 // Rutas de Administrador (Red Social - Foros)
 $router->get('/admin/foros', 'AdminForoController', 'index');
 $router->get('/admin/foros/ver', 'AdminForoController', 'ver');
+$router->get('/admin/foros/ver-modal', 'AdminForoController', 'verModal');
 $router->post('/admin/foros/toggle-estado', 'AdminForoController', 'toggleEstado');
 $router->post('/admin/foros/comentario/eliminar', 'AdminForoController', 'eliminarComentario');
+$router->post('/admin/foros/comentario/restaurar', 'AdminForoController', 'restaurarComentario');
+$router->post('/admin/foros/ban-usuario', 'AdminForoController', 'toggleBanUsuario');
 
 // Rutas de Administrador (Alojamientos)
 $router->get('/admin/alojamientos', 'AdminAlojamientoController', 'index');

@@ -42,21 +42,27 @@ try {
     $foro_id = $stmtForo->fetchColumn();
     
     if ($foro_id) {
-        // 3. Insertar comentarios (Usando prepared statements porque foro_id y usuario_id son UUID)
-        $stmtComentario = $db->prepare("INSERT INTO foro_comentario (foro_id, mensaje, fecha_envio, usuario_id) 
-                                        VALUES (:foro_id, :mensaje, NOW(), :usuario_id)");
+        // 3. Insertar comentarios
+        $stmtComentario = $db->prepare("INSERT INTO foro_comentario (foro_id, mensaje, fecha_envio, usuario_id, habilitado) 
+                                        VALUES (:foro_id, :mensaje, NOW(), :usuario_id, :habilitado)");
         
-        $stmtComentario->execute([
-            ':foro_id' => $foro_id,
-            ':mensaje' => 'Te recomiendo buscar por la zona norte, es bastante segura.',
-            ':usuario_id' => $usuario_id
-        ]);
-        
-        $stmtComentario->execute([
-            ':foro_id' => $foro_id,
-            ':mensaje' => 'Yo alquilo cerca de la avenida principal, hay mucho transporte.',
-            ':usuario_id' => $usuario_id
-        ]);
+        $comentarios = [
+            ['mensaje' => 'Te recomiendo buscar por la zona norte, es bastante segura.', 'habilitado' => true],
+            ['mensaje' => 'Yo alquilo cerca de la avenida principal, hay mucho transporte.', 'habilitado' => true],
+            ['mensaje' => 'Alguien sabe cuánto está el promedio de un cuarto?', 'habilitado' => true],
+            ['mensaje' => 'Eviten la zona sur, muy peligrosa de noche.', 'habilitado' => true],
+            ['mensaje' => 'Este comentario fue eliminado por inapropiado.', 'habilitado' => false],
+            ['mensaje' => 'Publicidad de alquiler - NO USAR', 'habilitado' => false],
+        ];
+
+        foreach ($comentarios as $c) {
+            $stmtComentario->execute([
+                ':foro_id' => $foro_id,
+                ':mensaje' => $c['mensaje'],
+                ':usuario_id' => $usuario_id,
+                ':habilitado' => $c['habilitado']
+            ]);
+        }
                    
         // 4. Insertar reacciones
         $stmtReaccion = $db->prepare("INSERT INTO foro_reaccion (tipo_reaccion_codigo, foro_id, usuario_id) 
