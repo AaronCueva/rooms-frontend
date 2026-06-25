@@ -18,6 +18,8 @@
                     <input type="hidden" name="alojamiento_id" value="<?php echo $alojamiento['alojamiento_id']; ?>">
                 <?php endif; ?>
 
+                <!-- Información básica -->
+                <h6 class="fw-bold mb-3 border-bottom pb-2"><i class="fas fa-info-circle me-1 text-primary"></i> Información Principal</h6>
                 <div class="row g-3 mb-4">
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">Código *</label>
@@ -34,7 +36,7 @@
                         <select class="form-select" name="tipo_codigo" required>
                             <option value="">Seleccionar...</option>
                             <?php foreach ($tipos as $tipo): ?>
-                                <option value="<?php echo $tipo['codigo']; ?>" <?php echo ($esEditar && $alojamiento['TIPO_PUBLICACION_ALOJAMIENTO'] == $tipo['codigo']) ? 'selected' : ''; ?>>
+                                <option value="<?php echo $tipo['codigo']; ?>" <?php echo ($esEditar && $alojamiento['tipo_codigo'] == $tipo['codigo']) ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars($tipo['nombre']); ?>
                                 </option>
                             <?php endforeach; ?>
@@ -42,6 +44,8 @@
                     </div>
                 </div>
 
+                <!-- Características físicas -->
+                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2"><i class="fas fa-ruler-combined me-1 text-primary"></i> Características Físicas</h6>
                 <div class="row g-3 mb-4">
                     <div class="col-md-2">
                         <label class="form-label fw-semibold">Habitaciones *</label>
@@ -51,12 +55,12 @@
                     <div class="col-md-2">
                         <label class="form-label fw-semibold">Baños *</label>
                         <input type="number" class="form-control" name="numero_banios" min="0" required
-                            value="<?php echo $alojamiento['numero_banios'] ?? 0; ?>">
+                            value="<?php echo $alojamiento['numero_banos'] ?? 0; ?>">
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label fw-semibold">Tamaño (m2) *</label>
+                        <label class="form-label fw-semibold">Tamaño (m²) *</label>
                         <input type="number" step="0.01" class="form-control" name="tamanio_m2" required
-                            value="<?php echo $alojamiento['tamanio_m2'] ?? 0; ?>">
+                            value="<?php echo $alojamiento['tamano_m2'] ?? 0; ?>">
                     </div>
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">Género Exclusivo</label>
@@ -81,6 +85,8 @@
                     </div>
                 </div>
 
+                <!-- Precios -->
+                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2"><i class="fas fa-money-bill-wave me-1 text-primary"></i> Precios y Condiciones</h6>
                 <div class="row g-3 mb-4">
                     <div class="col-md-3">
                         <label class="form-label fw-semibold">Precio Mensual *</label>
@@ -122,20 +128,15 @@
                             value="<?php echo $alojamiento['fecha_disponible'] ?? ''; ?>">
                     </div>
                     <div class="col-md-4">
-                        <label class="form-label fw-semibold">Política de Casa</label>
-                        <select class="form-select" name="politica_casa_id">
-                            <option value="">Seleccionar...</option>
-                            <?php foreach ($politicas as $pol): ?>
-                                <option value="<?php echo $pol['politica_casa_id']; ?>" <?php echo ($esEditar && $alojamiento['politica_casa_id'] == $pol['politica_casa_id']) ? 'selected' : ''; ?>>
-                                    <?php echo htmlspecialchars($pol['nombre']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                        <label class="form-label fw-semibold">Calificación Promedio</label>
+                        <input type="number" step="0.1" max="5" class="form-control" name="calificacion"
+                            value="<?php echo $alojamiento['calificacion'] ?? 0; ?>">
                     </div>
                 </div>
 
+                <!-- Propietario -->
                 <div class="row g-3 mb-4">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label class="form-label fw-semibold">Propietario *</label>
                         <select class="form-select" name="usuario_id" required>
                             <option value="">Seleccionar Propietario...</option>
@@ -146,14 +147,39 @@
                             <?php endforeach; ?>
                         </select>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-semibold">Calificación Promedio</label>
-                        <input type="number" step="0.1" max="5" class="form-control" name="calificacion"
-                            value="<?php echo $alojamiento['calificacion'] ?? 0; ?>">
-                    </div>
                 </div>
 
-                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2">Ubicación</h6>
+                <!-- Políticas de Casa (Múltiples) -->
+                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2"><i class="fas fa-clipboard-list me-1 text-primary"></i> Políticas de Casa</h6>
+                <div class="row g-2 mb-4">
+                    <?php if (!empty($politicas)): ?>
+                        <?php foreach ($politicas as $pol): ?>
+                            <?php
+                                $checked = in_array($pol['politica_casa_id'], $politicas_seleccionadas ?? []) ? 'checked' : '';
+                            ?>
+                            <div class="col-md-4">
+                                <div class="form-check border rounded p-3 h-100">
+                                    <input class="form-check-input" type="checkbox" name="politicas[]"
+                                        value="<?php echo $pol['politica_casa_id']; ?>"
+                                        id="pol_<?php echo $pol['politica_casa_id']; ?>" <?php echo $checked; ?>>
+                                    <label class="form-check-label fw-semibold" for="pol_<?php echo $pol['politica_casa_id']; ?>">
+                                        <?php echo htmlspecialchars($pol['nombre']); ?>
+                                    </label>
+                                    <?php if (!empty($pol['descripcion'])): ?>
+                                        <br><small class="text-muted"><?php echo htmlspecialchars($pol['descripcion']); ?></small>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="col-12">
+                            <div class="alert alert-warning mb-0">No hay políticas de casa registradas.</div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+
+                <!-- Ubicación -->
+                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2"><i class="fas fa-map-marker-alt me-1 text-primary"></i> Ubicación</h6>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
                         <label class="form-label fw-semibold">Departamento *</label>
@@ -168,8 +194,7 @@
                     </div>
                     <div class="col-md-4">
                         <label class="form-label fw-semibold">Provincia *</label>
-                        <select class="form-select" id="provincia" required onchange="cargarDistritos(this.value)"
-                            disabled>
+                        <select class="form-select" id="provincia" required onchange="cargarDistritos(this.value)" disabled>
                             <option value="">Seleccione...</option>
                         </select>
                     </div>
@@ -183,7 +208,6 @@
                                 </option>
                             <?php endif; ?>
                         </select>
-                        <small class="text-muted">Si edita, debe volver a seleccionar en cascada.</small>
                     </div>
                 </div>
 
@@ -193,14 +217,48 @@
                         value="<?php echo htmlspecialchars($alojamiento['direccion'] ?? ''); ?>">
                 </div>
 
-                <div class="mb-4">
-                    <label class="form-label fw-semibold">Descripción del Alojamiento</label>
-                    <textarea class="form-control" name="descripcion"
-                        rows="4"><?php echo htmlspecialchars($alojamiento['descripcion'] ?? ''); ?></textarea>
+                <!-- Mapa Interactivo -->
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="fw-bold mb-0"><i class="fas fa-map me-1 text-success"></i> Ubicación en el Mapa</h6>
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="btnObtenerUbicacion">
+                                <i class="fas fa-crosshairs me-1"></i> Obtener mi ubicación actual
+                            </button>
+                        </div>
+                        <div id="mapaAlojamiento" style="height: 350px; border-radius: 8px; border: 2px solid #dee2e6;"></div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Latitud</label>
+                                <input type="text" class="form-control form-control-sm" name="latitud" id="inputLatitud" readonly
+                                    value="<?php echo htmlspecialchars($alojamiento['latitud'] ?? ''); ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Longitud</label>
+                                <input type="text" class="form-control form-control-sm" name="longitud" id="inputLongitud" readonly
+                                    value="<?php echo htmlspecialchars($alojamiento['longitud'] ?? ''); ?>">
+                            </div>
+                        </div>
+                        <small class="text-muted mt-1 d-block">Haz clic en el mapa o arrastra el marcador para seleccionar la ubicación exacta del inmueble.</small>
+                    </div>
                 </div>
 
-                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2">Características Extra (Switches)</h6>
+                <!-- Descripción -->
+                <div class="mb-4">
+                    <label class="form-label fw-semibold">Descripción del Alojamiento</label>
+                    <textarea class="form-control" name="descripcion" rows="4"><?php echo htmlspecialchars($alojamiento['descripcion'] ?? ''); ?></textarea>
+                </div>
+
+                <!-- Switches -->
+                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2"><i class="fas fa-toggle-on me-1 text-primary"></i> Características Extra</h6>
                 <div class="row g-3 mb-4">
+                    <div class="col-md-3">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" name="bano_privado"
+                                <?php echo ($esEditar && $alojamiento['bano_privado']) ? 'checked' : ''; ?>>
+                            <label class="form-check-label">Baño Privado</label>
+                        </div>
+                    </div>
                     <div class="col-md-3">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" name="mascotas_permitidas"
@@ -221,7 +279,7 @@
                             <label class="form-check-label">Amoblado</label>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-3 mt-3">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" role="switch" name="solo_verificados" <?php echo ($esEditar && $alojamiento['solo_verificados']) ? 'checked' : ''; ?>>
                             <label class="form-check-label">Solo Usuarios Verificados</label>
@@ -245,68 +303,61 @@
     </div>
 </div>
 
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
+    // ============ Combos en Cascada ============
     async function cargarProvincias(departamento_id) {
         const provinciaSelect = document.getElementById('provincia');
         const distritoSelect = document.getElementById('distrito');
-
         provinciaSelect.innerHTML = '<option value="">Seleccione...</option>';
         distritoSelect.innerHTML = '<option value="">Seleccione...</option>';
         provinciaSelect.disabled = true;
         distritoSelect.disabled = true;
-
         if (!departamento_id) return;
-
         try {
             const response = await fetch('/api/ubicaciones?referencia_id=' + departamento_id);
             const data = await response.json();
-
             if (data.length > 0) {
-                data.forEach(provincia => {
-                    const option = document.createElement('option');
-                    option.value = provincia.ubicacion_id;
-                    option.textContent = provincia.nombre;
-                    provinciaSelect.appendChild(option);
+                data.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p.ubicacion_id;
+                    opt.textContent = p.nombre;
+                    provinciaSelect.appendChild(opt);
                 });
                 provinciaSelect.disabled = false;
             }
-        } catch (error) {
-            console.error('Error al cargar provincias:', error);
-        }
+        } catch (e) { console.error('Error provincias:', e); }
     }
 
     async function cargarDistritos(provincia_id) {
         const distritoSelect = document.getElementById('distrito');
-
         distritoSelect.innerHTML = '<option value="">Seleccione...</option>';
         distritoSelect.disabled = true;
-
         if (!provincia_id) return;
-
         try {
             const response = await fetch('/api/ubicaciones?referencia_id=' + provincia_id);
             const data = await response.json();
-
             if (data.length > 0) {
-                data.forEach(distrito => {
-                    const option = document.createElement('option');
-                    option.value = distrito.ubicacion_id;
-                    option.textContent = distrito.nombre;
-                    distritoSelect.appendChild(option);
+                data.forEach(d => {
+                    const opt = document.createElement('option');
+                    opt.value = d.ubicacion_id;
+                    opt.textContent = d.nombre;
+                    distritoSelect.appendChild(opt);
                 });
                 distritoSelect.disabled = false;
             }
-        } catch (error) {
-            console.error('Error al cargar distritos:', error);
-        }
+        } catch (e) { console.error('Error distritos:', e); }
     }
-    // Si estamos editando y tenemos la jerarquía, precargamos
+
+    // Precargar jerarquía si estamos editando
     <?php if (isset($jerarquia) && $jerarquia): ?>
         window.addEventListener('DOMContentLoaded', async () => {
             const depId = '<?php echo $jerarquia['departamento_id']; ?>';
             const provId = '<?php echo $jerarquia['provincia_id']; ?>';
             const distId = '<?php echo $jerarquia['distrito_id']; ?>';
-
             document.getElementById('departamento').value = depId;
             await cargarProvincias(depId);
             document.getElementById('provincia').value = provId;
@@ -314,4 +365,93 @@
             document.getElementById('distrito').value = distId;
         });
     <?php endif; ?>
+
+    // ============ Mapa Interactivo con Leaflet ============
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputLat = document.getElementById('inputLatitud');
+        const inputLng = document.getElementById('inputLongitud');
+
+        // Coordenadas iniciales: si hay datos guardados los usamos, sino centro de Perú
+        let lat = parseFloat(inputLat.value) || -12.0464;
+        let lng = parseFloat(inputLng.value) || -77.0428;
+        let zoomInicial = (inputLat.value && inputLng.value) ? 16 : 6;
+
+        const map = L.map('mapaAlojamiento').setView([lat, lng], zoomInicial);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        let marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+
+        // Si no hay coordenadas previas, ocultar el marcador hasta que se seleccione
+        if (!inputLat.value || !inputLng.value) {
+            map.removeLayer(marker);
+        }
+
+        function actualizarCoordenadas(latlng) {
+            inputLat.value = latlng.lat.toFixed(7);
+            inputLng.value = latlng.lng.toFixed(7);
+        }
+
+        // Click en el mapa para mover el marcador
+        map.on('click', function (e) {
+            if (!map.hasLayer(marker)) {
+                marker = L.marker(e.latlng, { draggable: true }).addTo(map);
+                marker.on('dragend', function (ev) {
+                    actualizarCoordenadas(ev.target.getLatLng());
+                });
+            } else {
+                marker.setLatLng(e.latlng);
+            }
+            actualizarCoordenadas(e.latlng);
+        });
+
+        // Arrastrar marcador
+        marker.on('dragend', function (e) {
+            actualizarCoordenadas(e.target.getLatLng());
+        });
+
+        // Botón "Obtener mi ubicación"
+        document.getElementById('btnObtenerUbicacion').addEventListener('click', function () {
+            if (!navigator.geolocation) {
+                Swal.fire('Error', 'Tu navegador no soporta geolocalización.', 'error');
+                return;
+            }
+            this.disabled = true;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Obteniendo...';
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latlng = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    map.setView([latlng.lat, latlng.lng], 17);
+                    if (!map.hasLayer(marker)) {
+                        marker = L.marker([latlng.lat, latlng.lng], { draggable: true }).addTo(map);
+                        marker.on('dragend', function (ev) {
+                            actualizarCoordenadas(ev.target.getLatLng());
+                        });
+                    } else {
+                        marker.setLatLng([latlng.lat, latlng.lng]);
+                    }
+                    actualizarCoordenadas(latlng);
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-crosshairs me-1"></i> Obtener mi ubicación actual';
+                    Swal.fire({
+                        toast: true, position: 'top-end', icon: 'success',
+                        title: 'Ubicación obtenida', showConfirmButton: false, timer: 2000
+                    });
+                },
+                (error) => {
+                    Swal.fire('Error', 'No se pudo obtener la ubicación: ' + error.message, 'error');
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-crosshairs me-1"></i> Obtener mi ubicación actual';
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        });
+    });
 </script>
