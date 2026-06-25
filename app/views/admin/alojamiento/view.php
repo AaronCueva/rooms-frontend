@@ -8,7 +8,7 @@
         </h1>
         
         <div>
-            <?php if ($alojamiento['estado_codigo'] !== 'APROBADO'): ?>
+            <?php if ($alojamiento['estado_codigo'] !== 'EPA003'): ?>
                 <form action="/admin/alojamientos/aprobar" method="POST" class="d-inline form-confirm" data-title="¿Aprobar esta publicación?" data-icon="question">
                     <input type="hidden" name="id" value="<?php echo $alojamiento['alojamiento_id']; ?>">
                     <button type="submit" class="btn btn-sm btn-success shadow-sm">
@@ -58,8 +58,9 @@
                                 <tr><th>Tipo:</th><td><span class="badge bg-info text-dark"><?php echo htmlspecialchars($alojamiento['tipo_nombre']); ?></span></td></tr>
                                 <tr><th>Estado:</th><td><span class="badge <?php echo ($alojamiento['estado_codigo']=='APROBADO') ? 'bg-success' : 'bg-warning text-dark'; ?>"><?php echo htmlspecialchars($alojamiento['estado_nombre']); ?></span></td></tr>
                                 <tr><th>Habitaciones:</th><td><?php echo $alojamiento['numero_habitaciones']; ?></td></tr>
-                                <tr><th>Baños:</th><td><?php echo $alojamiento['numero_banios']; ?></td></tr>
-                                <tr><th>Tamaño:</th><td><?php echo $alojamiento['tamanio_m2']; ?> m2</td></tr>
+                                <tr><th>Baños:</th><td><?php echo $alojamiento['numero_banos']; ?></td></tr>
+                                <tr><th>Baño Privado:</th><td><?php echo $alojamiento['bano_privado'] ? '<i class="fas fa-check text-success"></i> Sí' : '<i class="fas fa-times text-danger"></i> No'; ?></td></tr>
+                                <tr><th>Tamaño:</th><td><?php echo $alojamiento['tamano_m2']; ?> m²</td></tr>
                                 <tr><th>Distrito:</th><td><?php echo htmlspecialchars($alojamiento['distrito_nombre']); ?></td></tr>
                                 <tr><th>Dirección:</th><td><?php echo htmlspecialchars($alojamiento['direccion']); ?></td></tr>
                             </table>
@@ -81,6 +82,13 @@
                             <h6 class="fw-bold text-primary border-bottom pb-2">Descripción</h6>
                             <p style="white-space: pre-wrap;"><?php echo htmlspecialchars($alojamiento['descripcion']); ?></p>
                         </div>
+                        <?php if (!empty($alojamiento['latitud']) && !empty($alojamiento['longitud'])): ?>
+                        <div class="col-12">
+                            <h6 class="fw-bold text-primary border-bottom pb-2"><i class="fas fa-map-marker-alt me-1"></i> Ubicación en el Mapa</h6>
+                            <div id="mapaDetalle" style="height: 300px; border-radius: 8px; border: 2px solid #dee2e6;"></div>
+                            <small class="text-muted mt-1 d-block">Lat: <?php echo $alojamiento['latitud']; ?>, Lng: <?php echo $alojamiento['longitud']; ?></small>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -142,16 +150,24 @@
 
                 <!-- TAB: POLITICA -->
                 <div class="tab-pane fade" id="politica" role="tabpanel">
-                    <?php if ($alojamiento['politica_casa_id']): ?>
-                        <div class="card border-left-info shadow-sm">
-                            <div class="card-body">
-                                <h5 class="fw-bold text-info"><?php echo htmlspecialchars($alojamiento['politica_nombre']); ?></h5>
-                                <h6 class="text-muted"><?php echo htmlspecialchars($alojamiento['politica_codigo']); ?></h6>
-                                <p class="mt-3 mb-0" style="white-space:pre-wrap;"><?php echo htmlspecialchars($alojamiento['politica_descripcion']); ?></p>
-                            </div>
+                    <?php if (!empty($politicas_asignadas)): ?>
+                        <div class="row g-3">
+                            <?php foreach ($politicas_asignadas as $pol): ?>
+                                <div class="col-md-4">
+                                    <div class="card border-left-info shadow-sm h-100">
+                                        <div class="card-body">
+                                            <h6 class="fw-bold text-info"><?php echo htmlspecialchars($pol['nombre']); ?></h6>
+                                            <small class="text-muted"><?php echo htmlspecialchars($pol['codigo']); ?></small>
+                                            <?php if (!empty($pol['descripcion'])): ?>
+                                                <p class="mt-2 mb-0 small" style="white-space:pre-wrap;"><?php echo htmlspecialchars($pol['descripcion']); ?></p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     <?php else: ?>
-                        <div class="alert alert-warning">No se ha seleccionado ninguna Política de Casa para este alojamiento.</div>
+                        <div class="alert alert-warning">No se han asignado Políticas de Casa a este alojamiento.</div>
                     <?php endif; ?>
                 </div>
 
@@ -301,3 +317,26 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<?php if (!empty($alojamiento['latitud']) && !empty($alojamiento['longitud'])): ?>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const lat = <?php echo $alojamiento['latitud']; ?>;
+    const lng = <?php echo $alojamiento['longitud']; ?>;
+    const map = L.map('mapaDetalle').setView([lat, lng], 16);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19, attribution: '© OpenStreetMap'
+    }).addTo(map);
+    L.marker([lat, lng]).addTo(map)
+        .bindPopup('<strong><?php echo htmlspecialchars(addslashes($alojamiento['titulo'])); ?></strong><br><?php echo htmlspecialchars(addslashes($alojamiento['direccion'])); ?>')
+        .openPopup();
+
+    // Forzar re-render si el mapa está en un tab oculto
+    document.getElementById('general-tab').addEventListener('shown.bs.tab', function () {
+        map.invalidateSize();
+    });
+});
+</script>
+<?php endif; ?>
