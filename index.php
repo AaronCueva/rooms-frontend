@@ -39,8 +39,14 @@ $router->get('/register', 'AuthController', 'register');
 $router->post('/register', 'AuthController', 'storeUser');
 $router->get('/logout', 'AuthController', 'logout');
 
-// Rutas de Administrador
+// Rutas de Administrador (Generales)
 $router->get('/admin', 'AdminController', 'dashboard');
+
+// Rutas de Administrador (Red Social - Foros)
+$router->get('/admin/foros', 'AdminForoController', 'index');
+$router->get('/admin/foros/ver', 'AdminForoController', 'ver');
+$router->post('/admin/foros/toggle-estado', 'AdminForoController', 'toggleEstado');
+$router->post('/admin/foros/comentario/eliminar', 'AdminForoController', 'eliminarComentario');
 
 // Ejecutar ruta
 $router->dispatch();

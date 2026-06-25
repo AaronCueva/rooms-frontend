@@ -43,6 +43,39 @@
             <hr class="sidebar-divider my-0">
             
             <ul class="nav flex-column mb-auto mt-2">
+                <!-- Menú Comunidad (Red Social) -->
+                <li class="nav-item mt-3">
+                    <div class="px-3 text-white-50 text-uppercase fw-bold" style="font-size: 0.75rem; letter-spacing: 0.05rem;">
+                        Red Social
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/foros">
+                        <i class="fas fa-fw fa-comments"></i>
+                        <span>Foros</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/blogs">
+                        <i class="fas fa-fw fa-newspaper"></i>
+                        <span>Blogs</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/resenias">
+                        <i class="fas fa-fw fa-star"></i>
+                        <span>Reseñas</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/chats">
+                        <i class="fas fa-fw fa-chart-bar"></i>
+                        <span>Monitor de Chats</span>
+                    </a>
+                </li>
+                
+                <hr class="sidebar-divider d-none d-md-block my-3 w-100" style="border-top: 1px solid rgba(255, 255, 255, 0.15);">
+
                 <!-- Carga dinámica del menú -->
                 <?php if(isset($menus) && is_array($menus)): ?>
                     <?php foreach($menus as $menu): ?>
