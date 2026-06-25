@@ -39,4 +39,23 @@ class Controller {
         header("Location: " . $url);
         exit;
     }
+
+    /**
+     * Guarda un mensaje flash en sesion para mostrar en la siguiente pantalla
+     */
+    public function setFlash($tipo, $mensaje) {
+        $_SESSION['flash'] = ['tipo' => $tipo, 'mensaje' => $mensaje];
+    }
+
+    /**
+     * Obtiene y limpia el mensaje flash de la sesion
+     */
+    public static function getFlash() {
+        if (isset($_SESSION['flash'])) {
+            $flash = $_SESSION['flash'];
+            unset($_SESSION['flash']);
+            return $flash;
+        }
+        return null;
+    }
 }

@@ -226,7 +226,7 @@
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
-                        confirmButtonText: 'Sí, continuar',
+                        confirmButtonText: form.dataset.confirmText || 'Sí, continuar',
                         cancelButtonText: 'Cancelar'
                     }).then((result) => {
                         if (result.isConfirmed) {
@@ -235,6 +235,20 @@
                     });
                 });
             });
+
+            // Mostrar mensaje flash si existe
+            <?php $flash = \App\Core\Controller::getFlash(); ?>
+            <?php if ($flash): ?>
+            Swal.fire({
+                icon: '<?php echo $flash['tipo']; ?>',
+                title: '<?php echo addslashes($flash['mensaje']); ?>',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+            <?php endif; ?>
         });
     </script>
 </body>
