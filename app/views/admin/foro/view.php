@@ -7,11 +7,11 @@
             <?php echo htmlspecialchars($titulo ?? 'Detalle del Foro'); ?>
         </h1>
         
-        <form action="/admin/foros/toggle-estado" method="POST" class="d-inline">
+        <form action="/admin/foros/toggle-estado" method="POST" class="d-inline form-confirm" data-title="¿Cambiar visibilidad?" data-text="Esto afectará si el foro se muestra a los usuarios.">
             <input type="hidden" name="id" value="<?php echo $foro['foro_id']; ?>">
             <input type="hidden" name="estado" value="<?php echo ($foro['habilitado'] == 1) ? 0 : 1; ?>">
             <?php if ($foro['habilitado'] == 1): ?>
-                <button type="submit" class="btn btn-sm btn-warning shadow-sm" onclick="return confirm('¿Estás seguro de ocultar este foro?');">
+                <button type="submit" class="btn btn-sm btn-warning shadow-sm">
                     <i class="fas fa-eye-slash fa-sm text-white-50"></i> Ocultar Foro
                 </button>
             <?php else: ?>
@@ -99,10 +99,10 @@
                                     <p class="mb-2 ms-4" style="padding-left: 10px;"><?php echo htmlspecialchars($comentario['mensaje']); ?></p>
                                     
                                     <div class="text-end">
-                                        <form action="/admin/foros/comentario/eliminar" method="POST" class="d-inline">
+                                        <form action="/admin/foros/comentario/eliminar" method="POST" class="d-inline form-confirm" data-title="¿Eliminar comentario?" data-text="Esta acción no se puede deshacer.">
                                             <input type="hidden" name="comentario_id" value="<?php echo $comentario['foro_comentario_id']; ?>">
                                             <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar este comentario de forma permanente? Esta acción no se puede deshacer.');">
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">
                                                 <i class="fas fa-trash-alt me-1"></i> Eliminar Comentario
                                             </button>
                                         </form>
