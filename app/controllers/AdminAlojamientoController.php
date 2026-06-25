@@ -7,6 +7,7 @@ use App\Models\Favorito;
 use App\Models\PoliticaCasa;
 use App\Models\Servicio;
 use App\Models\AlojamientoServicio;
+use App\Models\AlojamientoPolitica;
 use App\Models\Descuento;
 use App\Models\Beneficio;
 use App\Models\Catalogo;
@@ -55,6 +56,9 @@ class AdminAlojamientoController extends Controller
         $alojamientoServicioModel = new AlojamientoServicio();
         $servicios_asignados = $alojamientoServicioModel->getByAlojamientoId($id);
 
+        $alojamientoPoliticaModel = new AlojamientoPolitica();
+        $politicas_asignadas = $alojamientoPoliticaModel->getByAlojamientoId($id);
+
         $descuentoModel = new Descuento();
         $descuentos = $descuentoModel->getByAlojamientoId($id);
 
@@ -69,6 +73,7 @@ class AdminAlojamientoController extends Controller
             'alojamiento' => $alojamiento,
             'favoritos' => $favoritos,
             'servicios_asignados' => $servicios_asignados,
+            'politicas_asignadas' => $politicas_asignadas,
             'descuentos' => $descuentos,
             'beneficios' => $beneficios,
             'servicios_disponibles' => $servicios_disponibles,
@@ -120,6 +125,13 @@ class AdminAlojamientoController extends Controller
             $jerarquia = $ubicacionModel->obtenerJerarquia($alojamiento['ubicacion_id']);
         }
 
+        // Obtener IDs de políticas ya seleccionadas (para edición)
+        $politicas_seleccionadas = [];
+        if ($alojamiento) {
+            $alojamientoPoliticaModel = new AlojamientoPolitica();
+            $politicas_seleccionadas = $alojamientoPoliticaModel->getIdsByAlojamientoId($alojamiento['alojamiento_id']);
+        }
+
         $data = [
             'titulo' => $titulo,
             'alojamiento' => $alojamiento,
@@ -130,6 +142,7 @@ class AdminAlojamientoController extends Controller
             'estados' => $estados,
             'departamentos' => $departamentos,
             'politicas' => $politicas,
+            'politicas_seleccionadas' => $politicas_seleccionadas,
             'propietarios' => $propietarios,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
@@ -142,7 +155,14 @@ class AdminAlojamientoController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $datos = $this->obtenerDatosPost();
             $alojamientoModel = new Alojamiento();
-            $alojamientoModel->create($datos);
+            $alojamiento_id = $alojamientoModel->create($datos);
+
+            // Sincronizar políticas
+            if ($alojamiento_id) {
+                $politicas = $_POST['politicas'] ?? [];
+                $alojamientoPoliticaModel = new AlojamientoPolitica();
+                $alojamientoPoliticaModel->sincronizarPoliticas($alojamiento_id, $politicas);
+            }
         }
         $this->redirect('/admin/alojamientos');
     }
@@ -155,6 +175,11 @@ class AdminAlojamientoController extends Controller
                 $datos = $this->obtenerDatosPost();
                 $alojamientoModel = new Alojamiento();
                 $alojamientoModel->update($id, $datos);
+
+                // Sincronizar políticas
+                $politicas = $_POST['politicas'] ?? [];
+                $alojamientoPoliticaModel = new AlojamientoPolitica();
+                $alojamientoPoliticaModel->sincronizarPoliticas($id, $politicas);
             }
         }
         $this->redirect('/admin/alojamientos');
@@ -168,15 +193,17 @@ class AdminAlojamientoController extends Controller
             'tipo_codigo' => $_POST['tipo_codigo'] ?? '',
             'numero_habitaciones' => $_POST['numero_habitaciones'] ?? 0,
             'numero_banios' => $_POST['numero_banios'] ?? 0,
+            'bano_privado' => isset($_POST['bano_privado']) ? 1 : 0,
             'tamanio_m2' => $_POST['tamanio_m2'] ?? 0,
             'genero_exclusivo_codigo' => $_POST['genero_exclusivo_codigo'] ?? '',
             'mascotas_permitidas' => isset($_POST['mascotas_permitidas']) ? 1 : 0,
             'fumadores_permitidos' => isset($_POST['fumadores_permitidos']) ? 1 : 0,
             'descripcion' => $_POST['descripcion'] ?? '',
             'usuario_id' => $_POST['usuario_id'] ?? null,
-            'politica_casa_id' => !empty($_POST['politica_casa_id']) ? $_POST['politica_casa_id'] : null,
-            'ubicacion_id' => $_POST['distrito'] ?? null, // Del combo en cascada
+            'ubicacion_id' => $_POST['distrito'] ?? null,
             'direccion' => $_POST['direccion'] ?? '',
+            'latitud' => !empty($_POST['latitud']) ? $_POST['latitud'] : null,
+            'longitud' => !empty($_POST['longitud']) ? $_POST['longitud'] : null,
             'precio_mensual' => $_POST['precio_mensual'] ?? 0,
             'moneda_codigo' => $_POST['moneda_codigo'] ?? '',
             'garantia' => $_POST['garantia'] ?? 0,
