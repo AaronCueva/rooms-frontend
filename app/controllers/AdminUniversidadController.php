@@ -17,11 +17,27 @@ class AdminUniversidadController extends Controller
     public function index()
     {
         $universidadModel = new UniversidadModel();
-        $universidades = $universidadModel->getAll();
+
+        $pagina = max(1, (int)($_GET['pagina'] ?? 1));
+        $por_pagina = 10;
+
+        $filtros = [];
+        if (!empty($_GET['busqueda'])) $filtros['busqueda'] = $_GET['busqueda'];
+        if (isset($_GET['estado']) && $_GET['estado'] !== '') $filtros['estado'] = $_GET['estado'];
+
+        $total = $universidadModel->contar($filtros);
+        $total_paginas = max(1, ceil($total / $por_pagina));
+        $pagina = min($pagina, $total_paginas);
+
+        $universidades = $universidadModel->buscar($filtros, $pagina, $por_pagina);
 
         $data = [
             'titulo' => 'Gestión de Universidades',
             'universidades' => $universidades,
+            'pagina' => $pagina,
+            'total_paginas' => $total_paginas,
+            'total' => $total,
+            'filtros' => $filtros,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 

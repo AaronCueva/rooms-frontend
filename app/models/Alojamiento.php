@@ -35,6 +35,71 @@ class Alojamiento
     }
 
     /**
+     * Cuenta el total de alojamientos filtrados
+     */
+    public function contar($filtros = [])
+    {
+        $query = "SELECT COUNT(*) FROM alojamiento a WHERE 1=1";
+        $params = [];
+
+        if (!empty($filtros['busqueda'])) {
+            $query .= " AND (a.titulo ILIKE :busqueda OR a.codigo ILIKE :busqueda)";
+            $params[':busqueda'] = '%' . $filtros['busqueda'] . '%';
+        }
+        if (isset($filtros['estado']) && $filtros['estado'] !== '') {
+            $query .= " AND a.estado_codigo = :estado";
+            $params[':estado'] = $filtros['estado'];
+        }
+
+        $stmt = $this->db->prepare($query);
+        foreach ($params as $key => $val) {
+            $stmt->bindValue($key, $val);
+        }
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    /**
+     * Busca alojamientos paginados
+     */
+    public function buscar($filtros = [], $pagina = 1, $por_pagina = 10)
+    {
+        $offset = ($pagina - 1) * $por_pagina;
+        $query = "SELECT a.*,
+                         u.nombres, u.apellido_paterno, u.correo,
+                         ub.nombre as distrito_nombre,
+                         cat_tipo.nombre as tipo_nombre,
+                         cat_estado.nombre as estado_nombre
+                  FROM alojamiento a
+                  LEFT JOIN usuario u ON a.usuario_id = u.usuario_id
+                  LEFT JOIN ubicacion ub ON a.ubicacion_id = ub.ubicacion_id
+                  LEFT JOIN catalogo cat_tipo ON a.tipo_codigo = cat_tipo.codigo
+                  LEFT JOIN catalogo cat_estado ON a.estado_codigo = cat_estado.codigo
+                  WHERE 1=1";
+        
+        $params = [];
+        if (!empty($filtros['busqueda'])) {
+            $query .= " AND (a.titulo ILIKE :busqueda OR a.codigo ILIKE :busqueda)";
+            $params[':busqueda'] = '%' . $filtros['busqueda'] . '%';
+        }
+        if (isset($filtros['estado']) && $filtros['estado'] !== '') {
+            $query .= " AND a.estado_codigo = :estado";
+            $params[':estado'] = $filtros['estado'];
+        }
+
+        $query .= " ORDER BY a.alojamiento_id DESC LIMIT :limite OFFSET :offset";
+
+        $stmt = $this->db->prepare($query);
+        foreach ($params as $key => $val) {
+            $stmt->bindValue($key, $val);
+        }
+        $stmt->bindValue(':limite', $por_pagina, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Obtiene un alojamiento con todos sus datos
      */
     public function findById($id)

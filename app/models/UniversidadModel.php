@@ -29,6 +29,65 @@ class UniversidadModel
     }
 
     /**
+     * Cuenta el total de universidades filtradas
+     */
+    public function contar($filtros = [])
+    {
+        $query = "SELECT COUNT(*) FROM universidad uni WHERE 1=1";
+        $params = [];
+
+        if (!empty($filtros['busqueda'])) {
+            $query .= " AND (uni.nombre ILIKE :busqueda OR uni.codigo ILIKE :busqueda)";
+            $params[':busqueda'] = '%' . $filtros['busqueda'] . '%';
+        }
+        if (isset($filtros['estado']) && $filtros['estado'] !== '') {
+            $estadoVal = $filtros['estado'] == '1' ? 'true' : 'false';
+            $query .= " AND uni.habilitado = " . $estadoVal;
+        }
+
+        $stmt = $this->db->prepare($query);
+        foreach ($params as $key => $val) {
+            $stmt->bindValue($key, $val);
+        }
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    /**
+     * Busca universidades paginadas
+     */
+    public function buscar($filtros = [], $pagina = 1, $por_pagina = 10)
+    {
+        $offset = ($pagina - 1) * $por_pagina;
+        $query = "SELECT uni.*,
+                         ub.nombre as distrito_nombre
+                  FROM universidad uni
+                  LEFT JOIN ubicacion ub ON uni.ubicacion_id = ub.ubicacion_id
+                  WHERE 1=1";
+        
+        $params = [];
+        if (!empty($filtros['busqueda'])) {
+            $query .= " AND (uni.nombre ILIKE :busqueda OR uni.codigo ILIKE :busqueda)";
+            $params[':busqueda'] = '%' . $filtros['busqueda'] . '%';
+        }
+        if (isset($filtros['estado']) && $filtros['estado'] !== '') {
+            $estadoVal = $filtros['estado'] == '1' ? 'true' : 'false';
+            $query .= " AND uni.habilitado = " . $estadoVal;
+        }
+
+        $query .= " ORDER BY uni.nombre ASC LIMIT :limite OFFSET :offset";
+
+        $stmt = $this->db->prepare($query);
+        foreach ($params as $key => $val) {
+            $stmt->bindValue($key, $val);
+        }
+        $stmt->bindValue(':limite', $por_pagina, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    /**
      * Obtiene una universidad por ID
      */
     public function findById($id)
