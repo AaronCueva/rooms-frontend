@@ -4,16 +4,19 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\Usuario;
 
-class AuthController extends Controller {
+class AuthController extends Controller
+{
 
-    public function login() {
+    public function login()
+    {
         if (isset($_SESSION['usuario_id'])) {
             $this->redirect('/admin');
         }
         $this->render('auth/login', [], 'auth');
     }
 
-    public function authenticate() {
+    public function authenticate()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $correo = $_POST['correo'] ?? '';
             $password = $_POST['password'] ?? '';
@@ -35,19 +38,30 @@ class AuthController extends Controller {
         }
     }
 
-    public function register() {
+    public function register()
+    {
         if (isset($_SESSION['usuario_id'])) {
             $this->redirect('/admin');
         }
 
-        // Cargar tipos de documento desde el catálogo
         $catalogoModel = new \App\Models\Catalogo();
         $tipos_documento = $catalogoModel->obtenerPorReferencia('TIPO_DOCUMENTO');
 
-        $this->render('auth/register', ['tipos_documento' => $tipos_documento], 'auth');
+        $rolModel = new \App\Models\Rol();
+        $roles = $rolModel->obtenerRolesRegistro();
+
+        $ubicacionModel = new \App\Models\Ubicacion();
+        $departamentos = $ubicacionModel->obtenerDepartamentos();
+
+        $this->render('auth/register', [
+            'tipos_documento' => $tipos_documento,
+            'roles' => $roles,
+            'departamentos' => $departamentos
+        ], 'auth');
     }
 
-    public function storeUser() {
+    public function storeUser()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $datos = [
                 'correo' => $_POST['correo'] ?? '',
@@ -58,21 +72,27 @@ class AuthController extends Controller {
                 'tipo_documento_codigo' => $_POST['tipo_documento_codigo'] ?? '',
                 'numero_documento' => $_POST['numero_documento'] ?? '',
                 'celular' => $_POST['celular'] ?? '',
-                // Para las pruebas, le asignaremos null al rol_id o podrías consultar el rol "Administrador" de la BD
-                'rol_id' => null 
+                'rol_id' => $_POST['rol_id'] ?? null,
+                'ubicacion_id' => $_POST['distrito'] ?? null // The selected district is the ubicacion
             ];
 
             $usuarioModel = new Usuario();
-            
+
             // Validar si existe el correo
             if ($usuarioModel->findByEmail($datos['correo'])) {
-                // Volvemos a cargar los tipos de documento para la vista
+                // Volvemos a cargar los combos para la vista
                 $catalogoModel = new \App\Models\Catalogo();
                 $tipos_documento = $catalogoModel->obtenerPorReferencia('TIPO_DOCUMENTO');
-                
+                $rolModel = new \App\Models\Rol();
+                $roles = $rolModel->obtenerRolesRegistro();
+                $ubicacionModel = new \App\Models\Ubicacion();
+                $departamentos = $ubicacionModel->obtenerDepartamentos();
+
                 $this->render('auth/register', [
                     'error' => 'El correo ya está registrado.',
-                    'tipos_documento' => $tipos_documento
+                    'tipos_documento' => $tipos_documento,
+                    'roles' => $roles,
+                    'departamentos' => $departamentos
                 ], 'auth');
                 return;
             }
@@ -83,16 +103,38 @@ class AuthController extends Controller {
             } else {
                 $catalogoModel = new \App\Models\Catalogo();
                 $tipos_documento = $catalogoModel->obtenerPorReferencia('TIPO_DOCUMENTO');
-                
+                $rolModel = new \App\Models\Rol();
+                $roles = $rolModel->obtenerRolesRegistro();
+                $ubicacionModel = new \App\Models\Ubicacion();
+                $departamentos = $ubicacionModel->obtenerDepartamentos();
+
                 $this->render('auth/register', [
                     'error' => 'Error al registrar usuario.',
-                    'tipos_documento' => $tipos_documento
+                    'tipos_documento' => $tipos_documento,
+                    'roles' => $roles,
+                    'departamentos' => $departamentos
                 ], 'auth');
             }
         }
     }
 
-    public function logout() {
+    public function getUbicaciones()
+    {
+        header('Content-Type: application/json');
+        $referencia_id = $_GET['referencia_id'] ?? null;
+
+        if ($referencia_id) {
+            $ubicacionModel = new \App\Models\Ubicacion();
+            $ubicaciones = $ubicacionModel->obtenerPorReferencia($referencia_id);
+            echo json_encode($ubicaciones);
+        } else {
+            echo json_encode([]);
+        }
+        exit;
+    }
+
+    public function logout()
+    {
         session_destroy();
         $this->redirect('/login');
     }
