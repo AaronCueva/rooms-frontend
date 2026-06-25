@@ -579,3 +579,210 @@ h6,
 .dropdown-menu {
   z-index: 3000 !important;
 }
+
+/* =========================================================
+   TABLA DE FOROS - DISEÑO MODERNO
+   ========================================================= */
+.foro-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.85rem;
+}
+
+.foro-table thead th {
+  padding: 0.85rem 1rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--admin-text-muted);
+  background: var(--admin-surface-alt);
+  border-bottom: 2px solid var(--admin-border);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.foro-table tbody tr {
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.foro-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.foro-table tbody tr:hover {
+  background: rgba(220, 38, 38, 0.03);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.foro-table tbody tr.row-oculto {
+  opacity: 0.55;
+}
+
+.foro-table tbody td {
+  padding: 0.9rem 1rem;
+  vertical-align: middle;
+}
+
+/* Icono del foro */
+.foro-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.05));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-primary);
+  flex-shrink: 0;
+}
+
+/* Avatar del autor */
+.autor-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Badge de categoría */
+.cat-badge {
+  display: inline-flex;
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(15, 23, 42, 0.06);
+  color: var(--admin-text-main);
+  border: 1px solid var(--admin-border);
+}
+
+/* Interacciones */
+.interacciones-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--admin-surface-alt);
+  padding: 0.35rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+}
+
+.interaccion-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--admin-text-muted);
+}
+
+.interaccion-item i {
+  font-size: 0.75rem;
+}
+
+.interaccion-item i.fa-heart {
+  color: #e11d48;
+}
+
+.interaccion-item i.fa-comment {
+  color: var(--admin-primary);
+}
+
+/* Badge de estado */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-activo {
+  background: rgba(34, 197, 94, 0.12);
+  color: #15803d;
+}
+
+.status-oculto {
+  background: rgba(100, 116, 139, 0.12);
+  color: #475569;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.status-activo .status-dot {
+  background: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+}
+
+.status-oculto .status-dot {
+  background: #94a3b8;
+}
+
+/* Acciones - botones compactos */
+.acciones-group {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.btn-accion {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--admin-border);
+  background: white;
+  color: var(--admin-text-muted);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.8rem;
+  padding: 0;
+}
+
+.btn-accion:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-accion-view:hover {
+  background: var(--admin-primary);
+  border-color: var(--admin-primary);
+  color: white;
+}
+
+.btn-accion-hide:hover {
+  background: #d97706;
+  border-color: #d97706;
+  color: white;
+}
+
+.btn-accion-restore:hover {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: white;
+}
+
+/* Modal Bootstrap por encima del topbar */
+.modal {
+  z-index: 3000 !important;
+}
+.modal-backdrop {
+  z-index: 2999 !important;
+}
