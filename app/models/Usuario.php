@@ -46,8 +46,8 @@ class Usuario
         $stmt->bindParam(':tipo_documento_codigo', $datos['tipo_documento_codigo']);
         $stmt->bindParam(':numero_documento', $datos['numero_documento']);
         $stmt->bindParam(':celular', $datos['celular']);
-        $stmt->bindParam(':rol_id', $datos['rol_id'], PDO::PARAM_NULL);
-        $stmt->bindParam(':ubicacion_id', $datos['ubicacion_id'], PDO::PARAM_NULL);
+        $stmt->bindParam(':rol_id', $datos['rol_id']);
+        $stmt->bindParam(':ubicacion_id', $datos['ubicacion_id']);
 
         return $stmt->execute();
     }
