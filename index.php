@@ -49,5 +49,31 @@ $router->get('/admin/foros/ver', 'AdminForoController', 'ver');
 $router->post('/admin/foros/toggle-estado', 'AdminForoController', 'toggleEstado');
 $router->post('/admin/foros/comentario/eliminar', 'AdminForoController', 'eliminarComentario');
 
+// Rutas de Administrador (Alojamientos)
+$router->get('/admin/alojamientos', 'AdminAlojamientoController', 'index');
+$router->get('/admin/alojamientos/ver', 'AdminAlojamientoController', 'ver');
+$router->get('/admin/alojamientos/crear', 'AdminAlojamientoController', 'crear');
+$router->post('/admin/alojamientos/guardar', 'AdminAlojamientoController', 'guardar');
+$router->get('/admin/alojamientos/editar', 'AdminAlojamientoController', 'editar');
+$router->post('/admin/alojamientos/actualizar', 'AdminAlojamientoController', 'actualizar');
+$router->post('/admin/alojamientos/toggle-estado', 'AdminAlojamientoController', 'toggleEstado');
+$router->post('/admin/alojamientos/aprobar', 'AdminAlojamientoController', 'aprobar');
+$router->post('/admin/alojamientos/servicio/agregar', 'AdminAlojamientoController', 'agregarServicio');
+$router->post('/admin/alojamientos/servicio/eliminar', 'AdminAlojamientoController', 'eliminarServicio');
+$router->post('/admin/alojamientos/descuento/guardar', 'AdminAlojamientoController', 'guardarDescuento');
+$router->post('/admin/alojamientos/descuento/eliminar', 'AdminAlojamientoController', 'eliminarDescuento');
+$router->post('/admin/alojamientos/beneficio/guardar', 'AdminAlojamientoController', 'guardarBeneficio');
+$router->post('/admin/alojamientos/beneficio/eliminar', 'AdminAlojamientoController', 'eliminarBeneficio');
+
+// Rutas de Administrador (Universidades)
+$router->get('/admin/universidades', 'AdminUniversidadController', 'index');
+$router->get('/admin/universidades/ver', 'AdminUniversidadController', 'ver');
+$router->get('/admin/universidades/ver_modal', 'AdminUniversidadController', 'verModal');
+$router->get('/admin/universidades/crear', 'AdminUniversidadController', 'crear');
+$router->post('/admin/universidades/guardar', 'AdminUniversidadController', 'guardar');
+$router->get('/admin/universidades/editar', 'AdminUniversidadController', 'editar');
+$router->post('/admin/universidades/actualizar', 'AdminUniversidadController', 'actualizar');
+$router->post('/admin/universidades/toggle-estado', 'AdminUniversidadController', 'toggleEstado');
+
 // Ejecutar ruta
 $router->dispatch();

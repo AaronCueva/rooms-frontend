@@ -60,11 +60,11 @@
                                             </a>
                                             
                                             <!-- Botón Toggle Estado -->
-                                            <form action="/admin/foros/toggle-estado" method="POST" class="d-inline">
+                                            <form action="/admin/foros/toggle-estado" method="POST" class="d-inline form-confirm" data-title="¿Cambiar estado?" data-text="Esto afectará la visibilidad del foro.">
                                                 <input type="hidden" name="id" value="<?php echo $foro['foro_id']; ?>">
                                                 <input type="hidden" name="estado" value="<?php echo ($foro['habilitado'] == 1) ? 0 : 1; ?>">
                                                 <?php if ($foro['habilitado'] == 1): ?>
-                                                    <button type="submit" class="btn btn-sm btn-warning" title="Ocultar foro" onclick="return confirm('¿Estás seguro de ocultar este foro?');">
+                                                    <button type="submit" class="btn btn-sm btn-warning" title="Ocultar foro">
                                                         <i class="fas fa-eye-slash"></i>
                                                     </button>
                                                 <?php else: ?>

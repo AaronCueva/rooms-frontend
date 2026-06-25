@@ -37,4 +37,26 @@ class Ubicacion {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function obtenerJerarquia($distrito_id) {
+        $q = "SELECT ubicacion_id, referencia_id FROM ubicacion WHERE ubicacion_id = :id";
+        
+        $stmt1 = $this->db->prepare($q);
+        $stmt1->bindParam(':id', $distrito_id);
+        $stmt1->execute();
+        $distrito = $stmt1->fetch();
+        if (!$distrito) return null;
+
+        $stmt2 = $this->db->prepare($q);
+        $stmt2->bindParam(':id', $distrito['referencia_id']);
+        $stmt2->execute();
+        $provincia = $stmt2->fetch();
+        if (!$provincia) return null;
+
+        return [
+            'distrito_id' => $distrito['ubicacion_id'],
+            'provincia_id' => $provincia['ubicacion_id'],
+            'departamento_id' => $provincia['referencia_id']
+        ];
+    }
 }
