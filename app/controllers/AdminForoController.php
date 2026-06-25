@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\Foro;
 use App\Models\ForoComentario;
+use App\Models\Usuario;
 
 class AdminForoController extends Controller
 {
@@ -143,6 +144,27 @@ class AdminForoController extends Controller
             } else {
                 $this->redirect('/admin/foros');
             }
+        }
+    }
+
+    public function toggleBanUsuario()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $usuario_id = $_POST['usuario_id'] ?? null;
+            $foro_id = $_POST['foro_id'] ?? null;
+            $accion = $_POST['accion'] ?? 'banear';
+
+            if ($usuario_id) {
+                $usuarioModel = new Usuario();
+
+                if ($accion == 'banear') {
+                    $usuarioModel->banear($usuario_id);
+                } else {
+                    $usuarioModel->desbanear($usuario_id);
+                }
+            }
+
+            $this->redirect('/admin/foros/ver?id=' . $foro_id);
         }
     }
 }

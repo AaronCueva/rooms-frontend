@@ -68,7 +68,7 @@ Todas las tablas del admin deben seguir el mismo patrón visual definido en `adm
 |---|---|---|---|
 | `btn-accion-view` | `fa-eye` | Ver detalles | Rojo (primary) |
 | `btn-accion-edit` | `fa-pen` | Editar registro | Azul |
-| `btn-accion-hide` | `fa-eye-slash` | Ocultar/Deshabilitar | Ámbar |
+| `btn-accion-hide` | `fa-power-off` | Ocultar/Deshabilitar | Ámbar |
 | `btn-accion-restore` | `fa-check` | Restaurar/Activar | Verde |
 | `btn-accion-delete` | `fa-trash` | Eliminar | Rojo |
 

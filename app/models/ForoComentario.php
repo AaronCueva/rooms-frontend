@@ -18,7 +18,9 @@ class ForoComentario {
      */
     public function getByForoId($foro_id) {
         $query = "SELECT fc.*, 
-                         u.nombres, u.apellido_paterno, u.correo
+                         u.nombres, u.apellido_paterno, u.correo,
+                         u.usuario_id as comentarista_id,
+                         u.habilitado as comentarista_habilitado
                   FROM foro_comentario fc
                   LEFT JOIN usuario u ON fc.usuario_id = u.usuario_id
                   WHERE fc.foro_id = :foro_id

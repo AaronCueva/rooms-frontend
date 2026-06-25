@@ -10,9 +10,6 @@
     </div>
 
     <div class="card shadow mb-4">
-        <div class="card-header py-3 d-flex align-items-center">
-            <h6 class="m-0 fw-bold"><i class="fas fa-list me-2"></i>Listado de Foros</h6>
-        </div>
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table foro-table mb-0" id="dataTable" width="100%" cellspacing="0">
@@ -33,18 +30,15 @@
                                 <tr class="<?php echo (!isset($foro['habilitado']) || $foro['habilitado'] != 1) ? 'row-oculto' : ''; ?>">
                                     <td class="td-titulo">
                                         <div class="d-flex align-items-center gap-2">
-                                            <div class="foro-icon">
-                                                <i class="fas fa-file-lines"></i>
-                                            </div>
                                             <div>
                                                 <strong class="d-block text-truncate" style="max-width: 280px;"><?php echo htmlspecialchars($foro['titulo']); ?></strong>
-                                                <small class="text-muted">ID: <?php echo htmlspecialchars($foro['foro_id']); ?></small>
+                                          
                                             </div>
                                         </div>
                                     </td>
                                     <td class="td-autor">
                                         <div class="d-flex align-items-center gap-2">
-                                            <div class="autor-avatar"><?php echo strtoupper(substr($foro['nombres'] ?? '?', 0, 1)); ?></div>
+                                       
                                             <div>
                                                 <span class="d-block fw-semibold small"><?php echo htmlspecialchars($foro['nombres'] . ' ' . $foro['apellido_paterno']); ?></span>
                                                 <small class="text-muted"><?php echo htmlspecialchars($foro['universidad_nombre'] ?? 'Sin universidad'); ?></small>
@@ -83,16 +77,16 @@
                                     </td>
                                     <td class="td-acciones text-center">
                                         <div class="acciones-group">
-                                            <button type="button" class="btn-accion btn-accion-view btn-view-foro" title="Ver foro y moderar" data-foro-id="<?php echo $foro['foro_id']; ?>">
+                                            <a href="/admin/foros/ver?id=<?php echo $foro['foro_id']; ?>" class="btn-accion btn-accion-view" title="Ver foro y moderar">
                                                 <i class="fas fa-eye"></i>
-                                            </button>
+                                            </a>
                                             
                                             <form action="/admin/foros/toggle-estado" method="POST" class="d-inline">
                                                 <input type="hidden" name="id" value="<?php echo $foro['foro_id']; ?>">
                                                 <input type="hidden" name="estado" value="<?php echo ($foro['habilitado'] == 1) ? 0 : 1; ?>">
                                                 <?php if ($foro['habilitado'] == 1): ?>
                                                     <button type="submit" class="btn-accion btn-accion-hide" title="Ocultar foro" onclick="return confirm('¿Estás seguro de ocultar este foro?');">
-                                                        <i class="fas fa-eye-slash"></i>
+                                                        <i class="fas fa-power-off"></i>
                                                     </button>
                                                 <?php else: ?>
                                                     <button type="submit" class="btn-accion btn-accion-restore" title="Activar foro">
@@ -119,56 +113,3 @@
     </div>
 </div>
 
-<!-- Modal para Ver Foro -->
-<div class="modal fade" id="foroModal" tabindex="-1" aria-labelledby="foroModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="foroModalLabel">Detalle del Foro</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-            <div class="modal-body" id="foroModalBody">
-                <div class="text-center py-4">
-                    <div class="spinner-border text-primary" role="status">
-                        <span class="visually-hidden">Cargando...</span>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('foroModal');
-    const modalBody = document.getElementById('foroModalBody');
-    const modalLabel = document.getElementById('foroModalLabel');
-
-    modal.addEventListener('hidden.bs.modal', function () {
-        modalBody.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
-    });
-
-    document.querySelectorAll('.btn-view-foro').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var foroId = this.getAttribute('data-foro-id');
-            modalBody.innerHTML = '<div class="text-center py-4"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
-            
-            fetch('/admin/foros/ver-modal?id=' + foroId)
-                .then(function(response) { return response.text(); })
-                .then(function(html) {
-                    modalBody.innerHTML = html;
-                    var bsModal = new bootstrap.Modal(modal);
-                    bsModal.show();
-                })
-                .catch(function() {
-                    modalBody.innerHTML = '<div class="alert alert-danger m-3">Error al cargar el foro.</div>';
-                    var bsModal = new bootstrap.Modal(modal);
-                    bsModal.show();
-                });
-        });
-    });
-});
-</script>

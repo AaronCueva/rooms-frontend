@@ -25,6 +25,12 @@ class AuthController extends Controller
             $usuario = $usuarioModel->findByEmail($correo);
 
             if ($usuario && password_verify($password, $usuario['password'])) {
+                // Verificar si el usuario está baneado
+                if (isset($usuario['habilitado']) && !$usuario['habilitado']) {
+                    $this->render('auth/login', ['error' => 'Tu cuenta ha sido suspendida. Contacta al administrador.'], 'auth');
+                    return;
+                }
+
                 // Iniciar sesión
                 $_SESSION['usuario_id'] = $usuario['usuario_id'];
                 $_SESSION['rol_id'] = $usuario['rol_id'];

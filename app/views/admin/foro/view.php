@@ -12,7 +12,7 @@
             <input type="hidden" name="estado" value="<?php echo ($foro['habilitado'] == 1) ? 0 : 1; ?>">
             <?php if ($foro['habilitado'] == 1): ?>
                 <button type="submit" class="btn btn-sm btn-warning shadow-sm" onclick="return confirm('¿Estás seguro de ocultar este foro?');">
-                    <i class="fas fa-eye-slash fa-sm text-white-50"></i> Ocultar Foro
+                    <i class="fas fa-power-off fa-sm text-white-50"></i> Ocultar Foro
                 </button>
             <?php else: ?>
                 <button type="submit" class="btn btn-sm btn-success shadow-sm">
@@ -95,10 +95,25 @@
                                             <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($comentario['nombres']); ?>&background=random&size=24" class="rounded-circle me-2" alt="avatar">
                                             <strong class="mb-1"><?php echo htmlspecialchars($comentario['nombres'] . ' ' . $comentario['apellido_paterno']); ?></strong>
                                             <?php if (!$comentarioHabilitado): ?>
-                                                <span class="badge bg-danger ms-1">Eliminado</span>
+                                                <span class="badge bg-secondary ms-1">Oculto</span>
+                                            <?php endif; ?>
+                                            <?php if (isset($comentario['comentarista_habilitado']) && !$comentario['comentarista_habilitado']): ?>
+                                                <span class="badge bg-dark ms-1"><i class="fas fa-ban me-1"></i>Baneado</span>
                                             <?php endif; ?>
                                         </div>
-                                        <small class="text-muted"><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($comentario['fecha_envio']))); ?></small>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <?php if ($comentario['comentarista_id'] != $_SESSION['usuario_id']): ?>
+                                                <form action="/admin/foros/ban-usuario" method="POST" class="d-inline m-0">
+                                                    <input type="hidden" name="usuario_id" value="<?php echo $comentario['comentarista_id']; ?>">
+                                                    <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
+                                                    <input type="hidden" name="accion" value="<?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'banear' : 'desbanear'; ?>">
+                                                    <button type="submit" class="btn btn-sm <?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'btn-outline-dark' : 'btn-outline-success'; ?>" title="<?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'Banear usuario' : 'Desbanear usuario'; ?>" onclick="return confirm('<?php echo ($comentario['comentarista_habilitado'] ?? true) ? '¿Banear a este usuario? No podrá iniciar sesión.' : '¿Desbanear a este usuario? Volverá a poder iniciar sesión.'; ?>');">
+                                                        <i class="fas <?php echo ($comentario['comentarista_habilitado'] ?? true) ? 'fa-gavel' : 'fa-check'; ?>"></i>
+                                                    </button>
+                                                </form>
+                                            <?php endif; ?>
+                                            <small class="text-muted"><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($comentario['fecha_envio']))); ?></small>
+                                        </div>
                                     </div>
                                     <p class="mb-2 ms-4 <?php echo $comentarioHabilitado ? '' : 'text-decoration-line-through text-muted'; ?>" style="padding-left: 10px;"><?php echo htmlspecialchars($comentario['mensaje']); ?></p>
                                     
@@ -107,16 +122,16 @@
                                             <form action="/admin/foros/comentario/eliminar" method="POST" class="d-inline">
                                                 <input type="hidden" name="comentario_id" value="<?php echo $comentario['foro_comentario_id']; ?>">
                                                 <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
-                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar este comentario? Quedará oculto y podrá restaurarse luego.');">
-                                                    <i class="fas fa-trash-alt me-1"></i> Eliminar Comentario
+                                                <button type="submit" class="btn btn-sm btn-outline-warning" onclick="return confirm('¿Ocultar este comentario? Dejará de ser visible y podrás mostrarlo después.');">
+                                                    <i class="fas fa-eye-slash me-1"></i> Ocultar Comentario
                                                 </button>
                                             </form>
                                         <?php else: ?>
                                             <form action="/admin/foros/comentario/restaurar" method="POST" class="d-inline">
                                                 <input type="hidden" name="comentario_id" value="<?php echo $comentario['foro_comentario_id']; ?>">
                                                 <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
-                                                <button type="submit" class="btn btn-sm btn-outline-success" onclick="return confirm('¿Restaurar este comentario? Volverá a ser visible.');">
-                                                    <i class="fas fa-rotate-left me-1"></i> Restaurar Comentario
+                                                <button type="submit" class="btn btn-sm btn-outline-info" onclick="return confirm('¿Mostrar este comentario? Volverá a ser visible para todos.');">
+                                                    <i class="fas fa-eye me-1"></i> Mostrar Comentario
                                                 </button>
                                             </form>
                                         <?php endif; ?>
