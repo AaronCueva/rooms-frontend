@@ -52,31 +52,13 @@ $router->post('/admin/foros/comentario/eliminar', 'AdminForoController', 'elimin
 $router->post('/admin/foros/comentario/restaurar', 'AdminForoController', 'restaurarComentario');
 $router->post('/admin/foros/ban-usuario', 'AdminForoController', 'toggleBanUsuario');
 
-// Rutas de Administrador (Alojamientos)
-$router->get('/admin/alojamientos', 'AdminAlojamientoController', 'index');
-$router->get('/admin/alojamientos/ver', 'AdminAlojamientoController', 'ver');
-$router->get('/admin/alojamientos/crear', 'AdminAlojamientoController', 'crear');
-$router->post('/admin/alojamientos/guardar', 'AdminAlojamientoController', 'guardar');
-$router->get('/admin/alojamientos/editar', 'AdminAlojamientoController', 'editar');
-$router->post('/admin/alojamientos/actualizar', 'AdminAlojamientoController', 'actualizar');
-$router->post('/admin/alojamientos/toggle-estado', 'AdminAlojamientoController', 'toggleEstado');
-$router->post('/admin/alojamientos/aprobar', 'AdminAlojamientoController', 'aprobar');
-$router->post('/admin/alojamientos/servicio/agregar', 'AdminAlojamientoController', 'agregarServicio');
-$router->post('/admin/alojamientos/servicio/eliminar', 'AdminAlojamientoController', 'eliminarServicio');
-$router->post('/admin/alojamientos/descuento/guardar', 'AdminAlojamientoController', 'guardarDescuento');
-$router->post('/admin/alojamientos/descuento/eliminar', 'AdminAlojamientoController', 'eliminarDescuento');
-$router->post('/admin/alojamientos/beneficio/guardar', 'AdminAlojamientoController', 'guardarBeneficio');
-$router->post('/admin/alojamientos/beneficio/eliminar', 'AdminAlojamientoController', 'eliminarBeneficio');
+// Editar foro
+$router->get('/admin/foros/editar-modal', 'AdminForoController', 'editarForoModal');
+$router->post('/admin/foros/actualizar', 'AdminForoController', 'actualizarForo');
 
-// Rutas de Administrador (Universidades)
-$router->get('/admin/universidades', 'AdminUniversidadController', 'index');
-$router->get('/admin/universidades/ver', 'AdminUniversidadController', 'ver');
-$router->get('/admin/universidades/ver_modal', 'AdminUniversidadController', 'verModal');
-$router->get('/admin/universidades/crear', 'AdminUniversidadController', 'crear');
-$router->post('/admin/universidades/guardar', 'AdminUniversidadController', 'guardar');
-$router->get('/admin/universidades/editar', 'AdminUniversidadController', 'editar');
-$router->post('/admin/universidades/actualizar', 'AdminUniversidadController', 'actualizar');
-$router->post('/admin/universidades/toggle-estado', 'AdminUniversidadController', 'toggleEstado');
+// Editar comentario
+$router->get('/admin/foros/comentario/editar-modal', 'AdminForoController', 'editarComentarioModal');
+$router->post('/admin/foros/comentario/actualizar', 'AdminForoController', 'actualizarComentario');
 
 // Ejecutar ruta
 $router->dispatch();
