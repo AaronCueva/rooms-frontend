@@ -204,6 +204,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         const toggle = document.getElementById('sidebarToggleTop');
         if (toggle) {
@@ -211,6 +212,30 @@
                 document.getElementById('sidebar').classList.toggle('toggled');
             });
         }
+
+        // Interceptar formularios con clase .form-confirm para usar SweetAlert2
+        document.addEventListener('DOMContentLoaded', function() {
+            const confirmForms = document.querySelectorAll('.form-confirm');
+            confirmForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: form.dataset.title || '¿Estás seguro?',
+                        text: form.dataset.text || 'Esta acción modificará el estado del registro.',
+                        icon: form.dataset.icon || 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Sí, continuar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
     </script>
 </body>
 
