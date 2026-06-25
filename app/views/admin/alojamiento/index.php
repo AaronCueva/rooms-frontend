@@ -7,8 +7,38 @@
     </div>
 
     <div class="card shadow mb-4">
+        <div class="card-body">
+            <form method="GET" action="/admin/alojamientos" class="row g-2 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label small fw-semibold mb-1">Buscar</label>
+                    <input type="text" name="busqueda" class="form-control form-control-sm" placeholder="Título o código..." value="<?php echo htmlspecialchars($filtros['busqueda'] ?? ''); ?>">
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold mb-1">Estado</label>
+                    <select name="estado" class="form-select form-select-sm">
+                        <option value="">Todos</option>
+                        <?php foreach ($estados as $est): ?>
+                            <option value="<?php echo $est['codigo']; ?>" <?php echo (isset($filtros['estado']) && $filtros['estado'] == $est['codigo']) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($est['nombre']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-primary flex-fill">
+                        <i class="fas fa-search me-1"></i> Filtrar
+                    </button>
+                    <a href="/admin/alojamientos" class="btn btn-sm btn-outline-secondary flex-fill">
+                        <i class="fas fa-times me-1"></i> Limpiar
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex justify-content-between align-items-center">
-            <h6 class="m-0 font-weight-bold text-primary">Listado de Alojamientos</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Listado de Alojamientos (<?php echo $total ?? 0; ?>)</h6>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -85,6 +115,25 @@
                     </tbody>
                 </table>
             </div>
+            
+            <!-- Paginación -->
+            <?php if (isset($total_paginas) && $total_paginas > 1): ?>
+            <div class="d-flex justify-content-center mt-4">
+                <ul class="pagination pagination-sm mb-0">
+                    <li class="page-item <?php echo ($pagina <= 1) ? 'disabled' : ''; ?>">
+                        <a class="page-link" href="?pagina=<?php echo $pagina - 1; ?>&busqueda=<?php echo urlencode($filtros['busqueda'] ?? ''); ?>&estado=<?php echo urlencode($filtros['estado'] ?? ''); ?>">Anterior</a>
+                    </li>
+                    <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                        <li class="page-item <?php echo ($pagina == $i) ? 'active' : ''; ?>">
+                            <a class="page-link" href="?pagina=<?php echo $i; ?>&busqueda=<?php echo urlencode($filtros['busqueda'] ?? ''); ?>&estado=<?php echo urlencode($filtros['estado'] ?? ''); ?>"><?php echo $i; ?></a>
+                        </li>
+                    <?php endfor; ?>
+                    <li class="page-item <?php echo ($pagina >= $total_paginas) ? 'disabled' : ''; ?>">
+                        <a class="page-link" href="?pagina=<?php echo $pagina + 1; ?>&busqueda=<?php echo urlencode($filtros['busqueda'] ?? ''); ?>&estado=<?php echo urlencode($filtros['estado'] ?? ''); ?>">Siguiente</a>
+                    </li>
+                </ul>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
