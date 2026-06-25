@@ -88,24 +88,38 @@
                     <?php if (isset($comentarios) && count($comentarios) > 0): ?>
                         <div class="list-group list-group-flush">
                             <?php foreach ($comentarios as $comentario): ?>
-                                <div class="list-group-item px-0 py-3">
+                                <?php $comentarioHabilitado = ($comentario['habilitado'] ?? false) == 1 || $comentario['habilitado'] === true; ?>
+                                <div class="list-group-item px-0 py-3 <?php echo $comentarioHabilitado ? '' : 'bg-light opacity-75'; ?>">
                                     <div class="d-flex w-100 justify-content-between align-items-center mb-1">
                                         <div>
                                             <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($comentario['nombres']); ?>&background=random&size=24" class="rounded-circle me-2" alt="avatar">
                                             <strong class="mb-1"><?php echo htmlspecialchars($comentario['nombres'] . ' ' . $comentario['apellido_paterno']); ?></strong>
+                                            <?php if (!$comentarioHabilitado): ?>
+                                                <span class="badge bg-danger ms-1">Eliminado</span>
+                                            <?php endif; ?>
                                         </div>
                                         <small class="text-muted"><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($comentario['fecha_envio']))); ?></small>
                                     </div>
-                                    <p class="mb-2 ms-4" style="padding-left: 10px;"><?php echo htmlspecialchars($comentario['mensaje']); ?></p>
+                                    <p class="mb-2 ms-4 <?php echo $comentarioHabilitado ? '' : 'text-decoration-line-through text-muted'; ?>" style="padding-left: 10px;"><?php echo htmlspecialchars($comentario['mensaje']); ?></p>
                                     
                                     <div class="text-end">
-                                        <form action="/admin/foros/comentario/eliminar" method="POST" class="d-inline">
-                                            <input type="hidden" name="comentario_id" value="<?php echo $comentario['foro_comentario_id']; ?>">
-                                            <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
-                                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar este comentario de forma permanente? Esta acción no se puede deshacer.');">
-                                                <i class="fas fa-trash-alt me-1"></i> Eliminar Comentario
-                                            </button>
-                                        </form>
+                                        <?php if ($comentarioHabilitado): ?>
+                                            <form action="/admin/foros/comentario/eliminar" method="POST" class="d-inline">
+                                                <input type="hidden" name="comentario_id" value="<?php echo $comentario['foro_comentario_id']; ?>">
+                                                <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Eliminar este comentario? Quedará oculto y podrá restaurarse luego.');">
+                                                    <i class="fas fa-trash-alt me-1"></i> Eliminar Comentario
+                                                </button>
+                                            </form>
+                                        <?php else: ?>
+                                            <form action="/admin/foros/comentario/restaurar" method="POST" class="d-inline">
+                                                <input type="hidden" name="comentario_id" value="<?php echo $comentario['foro_comentario_id']; ?>">
+                                                <input type="hidden" name="foro_id" value="<?php echo $foro['foro_id']; ?>">
+                                                <button type="submit" class="btn btn-sm btn-outline-success" onclick="return confirm('¿Restaurar este comentario? Volverá a ser visible.');">
+                                                    <i class="fas fa-rotate-left me-1"></i> Restaurar Comentario
+                                                </button>
+                                            </form>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

@@ -62,6 +62,37 @@ class AdminForoController extends Controller
         $this->render('admin/foro/view', $data, 'admin');
     }
 
+    public function verModal()
+    {
+        $id = $_GET['id'] ?? null;
+
+        if (!$id) {
+            echo '<div class="p-4 text-muted">Foro no encontrado.</div>';
+            return;
+        }
+
+        $foroModel = new Foro();
+        $comentarioModel = new ForoComentario();
+
+        $foro = $foroModel->findById($id);
+        
+        if (!$foro) {
+            echo '<div class="p-4 text-muted">Foro no encontrado.</div>';
+            return;
+        }
+
+        $comentarios = $comentarioModel->getByForoId($id);
+
+        $data = [
+            'titulo' => 'Ver Foro: ' . $foro['titulo'],
+            'foro' => $foro,
+            'comentarios' => $comentarios,
+            'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
+        ];
+
+        $this->render('admin/foro/view', $data, '');
+    }
+
     public function toggleEstado()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -86,6 +117,25 @@ class AdminForoController extends Controller
             if ($comentario_id) {
                 $comentarioModel = new ForoComentario();
                 $comentarioModel->eliminar($comentario_id);
+            }
+
+            if ($foro_id) {
+                $this->redirect('/admin/foros/ver?id=' . $foro_id);
+            } else {
+                $this->redirect('/admin/foros');
+            }
+        }
+    }
+
+    public function restaurarComentario()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $comentario_id = $_POST['comentario_id'] ?? null;
+            $foro_id = $_POST['foro_id'] ?? null;
+
+            if ($comentario_id) {
+                $comentarioModel = new ForoComentario();
+                $comentarioModel->restaurar($comentario_id);
             }
 
             if ($foro_id) {
