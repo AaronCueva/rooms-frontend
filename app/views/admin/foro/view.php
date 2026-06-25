@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">
+        <h1 class="h3 mb-0">
             <a href="/admin/foros" class="text-decoration-none text-secondary me-2">
                 <i class="fas fa-arrow-left"></i>
             </a>
@@ -61,7 +61,7 @@
                     </div>
                     
                     <div class="mb-0 text-center">
-                        <div class="p-3 bg-light rounded d-inline-block">
+                        <div class="p-3 rounded d-inline-block" style="background: rgba(255, 255, 255, 0.05);">
                             <i class="fas fa-heart text-danger"></i> <strong class="ms-1"><?php echo htmlspecialchars($foro['total_reacciones'] ?? 0); ?> Reacciones</strong>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
             <div class="card shadow mb-4 border-left-primary">
                 <div class="card-body">
                     <h4 class="font-weight-bold"><?php echo htmlspecialchars($foro['titulo']); ?></h4>
-                    <p class="mt-3 text-gray-800" style="white-space: pre-wrap;"><?php echo htmlspecialchars($foro['descripcion']); ?></p>
+                    <p class="mt-3" style="white-space: pre-wrap;"><?php echo htmlspecialchars($foro['descripcion']); ?></p>
                 </div>
             </div>
 
