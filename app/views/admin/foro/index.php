@@ -5,8 +5,46 @@
             <p class="text-muted small mb-0">Modera los foros y comentarios de la comunidad</p>
         </div>
         <span class="badge bg-primary fs-6 px-3 py-2">
-            <i class="fas fa-comments me-1"></i> <?php echo count($foros ?? []); ?> foros
+            <i class="fas fa-comments me-1"></i> <?php echo $total ?? count($foros ?? []); ?> foros
         </span>
+    </div>
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <form method="GET" action="/admin/foros" class="row g-2 align-items-end">
+                <div class="col-md-4">
+                    <label class="form-label small fw-semibold mb-1">Buscar</label>
+                    <input type="text" name="busqueda" class="form-control form-control-sm" placeholder="Título o descripción..." value="<?php echo htmlspecialchars($filtros['busqueda'] ?? ''); ?>">
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label small fw-semibold mb-1">Categoría</label>
+                    <select name="categoria" class="form-select form-select-sm">
+                        <option value="">Todas</option>
+                        <?php foreach ($categorias as $cat): ?>
+                            <option value="<?php echo $cat['codigo']; ?>" <?php echo (isset($filtros['categoria']) && $filtros['categoria'] == $cat['codigo']) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($cat['nombre']); ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label small fw-semibold mb-1">Estado</label>
+                    <select name="estado" class="form-select form-select-sm">
+                        <option value="">Todos</option>
+                        <option value="1" <?php echo (isset($filtros['estado']) && $filtros['estado'] === '1') ? 'selected' : ''; ?>>Activo</option>
+                        <option value="0" <?php echo (isset($filtros['estado']) && $filtros['estado'] === '0') ? 'selected' : ''; ?>>Oculto</option>
+                    </select>
+                </div>
+                <div class="col-md-3 d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-primary flex-fill">
+                        <i class="fas fa-search me-1"></i> Filtrar
+                    </button>
+                    <a href="/admin/foros" class="btn btn-sm btn-outline-secondary flex-fill">
+                        <i class="fas fa-times me-1"></i> Limpiar
+                    </a>
+                </div>
+            </form>
+        </div>
     </div>
 
     <div class="card shadow mb-4">
@@ -17,7 +55,7 @@
                         <tr>
                             <th>Título</th>
                             <th>Autor</th>
-                            <th>Categoría</th>
+                            <th>Categoria</th>
                             <th>Fecha</th>
                             <th class="text-center">Interacciones</th>
                             <th class="text-center">Estado</th>
@@ -32,13 +70,11 @@
                                         <div class="d-flex align-items-center gap-2">
                                             <div>
                                                 <strong class="d-block text-truncate" style="max-width: 280px;"><?php echo htmlspecialchars($foro['titulo']); ?></strong>
-                                          
                                             </div>
                                         </div>
                                     </td>
                                     <td class="td-autor">
                                         <div class="d-flex align-items-center gap-2">
-                                       
                                             <div>
                                                 <span class="d-block fw-semibold small"><?php echo htmlspecialchars($foro['nombres'] . ' ' . $foro['apellido_paterno']); ?></span>
                                                 <small class="text-muted"><?php echo htmlspecialchars($foro['universidad_nombre'] ?? 'Sin universidad'); ?></small>
@@ -80,7 +116,9 @@
                                             <a href="/admin/foros/ver?id=<?php echo $foro['foro_id']; ?>" class="btn-accion btn-accion-view" title="Ver foro y moderar">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            
+                                            <button type="button" class="btn-accion btn-accion-edit" title="Editar foro" onclick="abrirModalEditarForo('<?php echo $foro['foro_id']; ?>')">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
                                             <form action="/admin/foros/toggle-estado" method="POST" class="d-inline">
                                                 <input type="hidden" name="id" value="<?php echo $foro['foro_id']; ?>">
                                                 <input type="hidden" name="estado" value="<?php echo ($foro['habilitado'] == 1) ? 0 : 1; ?>">
@@ -111,5 +149,50 @@
             </div>
         </div>
     </div>
+
+    <?php if ($total_paginas > 1): ?>
+    <nav aria-label="Paginación de foros">
+        <ul class="pagination pagination-sm justify-content-center">
+            <li class="page-item <?php echo ($pagina <= 1) ? 'disabled' : ''; ?>">
+                <a class="page-link" href="?<?php echo http_build_query(array_merge($filtros, ['pagina' => $pagina - 1])); ?>">Anterior</a>
+            </li>
+            <?php for ($i = 1; $i <= $total_paginas; $i++): ?>
+                <li class="page-item <?php echo ($i == $pagina) ? 'active' : ''; ?>">
+                    <a class="page-link" href="?<?php echo http_build_query(array_merge($filtros, ['pagina' => $i])); ?>"><?php echo $i; ?></a>
+                </li>
+            <?php endfor; ?>
+            <li class="page-item <?php echo ($pagina >= $total_paginas) ? 'disabled' : ''; ?>">
+                <a class="page-link" href="?<?php echo http_build_query(array_merge($filtros, ['pagina' => $pagina + 1])); ?>">Siguiente</a>
+            </li>
+        </ul>
+    </nav>
+    <?php endif; ?>
 </div>
 
+<script>
+function abrirModalEditarForo(id) {
+    const url = '/admin/foros/editar-modal?id=' + id;
+    fetch(url)
+        .then(r => r.text())
+        .then(html => {
+            const modal = document.createElement('div');
+            modal.innerHTML = `
+                <div class="modal fade" tabindex="-1">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Editar Foro</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            ${html}
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            const m = new bootstrap.Modal(modal.querySelector('.modal'));
+            m.show();
+            modal.querySelector('.modal').addEventListener('hidden.bs.modal', () => modal.remove());
+        });
+}
+</script>

@@ -5,12 +5,13 @@ use App\Core\Controller;
 use App\Models\Foro;
 use App\Models\ForoComentario;
 use App\Models\Usuario;
+use App\Models\Multimedia;
+use App\Models\Catalogo;
 
 class AdminForoController extends Controller
 {
     public function __construct()
     {
-        // Proteger la ruta si requiere autenticación
         if (!isset($_SESSION['usuario_id'])) {
             $this->redirect('/login');
         }
@@ -19,23 +20,39 @@ class AdminForoController extends Controller
     public function index()
     {
         $foroModel = new Foro();
-        $foros = $foroModel->getAllForos();
+        $catalogoModel = new Catalogo();
+
+        $pagina = max(1, (int)($_GET['pagina'] ?? 1));
+        $por_pagina = 10;
+
+        $filtros = [];
+        if (!empty($_GET['busqueda'])) $filtros['busqueda'] = $_GET['busqueda'];
+        if (!empty($_GET['categoria'])) $filtros['categoria'] = $_GET['categoria'];
+        if (isset($_GET['estado']) && $_GET['estado'] !== '') $filtros['estado'] = $_GET['estado'];
+
+        $total = $foroModel->contar($filtros);
+        $total_paginas = max(1, ceil($total / $por_pagina));
+        $pagina = min($pagina, $total_paginas);
+
+        $foros = $foroModel->buscar($filtros, $pagina, $por_pagina);
+        $categorias = $catalogoModel->obtenerPorReferencia('CATEGORIA_FORO');
 
         $data = [
-            'titulo' => 'Gestión de Foros',
+            'titulo' => 'Gestion de Foros',
             'foros' => $foros,
-            // Aquí podríamos enviar el nombre de usuario de la sesión para el menú superior
+            'categorias' => $categorias,
+            'pagina' => $pagina,
+            'total_paginas' => $total_paginas,
+            'total' => $total,
+            'filtros' => $filtros,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
-        // Renderizar la vista dentro del layout de admin
         $this->render('admin/foro/index', $data, 'admin');
     }
 
     public function ver()
     {
-        // Obtener el ID de la URL usando $_GET (ej: /admin/foros/ver?id=1)
-        // Ya que el enrutador actual parece simple y no inyecta parámetros en la función
         $id = $_GET['id'] ?? null;
 
         if (!$id) {
@@ -44,6 +61,7 @@ class AdminForoController extends Controller
 
         $foroModel = new Foro();
         $comentarioModel = new ForoComentario();
+        $multimediaModel = new Multimedia();
 
         $foro = $foroModel->findById($id);
         
@@ -52,11 +70,25 @@ class AdminForoController extends Controller
         }
 
         $comentarios = $comentarioModel->getByForoId($id);
+        $multimedia = $multimediaModel->getByForoId($id);
+
+        // Organizar comentarios en arbol (padres e hijos)
+        $comentarios_padres = [];
+        $comentarios_hijos = [];
+        foreach ($comentarios as $c) {
+            if (empty($c['comentario_padre_id'])) {
+                $comentarios_padres[] = $c;
+            } else {
+                $comentarios_hijos[$c['comentario_padre_id']][] = $c;
+            }
+        }
 
         $data = [
             'titulo' => 'Ver Foro: ' . $foro['titulo'],
             'foro' => $foro,
-            'comentarios' => $comentarios,
+            'comentarios_padres' => $comentarios_padres,
+            'comentarios_hijos' => $comentarios_hijos,
+            'multimedia' => $multimedia,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
@@ -74,6 +106,7 @@ class AdminForoController extends Controller
 
         $foroModel = new Foro();
         $comentarioModel = new ForoComentario();
+        $multimediaModel = new Multimedia();
 
         $foro = $foroModel->findById($id);
         
@@ -83,15 +116,111 @@ class AdminForoController extends Controller
         }
 
         $comentarios = $comentarioModel->getByForoId($id);
+        $multimedia = $multimediaModel->getByForoId($id);
+
+        $comentarios_padres = [];
+        $comentarios_hijos = [];
+        foreach ($comentarios as $c) {
+            if (empty($c['comentario_padre_id'])) {
+                $comentarios_padres[] = $c;
+            } else {
+                $comentarios_hijos[$c['comentario_padre_id']][] = $c;
+            }
+        }
 
         $data = [
             'titulo' => 'Ver Foro: ' . $foro['titulo'],
             'foro' => $foro,
-            'comentarios' => $comentarios,
+            'comentarios_padres' => $comentarios_padres,
+            'comentarios_hijos' => $comentarios_hijos,
+            'multimedia' => $multimedia,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
         $this->render('admin/foro/view', $data, '');
+    }
+
+    public function editarForoModal()
+    {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            echo '<div class="p-4 text-muted">Foro no encontrado.</div>';
+            return;
+        }
+
+        $foroModel = new Foro();
+        $catalogoModel = new Catalogo();
+
+        $foro = $foroModel->findById($id);
+        if (!$foro) {
+            echo '<div class="p-4 text-muted">Foro no encontrado.</div>';
+            return;
+        }
+
+        $categorias = $catalogoModel->obtenerPorReferencia('CATEGORIA_FORO');
+        $db = \App\Core\Database::getInstance()->getConnection();
+        $universidades = $db->query("SELECT universidad_id, nombre FROM universidad WHERE habilitado = true ORDER BY nombre")->fetchAll();
+
+        $data = [
+            'foro' => $foro,
+            'categorias' => $categorias,
+            'universidades' => $universidades,
+        ];
+
+        $this->render('admin/foro/form', $data, '');
+    }
+
+    public function actualizarForo()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'] ?? null;
+            if ($id) {
+                $foroModel = new Foro();
+                $foroModel->actualizar($id, $_POST);
+            }
+            $this->redirect('/admin/foros/ver?id=' . $id);
+        }
+    }
+
+    public function editarComentarioModal()
+    {
+        $id = $_GET['id'] ?? null;
+        if (!$id) {
+            echo '<div class="p-4 text-muted">Comentario no encontrado.</div>';
+            return;
+        }
+
+        $comentarioModel = new ForoComentario();
+        $comentario = null;
+
+        // Obtener solo este comentario - busqueda directa
+        $db = \App\Core\Database::getInstance()->getConnection();
+        $stmt = $db->prepare("SELECT * FROM foro_comentario WHERE foro_comentario_id = ?");
+        $stmt->execute([$id]);
+        $comentario = $stmt->fetch();
+
+        if (!$comentario) {
+            echo '<div class="p-4 text-muted">Comentario no encontrado.</div>';
+            return;
+        }
+
+        $data = ['comentario' => $comentario];
+        $this->render('admin/foro/comentario_form', $data, '');
+    }
+
+    public function actualizarComentario()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['comentario_id'] ?? null;
+            $foro_id = $_POST['foro_id'] ?? null;
+
+            if ($id && isset($_POST['mensaje'])) {
+                $comentarioModel = new ForoComentario();
+                $comentarioModel->actualizar($id, $_POST['mensaje']);
+            }
+
+            $this->redirect('/admin/foros/ver?id=' . $foro_id);
+        }
     }
 
     public function toggleEstado()
