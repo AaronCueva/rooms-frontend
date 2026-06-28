@@ -12,6 +12,9 @@ use App\Models\Descuento;
 use App\Models\Beneficio;
 use App\Models\Catalogo;
 use App\Models\Ubicacion;
+use App\Models\Multimedia;
+use App\Models\Resena;
+use App\Models\ReseniaAlojamiento;
 
 class AdminAlojamientoController extends Controller
 {
@@ -87,6 +90,12 @@ class AdminAlojamientoController extends Controller
         $servicioModel = new Servicio();
         $servicios_disponibles = $servicioModel->getAll();
 
+        $multimediaModel = new Multimedia();
+        $imagenes = $multimediaModel->getByAlojamientoId($id);
+
+        $reseniaModel = new ReseniaAlojamiento();
+        $resenas = $reseniaModel->getByAlojamientoId($id);
+
         $data = [
             'titulo' => 'Detalle del Alojamiento: ' . $alojamiento['titulo'],
             'alojamiento' => $alojamiento,
@@ -96,6 +105,8 @@ class AdminAlojamientoController extends Controller
             'descuentos' => $descuentos,
             'beneficios' => $beneficios,
             'servicios_disponibles' => $servicios_disponibles,
+            'imagenes' => $imagenes,
+            'resenas' => $resenas,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
@@ -255,7 +266,7 @@ class AdminAlojamientoController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $id = $_POST['id'] ?? null;
-            $estado_codigo = $_POST['estado_codigo'] ?? 'APROBADO'; // Por ejemplo, el código
+            $estado_codigo = $_POST['estado_codigo'] ?? 'EPA003'; // Código para APROBADO
 
             if ($id) {
                 $alojamientoModel = new Alojamiento();
@@ -339,6 +350,87 @@ class AdminAlojamientoController extends Controller
             $model = new Beneficio();
             $model->delete($_POST['beneficio_id']);
             $this->redirect('/admin/alojamientos/ver?id=' . $_POST['alojamiento_id']);
+        }
+    }
+
+    // --- Multimedia (Imágenes) ---
+    public function subirImagen()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $alojamiento_id = $_POST['alojamiento_id'] ?? null;
+            if (!$alojamiento_id || empty($_FILES['imagenes']['name'][0])) {
+                $this->redirect('/admin/alojamientos/ver?id=' . $alojamiento_id);
+                return;
+            }
+
+            $uploadDir = __DIR__ . '/../../public/uploads/alojamientos/';
+            $multimediaModel = new Multimedia();
+            $maxSize = 5 * 1024 * 1024; // 5MB
+
+            foreach ($_FILES['imagenes']['name'] as $i => $name) {
+                if ($_FILES['imagenes']['error'][$i] !== UPLOAD_ERR_OK) continue;
+                if ($_FILES['imagenes']['size'][$i] > $maxSize) continue;
+
+                $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+                if (!in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'])) continue;
+
+                $newName = uniqid('aloj_') . '.' . $ext;
+                $destPath = $uploadDir . $newName;
+
+                if (move_uploaded_file($_FILES['imagenes']['tmp_name'][$i], $destPath)) {
+                    $multimediaModel->create([
+                        'url'            => '/public/uploads/alojamientos/' . $newName,
+                        'tipo_codigo'    => 'IMAGEN',
+                        'nombre'         => $name,
+                        'orden'          => $i,
+                        'alojamiento_id' => $alojamiento_id,
+                        'creado_por'     => $_SESSION['nombres'] ?? 'admin'
+                    ]);
+                }
+            }
+
+            self::setFlash('success', 'Imágenes subidas correctamente.');
+            $this->redirect('/admin/alojamientos/ver?id=' . $alojamiento_id);
+        }
+    }
+
+    public function eliminarImagen()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $multimedia_id = $_POST['multimedia_id'] ?? null;
+            $alojamiento_id = $_POST['alojamiento_id'] ?? null;
+
+            if ($multimedia_id) {
+                $multimediaModel = new Multimedia();
+                $media = $multimediaModel->findById($multimedia_id);
+                if ($media && !empty($media['url'])) {
+                    $filePath = __DIR__ . '/../../' . ltrim($media['url'], '/');
+                    if (file_exists($filePath)) {
+                        unlink($filePath);
+                    }
+                }
+                $multimediaModel->hardDelete($multimedia_id);
+            }
+
+            self::setFlash('success', 'Imagen eliminada.');
+            $this->redirect('/admin/alojamientos/ver?id=' . $alojamiento_id);
+        }
+    }
+
+    // --- Reseñas ---
+    public function toggleResena()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $resena_id = $_POST['resena_id'] ?? null;
+            $alojamiento_id = $_POST['alojamiento_id'] ?? null;
+
+            if ($resena_id) {
+                $reseniaModel = new ReseniaAlojamiento();
+                $reseniaModel->toggleEstado($resena_id);
+            }
+
+            self::setFlash('success', 'Estado de la reseña actualizado.');
+            $this->redirect('/admin/alojamientos/ver?id=' . $alojamiento_id);
         }
     }
 }

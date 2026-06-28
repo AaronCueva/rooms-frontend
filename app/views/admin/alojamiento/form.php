@@ -125,7 +125,7 @@
                     <div class="col-md-4">
                         <label class="form-label fw-semibold">Fecha Disponible</label>
                         <input type="date" class="form-control" name="fecha_disponible"
-                            value="<?php echo $alojamiento['fecha_disponible'] ?? ''; ?>">
+                            value="<?php echo !empty($alojamiento['fecha_disponible']) ? date('Y-m-d', strtotime($alojamiento['fecha_disponible'])) : ''; ?>">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label fw-semibold">Calificación Promedio</label>

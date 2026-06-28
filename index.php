@@ -81,5 +81,28 @@ $router->get('/admin/universidades/editar', 'AdminUniversidadController', 'edita
 $router->post('/admin/universidades/actualizar', 'AdminUniversidadController', 'actualizar');
 $router->post('/admin/universidades/toggle-estado', 'AdminUniversidadController', 'toggleEstado');
 
+// Rutas de Administrador (Reservas)
+$router->get('/admin/reservas', 'AdminReservaController', 'index');
+$router->get('/admin/reservas/ver', 'AdminReservaController', 'ver');
+$router->get('/admin/reservas/crear', 'AdminReservaController', 'crear');
+$router->post('/admin/reservas/guardar', 'AdminReservaController', 'guardar');
+$router->get('/admin/reservas/editar', 'AdminReservaController', 'editar');
+$router->post('/admin/reservas/actualizar', 'AdminReservaController', 'actualizar');
+$router->post('/admin/reservas/toggle-estado', 'AdminReservaController', 'toggleEstado');
+
+// Rutas de Administrador (Contratos)
+$router->get('/admin/contratos', 'AdminContratoController', 'index');
+$router->get('/admin/contratos/ver', 'AdminContratoController', 'ver');
+$router->get('/admin/contratos/crear', 'AdminContratoController', 'crear');
+$router->post('/admin/contratos/guardar', 'AdminContratoController', 'guardar');
+$router->get('/admin/contratos/editar', 'AdminContratoController', 'editar');
+$router->post('/admin/contratos/actualizar', 'AdminContratoController', 'actualizar');
+$router->post('/admin/contratos/toggle-estado', 'AdminContratoController', 'toggleEstado');
+
+// Rutas de Administrador (Alojamientos - Extensiones)
+$router->post('/admin/alojamientos/imagen/subir', 'AdminAlojamientoController', 'subirImagen');
+$router->post('/admin/alojamientos/imagen/eliminar', 'AdminAlojamientoController', 'eliminarImagen');
+$router->post('/admin/alojamientos/resena/toggle', 'AdminAlojamientoController', 'toggleResena');
+
 // Ejecutar ruta
 $router->dispatch();
