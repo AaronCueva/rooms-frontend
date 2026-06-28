@@ -14,7 +14,12 @@
 </head>
 
 <body class="admin-body">
-    <?php $current_uri = $_SERVER['REQUEST_URI']; ?>
+    <?php
+    $current_uri = $_SERVER['REQUEST_URI'];
+    $rol_id = $_SESSION['rol_id'] ?? null;
+    $menuModel = new \App\Models\MenuMaestro();
+    $menu_items = $menuModel->obtenerMenuPorRol($rol_id);
+    ?>
     <div class="admin-shell d-flex">
         <nav class="sidebar admin-sidebar" id="sidebar">
             <a class="sidebar-brand" href="/admin">
@@ -33,109 +38,50 @@
             </div>
 
             <ul class="nav flex-column mt-3">
-                <li class="nav-item">
-                    <div class="nav-section-label">Plataforma</div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo ($current_uri == '/admin' || $current_uri == '/admin/') ? 'active' : ''; ?>"
-                        href="/admin">
-                        <i class="fas fa-fw fa-chart-pie"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <div class="nav-section-label">Red social</div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/foros') !== false) ? 'active' : ''; ?>"
-                        href="/admin/foros">
-                        <i class="fas fa-fw fa-comments"></i>
-                        <span>Foros</span>
-                        <span class="sidebar-badge">12</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/blogs') !== false) ? 'active' : ''; ?>"
-                        href="/admin/blogs">
-                        <i class="fas fa-fw fa-newspaper"></i>
-                        <span>Blogs</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/resenias') !== false) ? 'active' : ''; ?>"
-                        href="/admin/resenias">
-                        <i class="fas fa-fw fa-star"></i>
-                        <span>Reseñas</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/chats') !== false) ? 'active' : ''; ?>"
-                        href="/admin/chats">
-                        <i class="fas fa-fw fa-chart-bar"></i>
-                        <span>Monitor de Chats</span>
-                    </a>
-                </li>
+                <?php foreach ($menu_items as $seccion): ?>
+                    <?php if (empty($seccion['url'])): // Es una etiqueta de sección ?>
+                        <li class="nav-item">
+                            <div class="nav-section-label"><?php echo htmlspecialchars($seccion['nombre']); ?></div>
+                        </li>
+                        <?php foreach ($seccion['hijos'] as $hijo): ?>
+                            <li class="nav-item">
+                                <a class="nav-link <?php echo (strpos($current_uri, $hijo['url']) !== false) ? 'active' : ''; ?>"
+                                    href="<?php echo htmlspecialchars($hijo['url']); ?>">
+                                    <?php if (!empty($hijo['icono'])): ?>
+                                        <i class="<?php echo htmlspecialchars($hijo['icono']); ?>"></i>
+                                    <?php else: ?>
+                                        <i class="fas fa-fw fa-circle"></i>
+                                    <?php endif; ?>
+                                    <span><?php echo htmlspecialchars($hijo['nombre']); ?></span>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php else: // Es un enlace principal sin sección superior ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo (strpos($current_uri, $seccion['url']) !== false && ($current_uri != '/admin' || $seccion['url'] == '/admin')) ? 'active' : ''; ?>"
+                                href="<?php echo htmlspecialchars($seccion['url']); ?>">
+                                <?php if (!empty($seccion['icono'])): ?>
+                                    <i class="<?php echo htmlspecialchars($seccion['icono']); ?>"></i>
+                                <?php else: ?>
+                                    <i class="fas fa-fw fa-circle"></i>
+                                <?php endif; ?>
+                                <span><?php echo htmlspecialchars($seccion['nombre']); ?></span>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
 
-                <li class="nav-item">
-                    <div class="nav-section-label">Reservas</div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/alojamientos') !== false) ? 'active' : ''; ?>"
-                        href="/admin/alojamientos">
-                        <i class="fas fa-fw fa-home"></i>
-                        <span>Alojamientos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/contratos') !== false) ? 'active' : ''; ?>"
-                        href="/admin/contratos">
-                        <i class="fas fa-fw fa-file-signature"></i>
-                        <span>Contratos</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/reservas') !== false) ? 'active' : ''; ?>"
-                        href="/admin/reservas">
-                        <i class="fas fa-fw fa-calendar-check"></i>
-                        <span>Reservas</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <div class="nav-section-label">Configuración</div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/universidades') !== false) ? 'active' : ''; ?>"
-                        href="/admin/universidades">
-                        <i class="fas fa-fw fa-university"></i>
-                        <span>Universidades</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/puntos') !== false) ? 'active' : ''; ?>"
-                        href="/admin/puntos">
-                        <i class="fas fa-fw fa-coins"></i>
-                        <span>Puntos</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <div class="nav-section-label">Seguridad</div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/usuarios') !== false) ? 'active' : ''; ?>"
-                        href="/admin/usuarios">
-                        <i class="fas fa-fw fa-users"></i>
-                        <span>Usuarios</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (strpos($current_uri, '/admin/roles') !== false) ? 'active' : ''; ?>"
-                        href="/admin/roles">
-                        <i class="fas fa-fw fa-user-shield"></i>
-                        <span>Roles y Permisos</span>
-                    </a>
-                </li>
+                <?php if (empty($menu_items)): ?>
+                    <li class="nav-item">
+                        <div class="nav-section-label">Sin acceso</div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-muted" href="#">
+                            <i class="fas fa-fw fa-ban"></i>
+                            <span>No hay menús asignados</span>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </nav>
 
@@ -214,10 +160,10 @@
         }
 
         // Interceptar formularios con clase .form-confirm para usar SweetAlert2
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const confirmForms = document.querySelectorAll('.form-confirm');
             confirmForms.forEach(form => {
-                form.addEventListener('submit', function(e) {
+                form.addEventListener('submit', function (e) {
                     e.preventDefault();
                     Swal.fire({
                         title: form.dataset.title || '¿Estás seguro?',
@@ -239,15 +185,15 @@
             // Mostrar mensaje flash si existe
             <?php $flash = \App\Core\Controller::getFlash(); ?>
             <?php if ($flash): ?>
-            Swal.fire({
-                icon: '<?php echo $flash['tipo']; ?>',
-                title: '<?php echo addslashes($flash['mensaje']); ?>',
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true
-            });
+                Swal.fire({
+                    icon: '<?php echo $flash['tipo']; ?>',
+                    title: '<?php echo addslashes($flash['mensaje']); ?>',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true
+                });
             <?php endif; ?>
         });
     </script>
