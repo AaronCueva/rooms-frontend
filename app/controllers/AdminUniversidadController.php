@@ -73,11 +73,11 @@ class AdminUniversidadController extends Controller
     public function verModal()
     {
         $id = $_GET['id'] ?? null;
-        if (!$id) exit;
+        if (!$id) exit('No ID provided');
 
         $universidadModel = new UniversidadModel();
         $universidad = $universidadModel->findById($id);
-        if (!$universidad) exit;
+        if (!$universidad) exit('Universidad no encontrada con ID ' . $id);
 
         $alojamientos = $universidadModel->getAlojamientosRelacionados($id);
 
