@@ -15,6 +15,7 @@ use App\Models\Ubicacion;
 use App\Models\Multimedia;
 use App\Models\Resena;
 use App\Models\ReseniaAlojamiento;
+use App\Models\AlojamientoUniversidad;
 
 class AdminAlojamientoController extends Controller
 {
@@ -187,11 +188,17 @@ class AdminAlojamientoController extends Controller
             $alojamientoModel = new Alojamiento();
             $alojamiento_id = $alojamientoModel->create($datos);
 
-            // Sincronizar políticas
             if ($alojamiento_id) {
+                // Sincronizar políticas
                 $politicas = $_POST['politicas'] ?? [];
                 $alojamientoPoliticaModel = new AlojamientoPolitica();
                 $alojamientoPoliticaModel->sincronizarPoliticas($alojamiento_id, $politicas);
+
+                // Sincronizar distancias con universidades cercanas
+                if (!empty($datos['latitud']) && !empty($datos['longitud'])) {
+                    $auModel = new AlojamientoUniversidad();
+                    $auModel->sincronizarParaAlojamiento($alojamiento_id, $datos['latitud'], $datos['longitud']);
+                }
             }
         }
         $this->redirect('/admin/alojamientos');
@@ -210,6 +217,12 @@ class AdminAlojamientoController extends Controller
                 $politicas = $_POST['politicas'] ?? [];
                 $alojamientoPoliticaModel = new AlojamientoPolitica();
                 $alojamientoPoliticaModel->sincronizarPoliticas($id, $politicas);
+
+                // Sincronizar distancias con universidades cercanas
+                if (!empty($datos['latitud']) && !empty($datos['longitud'])) {
+                    $auModel = new AlojamientoUniversidad();
+                    $auModel->sincronizarParaAlojamiento($id, $datos['latitud'], $datos['longitud']);
+                }
             }
         }
         $this->redirect('/admin/alojamientos');

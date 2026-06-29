@@ -104,5 +104,17 @@ $router->post('/admin/alojamientos/imagen/subir', 'AdminAlojamientoController', 
 $router->post('/admin/alojamientos/imagen/eliminar', 'AdminAlojamientoController', 'eliminarImagen');
 $router->post('/admin/alojamientos/resena/toggle', 'AdminAlojamientoController', 'toggleResena');
 
+// Rutas de Administrador (Roles y Permisos)
+$router->get('/admin/roles', 'AdminRolController', 'index');
+$router->post('/admin/roles/guardar', 'AdminRolController', 'guardar');
+$router->post('/admin/roles/actualizar', 'AdminRolController', 'actualizar');
+$router->post('/admin/roles/toggle', 'AdminRolController', 'toggleEstado');
+$router->get('/admin/roles/permisos', 'AdminRolController', 'permisos');
+$router->post('/admin/roles/permisos/guardar', 'AdminRolController', 'guardarPermisos');
+
+// Rutas de Administrador (Perfil / Contraseña)
+$router->get('/admin/perfil/password', 'AdminPerfilController', 'password');
+$router->post('/admin/perfil/password/actualizar', 'AdminPerfilController', 'actualizarPassword');
+
 // Ejecutar ruta
 $router->dispatch();

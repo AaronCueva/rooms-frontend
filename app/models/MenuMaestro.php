@@ -51,6 +51,35 @@ class MenuMaestro {
     }
 
     /**
+     * Obtiene TODOS los menús (padres e hijos) en formato de árbol.
+     * Útil para la pantalla de configuración de roles.
+     */
+    public function obtenerTodosArbol() {
+        $query = "
+            SELECT 
+                m.menu_maestro_id,
+                m.nombre,
+                m.descripcion,
+                m.url,
+                m.icono,
+                m.orden,
+                m.referencia_id,
+                m.habilitado
+            FROM menu_maestro m
+            ORDER BY m.orden ASC, m.nombre ASC
+        ";
+        
+        try {
+            $stmt = $this->db->query($query);
+            $items = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $this->construirArbolMenu($items);
+        } catch (Exception $e) {
+            error_log("Error obteniendo todos los menús: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    /**
      * Construye un árbol agrupando los hijos dentro de sus padres (secciones)
      */
     private function construirArbolMenu($items) {

@@ -76,4 +76,23 @@ class Usuario
         $stmt->bindParam(':id', $id);
         return $stmt->execute();
     }
+
+    public function obtenerPasswordHash($id)
+    {
+        $query = "SELECT password FROM usuario WHERE usuario_id = :id LIMIT 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $row = $stmt->fetch();
+        return $row ? $row['password'] : null;
+    }
+
+    public function actualizarPassword($id, $nuevo_password_hash)
+    {
+        $query = "UPDATE usuario SET password = :password, modificado = CURRENT_TIMESTAMP WHERE usuario_id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':password', $nuevo_password_hash);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
 }

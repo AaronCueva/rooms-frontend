@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2">Ubicación</h6>
+                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2"><i class="fas fa-map-marker-alt me-1 text-primary"></i> Ubicación</h6>
                 <div class="row g-3 mb-4">
                     <div class="col-md-4">
                         <label class="form-label fw-semibold">Departamento</label>
@@ -69,7 +69,33 @@
                     <input type="text" class="form-control" name="direccion" value="<?php echo htmlspecialchars($universidad['direccion'] ?? ''); ?>">
                 </div>
 
-                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2">Estado</h6>
+                <!-- Mapa Interactivo -->
+                <div class="card bg-light mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="fw-bold mb-0"><i class="fas fa-map me-1 text-success"></i> Ubicación en el Mapa</h6>
+                            <button type="button" class="btn btn-sm btn-outline-primary" id="btnObtenerUbicacion">
+                                <i class="fas fa-crosshairs me-1"></i> Obtener mi ubicación actual
+                            </button>
+                        </div>
+                        <div id="mapaUniversidad" style="height: 350px; border-radius: 8px; border: 2px solid #dee2e6;"></div>
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Latitud</label>
+                                <input type="text" class="form-control form-control-sm" name="latitud" id="inputLatitud" readonly
+                                    value="<?php echo htmlspecialchars($universidad['latitud'] ?? ''); ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Longitud</label>
+                                <input type="text" class="form-control form-control-sm" name="longitud" id="inputLongitud" readonly
+                                    value="<?php echo htmlspecialchars($universidad['longitud'] ?? ''); ?>">
+                            </div>
+                        </div>
+                        <small class="text-muted mt-1 d-block">Haz clic en el mapa o arrastra el marcador para seleccionar la ubicación exacta de la universidad.</small>
+                    </div>
+                </div>
+
+                <h6 class="fw-bold mt-4 mb-3 border-bottom pb-2"><i class="fas fa-toggle-on me-1 text-primary"></i> Estado</h6>
                 <div class="row g-3 mb-4">
                     <div class="col-md-6">
                         <div class="form-check form-switch">
@@ -94,61 +120,61 @@
     </div>
 </div>
 
+<!-- Leaflet CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 <script>
-async function cargarProvincias(departamento_id) {
-    const provinciaSelect = document.getElementById('provincia');
-    const distritoSelect = document.getElementById('distrito');
-    
-    provinciaSelect.innerHTML = '<option value="">Seleccione...</option>';
-    distritoSelect.innerHTML = '<option value="">Seleccione...</option>';
-    provinciaSelect.disabled = true;
-    distritoSelect.disabled = true;
+    // ============ Combos en Cascada ============
+    async function cargarProvincias(departamento_id) {
+        const provinciaSelect = document.getElementById('provincia');
+        const distritoSelect = document.getElementById('distrito');
+        provinciaSelect.innerHTML = '<option value="">Seleccione...</option>';
+        distritoSelect.innerHTML = '<option value="">Seleccione...</option>';
+        provinciaSelect.disabled = true;
+        distritoSelect.disabled = true;
+        if (!departamento_id) return;
+        try {
+            const response = await fetch('/api/ubicaciones?referencia_id=' + departamento_id);
+            const data = await response.json();
+            if (data.length > 0) {
+                data.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p.ubicacion_id;
+                    opt.textContent = p.nombre;
+                    provinciaSelect.appendChild(opt);
+                });
+                provinciaSelect.disabled = false;
+            }
+        } catch (e) { console.error('Error provincias:', e); }
+    }
 
-    if (!departamento_id) return;
+    async function cargarDistritos(provincia_id) {
+        const distritoSelect = document.getElementById('distrito');
+        distritoSelect.innerHTML = '<option value="">Seleccione...</option>';
+        distritoSelect.disabled = true;
+        if (!provincia_id) return;
+        try {
+            const response = await fetch('/api/ubicaciones?referencia_id=' + provincia_id);
+            const data = await response.json();
+            if (data.length > 0) {
+                data.forEach(d => {
+                    const opt = document.createElement('option');
+                    opt.value = d.ubicacion_id;
+                    opt.textContent = d.nombre;
+                    distritoSelect.appendChild(opt);
+                });
+                distritoSelect.disabled = false;
+            }
+        } catch (e) { console.error('Error distritos:', e); }
+    }
 
-    try {
-        const response = await fetch('/api/ubicaciones?referencia_id=' + departamento_id);
-        const data = await response.json();
-        if (data.length > 0) {
-            data.forEach(provincia => {
-                const option = document.createElement('option');
-                option.value = provincia.ubicacion_id;
-                option.textContent = provincia.nombre;
-                provinciaSelect.appendChild(option);
-            });
-            provinciaSelect.disabled = false;
-        }
-    } catch (e) {}
-}
-
-async function cargarDistritos(provincia_id) {
-    const distritoSelect = document.getElementById('distrito');
-    distritoSelect.innerHTML = '<option value="">Seleccione...</option>';
-    distritoSelect.disabled = true;
-    if (!provincia_id) return;
-
-    try {
-        const response = await fetch('/api/ubicaciones?referencia_id=' + provincia_id);
-        const data = await response.json();
-        if (data.length > 0) {
-            data.forEach(distrito => {
-                const option = document.createElement('option');
-                option.value = distrito.ubicacion_id;
-                option.textContent = distrito.nombre;
-                distritoSelect.appendChild(option);
-            });
-            distritoSelect.disabled = false;
-        }
-    } catch (e) {}
-}
-
-    // Si estamos editando y tenemos la jerarquía, precargamos
+    // Precargar jerarquía si estamos editando
     <?php if (isset($jerarquia) && $jerarquia): ?>
         window.addEventListener('DOMContentLoaded', async () => {
             const depId = '<?php echo $jerarquia['departamento_id']; ?>';
             const provId = '<?php echo $jerarquia['provincia_id']; ?>';
             const distId = '<?php echo $jerarquia['distrito_id']; ?>';
-            
             document.getElementById('departamento').value = depId;
             await cargarProvincias(depId);
             document.getElementById('provincia').value = provId;
@@ -156,4 +182,93 @@ async function cargarDistritos(provincia_id) {
             document.getElementById('distrito').value = distId;
         });
     <?php endif; ?>
+
+    // ============ Mapa Interactivo con Leaflet ============
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputLat = document.getElementById('inputLatitud');
+        const inputLng = document.getElementById('inputLongitud');
+
+        // Coordenadas iniciales: si hay datos guardados los usamos, sino centro de Perú
+        let lat = parseFloat(inputLat.value) || -12.0464;
+        let lng = parseFloat(inputLng.value) || -77.0428;
+        let zoomInicial = (inputLat.value && inputLng.value) ? 16 : 6;
+
+        const map = L.map('mapaUniversidad').setView([lat, lng], zoomInicial);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        let marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+
+        // Si no hay coordenadas previas, ocultar el marcador
+        if (!inputLat.value || !inputLng.value) {
+            map.removeLayer(marker);
+        }
+
+        function actualizarCoordenadas(latlng) {
+            inputLat.value = latlng.lat.toFixed(7);
+            inputLng.value = latlng.lng.toFixed(7);
+        }
+
+        // Click en el mapa para mover el marcador
+        map.on('click', function (e) {
+            if (!map.hasLayer(marker)) {
+                marker = L.marker(e.latlng, { draggable: true }).addTo(map);
+                marker.on('dragend', function (ev) {
+                    actualizarCoordenadas(ev.target.getLatLng());
+                });
+            } else {
+                marker.setLatLng(e.latlng);
+            }
+            actualizarCoordenadas(e.latlng);
+        });
+
+        // Arrastrar marcador
+        marker.on('dragend', function (e) {
+            actualizarCoordenadas(e.target.getLatLng());
+        });
+
+        // Botón "Obtener mi ubicación"
+        document.getElementById('btnObtenerUbicacion').addEventListener('click', function () {
+            if (!navigator.geolocation) {
+                Swal.fire('Error', 'Tu navegador no soporta geolocalización.', 'error');
+                return;
+            }
+            this.disabled = true;
+            this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Obteniendo...';
+
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latlng = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    map.setView([latlng.lat, latlng.lng], 17);
+                    if (!map.hasLayer(marker)) {
+                        marker = L.marker([latlng.lat, latlng.lng], { draggable: true }).addTo(map);
+                        marker.on('dragend', function (ev) {
+                            actualizarCoordenadas(ev.target.getLatLng());
+                        });
+                    } else {
+                        marker.setLatLng([latlng.lat, latlng.lng]);
+                    }
+                    actualizarCoordenadas(latlng);
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-crosshairs me-1"></i> Obtener mi ubicación actual';
+                    Swal.fire({
+                        toast: true, position: 'top-end', icon: 'success',
+                        title: 'Ubicación obtenida', showConfirmButton: false, timer: 2000
+                    });
+                },
+                (error) => {
+                    Swal.fire('Error', 'No se pudo obtener la ubicación: ' + error.message, 'error');
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-crosshairs me-1"></i> Obtener mi ubicación actual';
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        });
+    });
 </script>
