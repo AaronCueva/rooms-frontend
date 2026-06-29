@@ -68,10 +68,12 @@
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Estado de la Reserva</label>
                                 <select class="form-select" name="estado_codigo">
-                                    <option value="PENDIENTE" <?php echo $reserva['estado_codigo'] == 'PENDIENTE' ? 'selected' : ''; ?>>Pendiente</option>
-                                    <option value="APROBADA" <?php echo $reserva['estado_codigo'] == 'APROBADA' ? 'selected' : ''; ?>>Aprobada</option>
-                                    <option value="RECHAZADA" <?php echo $reserva['estado_codigo'] == 'RECHAZADA' ? 'selected' : ''; ?>>Rechazada</option>
-                                    <option value="FINALIZADA" <?php echo $reserva['estado_codigo'] == 'FINALIZADA' ? 'selected' : ''; ?>>Finalizada (Cancelada post-aprobación)</option>
+                                    <?php foreach ($estados_reserva as $estado): ?>
+                                        <?php $estado_codigo = $estado['codigo'] ?? ''; ?>
+                                        <option value="<?php echo htmlspecialchars($estado_codigo); ?>" <?php echo $reserva['estado_codigo'] == $estado_codigo ? 'selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($estado['nombre'] ?? $estado_codigo); ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="col-md-6">

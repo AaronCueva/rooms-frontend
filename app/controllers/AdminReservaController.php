@@ -31,6 +31,15 @@ class AdminReservaController extends Controller
         $pagina = min($pagina, $total_paginas);
 
         $reservas = $reservaModel->buscar($filtros, $pagina, $por_pagina);
+        $estados_reserva = $catalogoModel->obtenerPorReferencia('ESTADO_RESERVA');
+        if (empty($estados_reserva)) {
+            $estados_reserva = [
+                ['codigo' => 'ESRE001', 'nombre' => 'Pendiente'],
+                ['codigo' => 'ESRE002', 'nombre' => 'Aprobada'],
+                ['codigo' => 'ESRE003', 'nombre' => 'Rechazada'],
+                ['codigo' => 'ESRE004', 'nombre' => 'Finalizada']
+            ];
+        }
 
         $data = [
             'titulo' => 'Gestión de Reservas',
@@ -39,6 +48,7 @@ class AdminReservaController extends Controller
             'total_paginas' => $total_paginas,
             'total' => $total,
             'filtros' => $filtros,
+            'estados_reserva' => $estados_reserva,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
@@ -71,12 +81,23 @@ class AdminReservaController extends Controller
     public function crear()
     {
         $reservaModel = new Reserva();
+        $catalogoModel = new Catalogo();
+        $estados_reserva = $catalogoModel->obtenerPorReferencia('ESTADO_RESERVA');
+        if (empty($estados_reserva)) {
+            $estados_reserva = [
+                ['codigo' => 'ESRE001', 'nombre' => 'Pendiente'],
+                ['codigo' => 'ESRE002', 'nombre' => 'Aprobada'],
+                ['codigo' => 'ESRE003', 'nombre' => 'Rechazada'],
+                ['codigo' => 'ESRE004', 'nombre' => 'Finalizada']
+            ];
+        }
 
         $data = [
             'titulo' => 'Crear Nueva Reserva',
             'reserva' => null,
             'usuarios' => $reservaModel->getUsuarios(),
             'alojamientos' => $reservaModel->getAlojamientos(),
+            'estados_reserva' => $estados_reserva,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
@@ -97,11 +118,23 @@ class AdminReservaController extends Controller
             $this->redirect('/admin/reservas');
         }
 
+        $catalogoModel = new Catalogo();
+        $estados_reserva = $catalogoModel->obtenerPorReferencia('ESTADO_RESERVA');
+        if (empty($estados_reserva)) {
+            $estados_reserva = [
+                ['codigo' => 'ESRE001', 'nombre' => 'Pendiente'],
+                ['codigo' => 'ESRE002', 'nombre' => 'Aprobada'],
+                ['codigo' => 'ESRE003', 'nombre' => 'Rechazada'],
+                ['codigo' => 'ESRE004', 'nombre' => 'Finalizada']
+            ];
+        }
+
         $data = [
             'titulo' => 'Editar Reserva',
             'reserva' => $reserva,
             'usuarios' => $reservaModel->getUsuarios(),
             'alojamientos' => $reservaModel->getAlojamientos(),
+            'estados_reserva' => $estados_reserva,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 

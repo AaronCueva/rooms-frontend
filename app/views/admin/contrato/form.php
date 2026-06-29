@@ -26,11 +26,9 @@
                                 <select class="form-select select2" name="reserva_id" required>
                                     <option value="">Seleccione una reserva...</option>
                                     <?php 
-                                    // Si viene el ID por GET (desde el botón "Generar Contrato")
                                     $reserva_get_id = $_GET['reserva_id'] ?? null;
                                     foreach ($reservas as $res): 
-                                        // Solo mostrar reservas aprobadas
-                                        if($res['estado_codigo'] != 'APROBADA') continue;
+                                        if (!in_array($res['estado_codigo'], ['ESRE002', 'APROBADA'], true)) continue;
                                     ?>
                                         <option value="<?php echo $res['reserva_id']; ?>" <?php echo ($reserva_get_id == $res['reserva_id']) ? 'selected' : ''; ?>>
                                             R-<?php echo $res['reserva_id']; ?> | Estudiante: <?php echo htmlspecialchars($res['nombres'] . ' ' . $res['apellido_paterno']); ?> | Aloj: [<?php echo htmlspecialchars($res['alojamiento_codigo']); ?>]
@@ -85,9 +83,12 @@
                             <div class="col-md-6">
                                 <label class="form-label fw-bold">Estado del Contrato</label>
                                 <select class="form-select" name="estado_codigo">
-                                    <option value="ACTIVO" <?php echo ($contrato && $contrato['estado_codigo'] == 'ACTIVO') ? 'selected' : ''; ?>>Activo</option>
-                                    <option value="FINALIZADO" <?php echo ($contrato && $contrato['estado_codigo'] == 'FINALIZADO') ? 'selected' : ''; ?>>Finalizado (Terminado naturalmente)</option>
-                                    <option value="CANCELADO" <?php echo ($contrato && $contrato['estado_codigo'] == 'CANCELADO') ? 'selected' : ''; ?>>Cancelado (Roto antes de tiempo)</option>
+                                    <?php foreach ($estados_contrato as $estado): ?>
+                                        <?php $estado_codigo = $estado['codigo'] ?? ''; ?>
+                                        <option value="<?php echo htmlspecialchars($estado_codigo); ?>" <?php echo ($contrato && $contrato['estado_codigo'] == $estado_codigo) ? 'selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($estado['nombre'] ?? $estado_codigo); ?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </div>
                         </div>
