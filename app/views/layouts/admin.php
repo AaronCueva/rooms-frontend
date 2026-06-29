@@ -117,7 +117,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="#"><i
+                            <li><a class="dropdown-item" href="/admin/perfil"><i
                                         class="fas fa-user fa-sm fa-fw me-2 text-gray-400"></i> Perfil</a></li>
                             <li><a class="dropdown-item" href="/admin/perfil/password"><i
                                         class="fas fa-key fa-sm fa-fw me-2 text-gray-400"></i> Cambiar Contraseña</a></li>

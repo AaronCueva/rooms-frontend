@@ -205,4 +205,30 @@ class AdminUniversidadController extends Controller
         }
         $this->redirect('/admin/universidades');
     }
+
+    public function buscarApi()
+    {
+        header('Content-Type: application/json');
+        $busqueda = $_GET['q'] ?? '';
+        
+        $universidadModel = new UniversidadModel();
+        $filtros = [];
+        if (!empty($busqueda)) {
+            $filtros['busqueda'] = $busqueda;
+        }
+        $filtros['estado'] = '1'; // Solo habilitadas
+
+        $resultados = $universidadModel->buscar($filtros, 1, 50);
+        
+        $data = array_map(function($u) {
+            return [
+                'id' => $u['universidad_id'],
+                'nombre' => $u['nombre'],
+                'direccion' => $u['direccion']
+            ];
+        }, $resultados);
+
+        echo json_encode($data);
+        exit;
+    }
 }

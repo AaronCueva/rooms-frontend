@@ -39,6 +39,7 @@ $router->get('/register', 'AuthController', 'register');
 $router->post('/register', 'AuthController', 'storeUser');
 $router->get('/logout', 'AuthController', 'logout');
 $router->get('/api/ubicaciones', 'AuthController', 'getUbicaciones');
+$router->get('/api/universidades/buscar', 'AdminUniversidadController', 'buscarApi');
 
 // Rutas de Administrador (Generales)
 $router->get('/admin', 'AdminController', 'dashboard');
@@ -113,6 +114,8 @@ $router->get('/admin/roles/permisos', 'AdminRolController', 'permisos');
 $router->post('/admin/roles/permisos/guardar', 'AdminRolController', 'guardarPermisos');
 
 // Rutas de Administrador (Perfil / Contraseña)
+$router->get('/admin/perfil', 'AdminPerfilController', 'index');
+$router->post('/admin/perfil/actualizar', 'AdminPerfilController', 'actualizar');
 $router->get('/admin/perfil/password', 'AdminPerfilController', 'password');
 $router->post('/admin/perfil/password/actualizar', 'AdminPerfilController', 'actualizarPassword');
 
