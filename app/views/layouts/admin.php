@@ -19,6 +19,10 @@
     $rol_id = $_SESSION['rol_id'] ?? null;
     $menuModel = new \App\Models\MenuMaestro();
     $menu_items = $menuModel->obtenerMenuPorRol($rol_id);
+    $foto_usuario = $_SESSION['url_foto'] ?? null;
+    $avatar_usuario = !empty($foto_usuario)
+        ? $foto_usuario
+        : 'https://ui-avatars.com/api/?name=' . urlencode($nombre_usuario ?? 'Admin') . '&background=dc2626&color=fff';
     ?>
     <div class="admin-shell d-flex">
         <nav class="sidebar admin-sidebar" id="sidebar">
@@ -110,8 +114,9 @@
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img class="img-profile rounded-circle me-2"
-                                src="https://ui-avatars.com/api/?name=<?php echo urlencode($nombre_usuario ?? 'Admin'); ?>&background=dc2626&color=fff"
-                                width="36" height="36">
+                                src="<?php echo htmlspecialchars($avatar_usuario); ?>"
+                                width="36" height="36"
+                                style="object-fit: cover;">
                             <span
                                 class="d-none d-lg-inline small fw-semibold"><?php echo htmlspecialchars($nombre_usuario ?? 'Admin'); ?></span>
                         </a>
