@@ -113,7 +113,7 @@ class Contrato {
             ':monto_renta'       => $datos['monto_renta'] ?? 0,
             ':monto_garantia'    => $datos['monto_garantia'] ?? 0,
             ':cargo_plataforma'  => $datos['cargo_plataforma'] ?? 0,
-            ':estado_codigo'     => $datos['estado_codigo'] ?? 'ACTIVO',
+            ':estado_codigo'     => $datos['estado_codigo'] ?? 'ESCO001',
             ':fecha_pago_mensual'=> $datos['fecha_pago_mensual'] ?? 1,
             ':multimedia_id'     => $datos['multimedia_id'] ?? null,
             ':creado_por'        => $datos['creado_por'] ?? null
@@ -144,7 +144,7 @@ class Contrato {
             ':monto_renta'       => $datos['monto_renta'] ?? 0,
             ':monto_garantia'    => $datos['monto_garantia'] ?? 0,
             ':cargo_plataforma'  => $datos['cargo_plataforma'] ?? 0,
-            ':estado_codigo'     => $datos['estado_codigo'] ?? 'ACTIVO',
+            ':estado_codigo'     => $datos['estado_codigo'] ?? 'ESCO001',
             ':fecha_pago_mensual'=> $datos['fecha_pago_mensual'] ?? 1,
             ':multimedia_id'     => $datos['multimedia_id'] ?? null,
             ':modificado_por'    => $datos['modificado_por'] ?? null,
@@ -170,6 +170,7 @@ class Contrato {
             LEFT JOIN usuario u ON res.usuario_id = u.usuario_id
             LEFT JOIN alojamiento a ON res.alojamiento_id = a.alojamiento_id
             WHERE res.habilitado = true
+              AND res.estado_codigo IN ('ESRE002', 'APROBADA')
             ORDER BY res.fecha_solicitud DESC
         ";
         $stmt = $this->db->query($query);

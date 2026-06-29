@@ -117,7 +117,7 @@ class Reserva {
             ':duracion_meses'        => $datos['duracion_meses'] ?? 0,
             ':monto_total'           => $datos['monto_total'] ?? 0,
             ':mensaje_presentacion'  => $datos['mensaje_presentacion'] ?? null,
-            ':estado_codigo'         => $datos['estado_codigo'] ?? 'PENDIENTE',
+            ':estado_codigo'         => $datos['estado_codigo'] ?? 'ESRE001',
             ':usuario_id'            => $datos['usuario_id'] ?? null,
             ':alojamiento_id'        => $datos['alojamiento_id'] ?? null,
             ':creado_por'            => $datos['creado_por'] ?? null
@@ -145,7 +145,7 @@ class Reserva {
             ':duracion_meses'        => $datos['duracion_meses'] ?? 0,
             ':monto_total'           => $datos['monto_total'] ?? 0,
             ':mensaje_presentacion'  => $datos['mensaje_presentacion'] ?? null,
-            ':estado_codigo'         => $datos['estado_codigo'] ?? 'PENDIENTE',
+            ':estado_codigo'         => $datos['estado_codigo'] ?? 'ESRE001',
             ':usuario_id'            => $datos['usuario_id'] ?? null,
             ':alojamiento_id'        => $datos['alojamiento_id'] ?? null,
             ':fecha_respuesta'       => $datos['fecha_respuesta'] ?? null,

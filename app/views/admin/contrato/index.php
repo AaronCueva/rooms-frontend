@@ -19,9 +19,12 @@
                 <div class="col-md-3">
                     <select class="form-select" name="estado">
                         <option value="">Todos los estados</option>
-                        <option value="ACTIVO" <?php echo (isset($filtros['estado']) && $filtros['estado'] == 'ACTIVO') ? 'selected' : ''; ?>>Activo</option>
-                        <option value="FINALIZADO" <?php echo (isset($filtros['estado']) && $filtros['estado'] == 'FINALIZADO') ? 'selected' : ''; ?>>Finalizado</option>
-                        <option value="CANCELADO" <?php echo (isset($filtros['estado']) && $filtros['estado'] == 'CANCELADO') ? 'selected' : ''; ?>>Cancelado</option>
+                        <?php foreach ($estados_contrato as $estado): ?>
+                            <?php $estado_codigo = $estado['codigo'] ?? ''; ?>
+                            <option value="<?php echo htmlspecialchars($estado_codigo); ?>" <?php echo (isset($filtros['estado']) && $filtros['estado'] == $estado_codigo) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($estado['nombre'] ?? $estado_codigo); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-md-2">
@@ -68,12 +71,20 @@
                                     </td>
                                     <td>
                                         <?php 
+                                            $estado_nombre = $c['estado_codigo'];
+                                            foreach (($estados_contrato ?? []) as $estado) {
+                                                if (($estado['codigo'] ?? '') === $c['estado_codigo']) {
+                                                    $estado_nombre = $estado['nombre'] ?? $estado['codigo'] ?? $c['estado_codigo'];
+                                                    break;
+                                                }
+                                            }
+
                                             $estado_clase = 'bg-secondary';
-                                            if($c['estado_codigo'] == 'ACTIVO') $estado_clase = 'bg-success';
-                                            if($c['estado_codigo'] == 'FINALIZADO') $estado_clase = 'bg-info text-dark';
-                                            if($c['estado_codigo'] == 'CANCELADO') $estado_clase = 'bg-danger';
+                                            if (in_array($c['estado_codigo'], ['ESCO001', 'ACTIVO'], true)) $estado_clase = 'bg-success';
+                                            if (in_array($c['estado_codigo'], ['ESCO002', 'FINALIZADO'], true)) $estado_clase = 'bg-info text-dark';
+                                            if (in_array($c['estado_codigo'], ['ESCO003', 'CANCELADO'], true)) $estado_clase = 'bg-danger';
                                         ?>
-                                        <span class="badge <?php echo $estado_clase; ?>"><?php echo htmlspecialchars($c['estado_codigo']); ?></span>
+                                        <span class="badge <?php echo $estado_clase; ?>"><?php echo htmlspecialchars($estado_nombre); ?></span>
                                     </td>
                                     <td class="text-center">
                                         <?php if (!empty($c['documento_url'])): ?>

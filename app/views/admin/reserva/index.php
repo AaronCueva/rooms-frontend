@@ -19,10 +19,12 @@
                 <div class="col-md-3">
                     <select class="form-select" name="estado">
                         <option value="">Todos los estados</option>
-                        <option value="PENDIENTE" <?php echo (isset($filtros['estado']) && $filtros['estado'] == 'PENDIENTE') ? 'selected' : ''; ?>>Pendiente</option>
-                        <option value="APROBADA" <?php echo (isset($filtros['estado']) && $filtros['estado'] == 'APROBADA') ? 'selected' : ''; ?>>Aprobada</option>
-                        <option value="RECHAZADA" <?php echo (isset($filtros['estado']) && $filtros['estado'] == 'RECHAZADA') ? 'selected' : ''; ?>>Rechazada</option>
-                        <option value="FINALIZADA" <?php echo (isset($filtros['estado']) && $filtros['estado'] == 'FINALIZADA') ? 'selected' : ''; ?>>Finalizada</option>
+                        <?php foreach ($estados_reserva as $estado): ?>
+                            <?php $estado_codigo = $estado['codigo'] ?? ''; ?>
+                            <option value="<?php echo htmlspecialchars($estado_codigo); ?>" <?php echo (isset($filtros['estado']) && $filtros['estado'] == $estado_codigo) ? 'selected' : ''; ?>>
+                                <?php echo htmlspecialchars($estado['nombre'] ?? $estado_codigo); ?>
+                            </option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-md-2">
@@ -70,13 +72,21 @@
                                     </td>
                                     <td>
                                         <?php 
+                                            $estado_nombre = $r['estado_codigo'];
+                                            foreach (($estados_reserva ?? []) as $estado) {
+                                                if (($estado['codigo'] ?? '') === $r['estado_codigo']) {
+                                                    $estado_nombre = $estado['nombre'] ?? $estado['codigo'] ?? $r['estado_codigo'];
+                                                    break;
+                                                }
+                                            }
+
                                             $estado_clase = 'bg-secondary';
-                                            if($r['estado_codigo'] == 'PENDIENTE') $estado_clase = 'bg-warning text-dark';
-                                            if($r['estado_codigo'] == 'APROBADA') $estado_clase = 'bg-success';
-                                            if($r['estado_codigo'] == 'RECHAZADA') $estado_clase = 'bg-danger';
-                                            if($r['estado_codigo'] == 'FINALIZADA') $estado_clase = 'bg-info text-dark';
+                                            if (in_array($r['estado_codigo'], ['ESRE001', 'PENDIENTE'], true)) $estado_clase = 'bg-warning text-dark';
+                                            if (in_array($r['estado_codigo'], ['ESRE002', 'APROBADA'], true)) $estado_clase = 'bg-success';
+                                            if (in_array($r['estado_codigo'], ['ESRE003', 'RECHAZADA'], true)) $estado_clase = 'bg-danger';
+                                            if (in_array($r['estado_codigo'], ['ESRE004', 'FINALIZADA'], true)) $estado_clase = 'bg-info text-dark';
                                         ?>
-                                        <span class="badge <?php echo $estado_clase; ?>"><?php echo htmlspecialchars($r['estado_codigo']); ?></span>
+                                        <span class="badge <?php echo $estado_clase; ?>"><?php echo htmlspecialchars($estado_nombre); ?></span>
                                     </td>
                                     <td>
                                         <form action="/admin/reservas/toggle-estado" method="POST" class="form-confirm" data-title="¿Cambiar estado?">

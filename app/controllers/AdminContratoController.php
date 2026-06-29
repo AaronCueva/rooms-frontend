@@ -5,6 +5,7 @@ use App\Core\Controller;
 use App\Models\Contrato;
 use App\Models\Resena;
 use App\Models\Multimedia;
+use App\Models\Catalogo;
 
 class AdminContratoController extends Controller
 {
@@ -31,6 +32,15 @@ class AdminContratoController extends Controller
         $pagina = min($pagina, $total_paginas);
 
         $contratos = $contratoModel->buscar($filtros, $pagina, $por_pagina);
+        $catalogoModel = new Catalogo();
+        $estados_contrato = $catalogoModel->obtenerPorReferencia('ESTADO_CONTRATO');
+        if (empty($estados_contrato)) {
+            $estados_contrato = [
+                ['codigo' => 'ESCO001', 'nombre' => 'Activo'],
+                ['codigo' => 'ESCO002', 'nombre' => 'Finalizado'],
+                ['codigo' => 'ESCO003', 'nombre' => 'Cancelado']
+            ];
+        }
 
         $data = [
             'titulo' => 'Gestión de Contratos',
@@ -39,6 +49,7 @@ class AdminContratoController extends Controller
             'total_paginas' => $total_paginas,
             'total' => $total,
             'filtros' => $filtros,
+            'estados_contrato' => $estados_contrato,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
@@ -76,11 +87,21 @@ class AdminContratoController extends Controller
     public function crear()
     {
         $contratoModel = new Contrato();
+        $catalogoModel = new Catalogo();
+        $estados_contrato = $catalogoModel->obtenerPorReferencia('ESTADO_CONTRATO');
+        if (empty($estados_contrato)) {
+            $estados_contrato = [
+                ['codigo' => 'ESCO001', 'nombre' => 'Activo'],
+                ['codigo' => 'ESCO002', 'nombre' => 'Finalizado'],
+                ['codigo' => 'ESCO003', 'nombre' => 'Cancelado']
+            ];
+        }
 
         $data = [
             'titulo' => 'Crear Nuevo Contrato',
             'contrato' => null,
             'reservas' => $contratoModel->getReservasDisponibles(),
+            'estados_contrato' => $estados_contrato,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
@@ -101,10 +122,21 @@ class AdminContratoController extends Controller
             $this->redirect('/admin/contratos');
         }
 
+        $catalogoModel = new Catalogo();
+        $estados_contrato = $catalogoModel->obtenerPorReferencia('ESTADO_CONTRATO');
+        if (empty($estados_contrato)) {
+            $estados_contrato = [
+                ['codigo' => 'ESCO001', 'nombre' => 'Activo'],
+                ['codigo' => 'ESCO002', 'nombre' => 'Finalizado'],
+                ['codigo' => 'ESCO003', 'nombre' => 'Cancelado']
+            ];
+        }
+
         $data = [
             'titulo' => 'Editar Contrato',
             'contrato' => $contrato,
             'reservas' => $contratoModel->getReservasDisponibles(),
+            'estados_contrato' => $estados_contrato,
             'nombre_usuario' => $_SESSION['nombres'] ?? 'Administrador'
         ];
 
