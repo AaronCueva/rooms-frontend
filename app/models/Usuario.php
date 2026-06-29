@@ -54,11 +54,15 @@ class Usuario
 
     public function findById($id)
     {
-        $query = "SELECT * FROM usuario WHERE usuario_id = :id LIMIT 1";
+        $query = "SELECT u.*, ub.nombre AS distrito_nombre 
+                  FROM usuario u 
+                  LEFT JOIN ubicacion ub ON u.ubicacion_id = ub.ubicacion_id 
+                  WHERE u.usuario_id = :id 
+                  LIMIT 1";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function banear($id)
@@ -74,6 +78,95 @@ class Usuario
         $query = "UPDATE usuario SET habilitado = true WHERE usuario_id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+
+    public function obtenerPasswordHash($id)
+    {
+        $query = "SELECT password FROM usuario WHERE usuario_id = :id LIMIT 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        $row = $stmt->fetch();
+        return $row ? $row['password'] : null;
+    }
+
+    public function actualizarPassword($id, $nuevo_password_hash)
+    {
+        $query = "UPDATE usuario SET password = :password, modificado = CURRENT_TIMESTAMP WHERE usuario_id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':password', $nuevo_password_hash);
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+
+    public function actualizarPerfil($id, $datos)
+    {
+        // Obtener latitud y longitud de la ubicación si se seleccionó una
+        $latitud = null;
+        $longitud = null;
+        if (!empty($datos['ubicacion_id'])) {
+            $queryUbicacion = "SELECT latitud, longitud FROM ubicacion WHERE ubicacion_id = :ubicacion_id LIMIT 1";
+            $stmtUbicacion = $this->db->prepare($queryUbicacion);
+            $stmtUbicacion->bindParam(':ubicacion_id', $datos['ubicacion_id']);
+            $stmtUbicacion->execute();
+            $ubicacion = $stmtUbicacion->fetch(PDO::FETCH_ASSOC);
+            if ($ubicacion) {
+                $latitud = $ubicacion['latitud'];
+                $longitud = $ubicacion['longitud'];
+            }
+        }
+
+        $query = "UPDATE usuario SET 
+                    nombres = :nombres,
+                    apellido_paterno = :apellido_paterno,
+                    apellido_materno = :apellido_materno,
+                    tipo_documento_codigo = :tipo_documento_codigo,
+                    numero_documento = :numero_documento,
+                    correo = :correo,
+                    celular = :celular,
+                    telefono = :telefono,
+                    razon_social = :razon_social,
+                    nombre_comercial = :nombre_comercial,
+                    descripcion = :descripcion,
+                    genero_codigo = :genero_codigo,
+                    ubicacion_id = :ubicacion_id,
+                    universidad_id = :universidad_id,
+                    latitud = :latitud,
+                    longitud = :longitud,
+                    modificado = CURRENT_TIMESTAMP";
+
+        // Solo actualizar url_foto si se envió una nueva
+        if (isset($datos['url_foto'])) {
+            $query .= ", url_foto = :url_foto";
+        }
+
+        $query .= " WHERE usuario_id = :id";
+
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindValue(':nombres', $datos['nombres'] ?? null);
+        $stmt->bindValue(':apellido_paterno', $datos['apellido_paterno'] ?? null);
+        $stmt->bindValue(':apellido_materno', $datos['apellido_materno'] ?? null);
+        $stmt->bindValue(':tipo_documento_codigo', $datos['tipo_documento_codigo'] ?: null);
+        $stmt->bindValue(':numero_documento', $datos['numero_documento'] ?? null);
+        $stmt->bindValue(':correo', $datos['correo'] ?? null);
+        $stmt->bindValue(':celular', $datos['celular'] ?? null);
+        $stmt->bindValue(':telefono', $datos['telefono'] ?? null);
+        $stmt->bindValue(':razon_social', $datos['razon_social'] ?? null);
+        $stmt->bindValue(':nombre_comercial', $datos['nombre_comercial'] ?? null);
+        $stmt->bindValue(':descripcion', $datos['descripcion'] ?? null);
+        $stmt->bindValue(':genero_codigo', $datos['genero_codigo'] ?: null);
+        $stmt->bindValue(':ubicacion_id', !empty($datos['ubicacion_id']) ? $datos['ubicacion_id'] : null);
+        $stmt->bindValue(':universidad_id', !empty($datos['universidad_id']) ? $datos['universidad_id'] : null);
+        $stmt->bindValue(':latitud', $latitud);
+        $stmt->bindValue(':longitud', $longitud);
+        $stmt->bindValue(':id', $id);
+
+        if (isset($datos['url_foto'])) {
+            $stmt->bindValue(':url_foto', $datos['url_foto']);
+        }
+
         return $stmt->execute();
     }
 }

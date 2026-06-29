@@ -35,6 +35,7 @@ class AuthController extends Controller
                 $_SESSION['usuario_id'] = $usuario['usuario_id'];
                 $_SESSION['rol_id'] = $usuario['rol_id'];
                 $_SESSION['nombres'] = $usuario['nombres'];
+                $_SESSION['url_foto'] = $usuario['url_foto'] ?? null;
 
                 $this->redirect('/admin');
             } else {

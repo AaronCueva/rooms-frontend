@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\UniversidadModel;
 use App\Models\Ubicacion;
+use App\Models\AlojamientoUniversidad;
 
 class AdminUniversidadController extends Controller
 {
@@ -140,12 +141,22 @@ class AdminUniversidadController extends Controller
                 'descripcion' => $_POST['descripcion'] ?? '',
                 'verificado' => isset($_POST['verificado']) ? 1 : 0,
                 'habilitado' => isset($_POST['habilitado']) ? 1 : 0,
-                'ubicacion_id' => !empty($_POST['distrito']) ? $_POST['distrito'] : null, // De ubicacion en cascada
-                'direccion' => $_POST['direccion'] ?? ''
+                'ubicacion_id' => !empty($_POST['distrito']) ? $_POST['distrito'] : null,
+                'direccion' => $_POST['direccion'] ?? '',
+                'latitud' => !empty($_POST['latitud']) ? $_POST['latitud'] : null,
+                'longitud' => !empty($_POST['longitud']) ? $_POST['longitud'] : null
             ];
 
             $universidadModel = new UniversidadModel();
-            $universidadModel->create($datos);
+            $universidad_id = $universidadModel->create($datos);
+
+            // Sincronizar distancias con alojamientos cercanos
+            if ($universidad_id && !empty($datos['latitud']) && !empty($datos['longitud'])) {
+                $auModel = new AlojamientoUniversidad();
+                $auModel->sincronizarParaUniversidad($universidad_id, $datos['latitud'], $datos['longitud']);
+            }
+
+            self::setFlash('success', 'Universidad creada exitosamente.');
         }
         $this->redirect('/admin/universidades');
     }
@@ -161,11 +172,21 @@ class AdminUniversidadController extends Controller
                     'verificado' => isset($_POST['verificado']) ? 1 : 0,
                     'habilitado' => isset($_POST['habilitado']) ? 1 : 0,
                     'ubicacion_id' => !empty($_POST['distrito']) ? $_POST['distrito'] : null,
-                    'direccion' => $_POST['direccion'] ?? ''
+                    'direccion' => $_POST['direccion'] ?? '',
+                    'latitud' => !empty($_POST['latitud']) ? $_POST['latitud'] : null,
+                    'longitud' => !empty($_POST['longitud']) ? $_POST['longitud'] : null
                 ];
 
                 $universidadModel = new UniversidadModel();
                 $universidadModel->update($id, $datos);
+
+                // Sincronizar distancias con alojamientos cercanos
+                if (!empty($datos['latitud']) && !empty($datos['longitud'])) {
+                    $auModel = new AlojamientoUniversidad();
+                    $auModel->sincronizarParaUniversidad($id, $datos['latitud'], $datos['longitud']);
+                }
+
+                self::setFlash('success', 'Universidad actualizada exitosamente.');
             }
         }
         $this->redirect('/admin/universidades');
@@ -183,5 +204,31 @@ class AdminUniversidadController extends Controller
             }
         }
         $this->redirect('/admin/universidades');
+    }
+
+    public function buscarApi()
+    {
+        header('Content-Type: application/json');
+        $busqueda = $_GET['q'] ?? '';
+        
+        $universidadModel = new UniversidadModel();
+        $filtros = [];
+        if (!empty($busqueda)) {
+            $filtros['busqueda'] = $busqueda;
+        }
+        $filtros['estado'] = '1'; // Solo habilitadas
+
+        $resultados = $universidadModel->buscar($filtros, 1, 50);
+        
+        $data = array_map(function($u) {
+            return [
+                'id' => $u['universidad_id'],
+                'nombre' => $u['nombre'],
+                'direccion' => $u['direccion']
+            ];
+        }, $resultados);
+
+        echo json_encode($data);
+        exit;
     }
 }
