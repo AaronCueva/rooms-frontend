@@ -39,6 +39,7 @@ $router->get('/register', 'AuthController', 'register');
 $router->post('/register', 'AuthController', 'storeUser');
 $router->get('/logout', 'AuthController', 'logout');
 $router->get('/api/ubicaciones', 'AuthController', 'getUbicaciones');
+$router->get('/api/universidades/buscar', 'AdminUniversidadController', 'buscarApi');
 
 // Rutas de Administrador (Generales)
 $router->get('/admin', 'AdminController', 'dashboard');
@@ -64,7 +65,7 @@ $router->post('/admin/alojamientos/guardar', 'AdminAlojamientoController', 'guar
 $router->get('/admin/alojamientos/editar', 'AdminAlojamientoController', 'editar');
 $router->post('/admin/alojamientos/actualizar', 'AdminAlojamientoController', 'actualizar');
 $router->post('/admin/alojamientos/aprobar', 'AdminAlojamientoController', 'aprobar');
-$router->post('/admin/alojamientos/eliminar', 'AdminAlojamientoController', 'eliminar');
+$router->post('/admin/alojamientos/toggle-estado', 'AdminAlojamientoController', 'toggleEstado');
 $router->post('/admin/alojamientos/servicio/agregar', 'AdminAlojamientoController', 'agregarServicio');
 $router->post('/admin/alojamientos/servicio/eliminar', 'AdminAlojamientoController', 'eliminarServicio');
 $router->post('/admin/alojamientos/descuento/guardar', 'AdminAlojamientoController', 'guardarDescuento');
@@ -74,12 +75,49 @@ $router->post('/admin/alojamientos/beneficio/eliminar', 'AdminAlojamientoControl
 
 // Rutas de Administrador (Universidades)
 $router->get('/admin/universidades', 'AdminUniversidadController', 'index');
-$router->get('/admin/universidades/verModal', 'AdminUniversidadController', 'verModal');
+$router->get('/admin/universidades/ver-modal', 'AdminUniversidadController', 'verModal');
 $router->get('/admin/universidades/crear', 'AdminUniversidadController', 'crear');
 $router->post('/admin/universidades/guardar', 'AdminUniversidadController', 'guardar');
 $router->get('/admin/universidades/editar', 'AdminUniversidadController', 'editar');
 $router->post('/admin/universidades/actualizar', 'AdminUniversidadController', 'actualizar');
-$router->post('/admin/universidades/eliminar', 'AdminUniversidadController', 'eliminar');
+$router->post('/admin/universidades/toggle-estado', 'AdminUniversidadController', 'toggleEstado');
+
+// Rutas de Administrador (Reservas)
+$router->get('/admin/reservas', 'AdminReservaController', 'index');
+$router->get('/admin/reservas/ver', 'AdminReservaController', 'ver');
+$router->get('/admin/reservas/crear', 'AdminReservaController', 'crear');
+$router->post('/admin/reservas/guardar', 'AdminReservaController', 'guardar');
+$router->get('/admin/reservas/editar', 'AdminReservaController', 'editar');
+$router->post('/admin/reservas/actualizar', 'AdminReservaController', 'actualizar');
+$router->post('/admin/reservas/toggle-estado', 'AdminReservaController', 'toggleEstado');
+
+// Rutas de Administrador (Contratos)
+$router->get('/admin/contratos', 'AdminContratoController', 'index');
+$router->get('/admin/contratos/ver', 'AdminContratoController', 'ver');
+$router->get('/admin/contratos/crear', 'AdminContratoController', 'crear');
+$router->post('/admin/contratos/guardar', 'AdminContratoController', 'guardar');
+$router->get('/admin/contratos/editar', 'AdminContratoController', 'editar');
+$router->post('/admin/contratos/actualizar', 'AdminContratoController', 'actualizar');
+$router->post('/admin/contratos/toggle-estado', 'AdminContratoController', 'toggleEstado');
+
+// Rutas de Administrador (Alojamientos - Extensiones)
+$router->post('/admin/alojamientos/imagen/subir', 'AdminAlojamientoController', 'subirImagen');
+$router->post('/admin/alojamientos/imagen/eliminar', 'AdminAlojamientoController', 'eliminarImagen');
+$router->post('/admin/alojamientos/resena/toggle', 'AdminAlojamientoController', 'toggleResena');
+
+// Rutas de Administrador (Roles y Permisos)
+$router->get('/admin/roles', 'AdminRolController', 'index');
+$router->post('/admin/roles/guardar', 'AdminRolController', 'guardar');
+$router->post('/admin/roles/actualizar', 'AdminRolController', 'actualizar');
+$router->post('/admin/roles/toggle', 'AdminRolController', 'toggleEstado');
+$router->get('/admin/roles/permisos', 'AdminRolController', 'permisos');
+$router->post('/admin/roles/permisos/guardar', 'AdminRolController', 'guardarPermisos');
+
+// Rutas de Administrador (Perfil / Contraseña)
+$router->get('/admin/perfil', 'AdminPerfilController', 'index');
+$router->post('/admin/perfil/actualizar', 'AdminPerfilController', 'actualizar');
+$router->get('/admin/perfil/password', 'AdminPerfilController', 'password');
+$router->post('/admin/perfil/password/actualizar', 'AdminPerfilController', 'actualizarPassword');
 
 // Ejecutar ruta
 $router->dispatch();

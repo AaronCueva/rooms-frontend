@@ -135,7 +135,7 @@
 <script>
 async function abrirModalUniversidad(id) {
     try {
-        const response = await fetch('/admin/universidades/ver_modal?id=' + id);
+        const response = await fetch('/admin/universidades/ver-modal?id=' + id);
         const html = await response.text();
         console.log("Response HTML:", html);
         document.getElementById('modalContainer').innerHTML = html;

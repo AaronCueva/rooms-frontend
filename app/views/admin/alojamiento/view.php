@@ -29,6 +29,9 @@
                     <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">General</button>
                 </li>
                 <li class="nav-item">
+                    <button class="nav-link" id="imagenes-tab" data-bs-toggle="tab" data-bs-target="#imagenes" type="button" role="tab">Imágenes (<?php echo count($imagenes ?? []); ?>)</button>
+                </li>
+                <li class="nav-item">
                     <button class="nav-link" id="servicios-tab" data-bs-toggle="tab" data-bs-target="#servicios" type="button" role="tab">Servicios Extras</button>
                 </li>
                 <li class="nav-item">
@@ -39,6 +42,9 @@
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" id="beneficios-tab" data-bs-toggle="tab" data-bs-target="#beneficios" type="button" role="tab">Beneficios</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="resenas-tab" data-bs-toggle="tab" data-bs-target="#resenas" type="button" role="tab">Reseñas (<?php echo count($resenas ?? []); ?>)</button>
                 </li>
                 <li class="nav-item">
                     <button class="nav-link" id="favoritos-tab" data-bs-toggle="tab" data-bs-target="#favoritos" type="button" role="tab">Favoritos (<?php echo $alojamiento['total_favoritos']; ?>)</button>
@@ -88,6 +94,50 @@
                             <div id="mapaDetalle" style="height: 300px; border-radius: 8px; border: 2px solid #dee2e6;"></div>
                             <small class="text-muted mt-1 d-block">Lat: <?php echo $alojamiento['latitud']; ?>, Lng: <?php echo $alojamiento['longitud']; ?></small>
                         </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <!-- TAB: IMÁGENES -->
+                <div class="tab-pane fade" id="imagenes" role="tabpanel">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h6 class="fw-bold text-primary">Galería de Imágenes</h6>
+                    </div>
+                    <div class="card bg-light mb-4">
+                        <div class="card-body">
+                            <form action="/admin/alojamientos/imagen/subir" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="alojamiento_id" value="<?php echo $alojamiento['alojamiento_id']; ?>">
+                                <div class="row align-items-end">
+                                    <div class="col-md-8">
+                                        <label class="form-label small fw-bold">Subir Imágenes (máx 5MB c/u)</label>
+                                        <input type="file" name="imagenes[]" class="form-control form-control-sm" multiple accept="image/*" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-sm btn-primary w-100"><i class="fas fa-upload me-1"></i> Subir</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <?php if (!empty($imagenes)): ?>
+                            <?php foreach ($imagenes as $img): ?>
+                                <div class="col-md-3 col-sm-6 mb-3">
+                                    <div class="card shadow-sm h-100">
+                                        <img src="<?php echo htmlspecialchars($img['url']); ?>" class="card-img-top" style="height: 180px; object-fit: cover;" alt="<?php echo htmlspecialchars($img['nombre']); ?>">
+                                        <div class="card-body p-2 text-center">
+                                            <small class="text-muted d-block text-truncate"><?php echo htmlspecialchars($img['nombre']); ?></small>
+                                            <form action="/admin/alojamientos/imagen/eliminar" method="POST" class="form-confirm mt-1" data-title="¿Eliminar esta imagen?">
+                                                <input type="hidden" name="multimedia_id" value="<?php echo $img['multimedia_id']; ?>">
+                                                <input type="hidden" name="alojamiento_id" value="<?php echo $alojamiento['alojamiento_id']; ?>">
+                                                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class="col-12"><div class="alert alert-info">No hay imágenes cargadas para este alojamiento.</div></div>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -234,6 +284,54 @@
                             <div class="col-12"><div class="alert alert-info">No se han registrado beneficios adicionales.</div></div>
                         <?php endif; ?>
                     </div>
+                </div>
+
+                <!-- TAB: RESEÑAS -->
+                <div class="tab-pane fade" id="resenas" role="tabpanel">
+                    <h6 class="fw-bold text-primary mb-3">Reseñas de Usuarios</h6>
+                    <?php if (!empty($resenas)): ?>
+                        <?php foreach ($resenas as $res): ?>
+                            <div class="card mb-3 <?php echo $res['habilitado'] ? '' : 'border-danger opacity-50'; ?>">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <strong><?php echo htmlspecialchars($res['nombres'] . ' ' . $res['apellido_paterno']); ?></strong>
+                                            <small class="text-muted d-block"><?php echo htmlspecialchars($res['correo']); ?></small>
+                                        </div>
+                                        <div class="text-end">
+                                            <div class="mb-1">
+                                                <?php for ($i = 1; $i <= 5; $i++): ?>
+                                                    <i class="fas fa-star <?php echo $i <= $res['calificacion'] ? 'text-warning' : 'text-muted'; ?>"></i>
+                                                <?php endfor; ?>
+                                                <span class="ms-1 fw-bold"><?php echo $res['calificacion']; ?>/5</span>
+                                            </div>
+                                            <small class="text-muted"><?php echo date('d/m/Y H:i', strtotime($res['creado'])); ?></small>
+                                        </div>
+                                    </div>
+                                    <p class="mt-2 mb-1" style="white-space:pre-wrap;"><?php echo htmlspecialchars($res['comentario']); ?></p>
+                                    <?php if (!empty($res['respuesta_propietario'])): ?>
+                                        <div class="alert alert-light mt-2 mb-0 py-2 px-3">
+                                            <small class="fw-bold text-primary"><i class="fas fa-reply me-1"></i>Respuesta del Propietario:</small>
+                                            <p class="mb-0 small mt-1"><?php echo htmlspecialchars($res['respuesta_propietario']); ?></p>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="mt-2 d-flex justify-content-end align-items-center">
+                                        <form action="/admin/alojamientos/resena/toggle" method="POST" class="form-confirm" data-title="¿Cambiar estado de la reseña?" data-text="<?php echo $res['habilitado'] ? 'Se ocultará la reseña.' : 'Se volverá a mostrar.'; ?>">
+                                            <input type="hidden" name="resena_id" value="<?php echo $res['resenia_alojamiento_id']; ?>">
+                                            <input type="hidden" name="alojamiento_id" value="<?php echo $alojamiento['alojamiento_id']; ?>">
+                                            <?php if ($res['habilitado']): ?>
+                                                <button type="submit" class="btn btn-sm btn-outline-danger"><i class="fas fa-eye-slash me-1"></i>Ocultar</button>
+                                            <?php else: ?>
+                                                <button type="submit" class="btn btn-sm btn-outline-success"><i class="fas fa-eye me-1"></i>Mostrar</button>
+                                            <?php endif; ?>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="alert alert-info">Aún no hay reseñas para este alojamiento.</div>
+                    <?php endif; ?>
                 </div>
 
                 <!-- TAB: FAVORITOS -->

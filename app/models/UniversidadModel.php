@@ -109,8 +109,9 @@ class UniversidadModel
      */
     public function create($datos)
     {
-        $query = "INSERT INTO universidad (nombre, descripcion, verificado, habilitado, ubicacion_id, direccion)
-                  VALUES (:nombre, :descripcion, :verificado, :habilitado, :ubicacion_id, :direccion)";
+        $query = "INSERT INTO universidad (nombre, descripcion, verificado, habilitado, ubicacion_id, direccion, latitud, longitud)
+                  VALUES (:nombre, :descripcion, :verificado, :habilitado, :ubicacion_id, :direccion, :latitud, :longitud)
+                  RETURNING universidad_id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':nombre', $datos['nombre']);
         $stmt->bindParam(':descripcion', $datos['descripcion']);
@@ -120,7 +121,13 @@ class UniversidadModel
         $stmt->bindParam(':habilitado', $habilitado, PDO::PARAM_BOOL);
         $stmt->bindParam(':ubicacion_id', $datos['ubicacion_id']);
         $stmt->bindParam(':direccion', $datos['direccion']);
-        return $stmt->execute();
+        $latitud = !empty($datos['latitud']) ? $datos['latitud'] : null;
+        $longitud = !empty($datos['longitud']) ? $datos['longitud'] : null;
+        $stmt->bindParam(':latitud', $latitud);
+        $stmt->bindParam(':longitud', $longitud);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['universidad_id'] : null;
     }
 
     /**
@@ -131,7 +138,8 @@ class UniversidadModel
         $query = "UPDATE universidad SET
                     nombre = :nombre, descripcion = :descripcion,
                     verificado = :verificado, habilitado = :habilitado,
-                    ubicacion_id = :ubicacion_id, direccion = :direccion
+                    ubicacion_id = :ubicacion_id, direccion = :direccion,
+                    latitud = :latitud, longitud = :longitud
                   WHERE universidad_id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':id', $id);
@@ -143,7 +151,23 @@ class UniversidadModel
         $stmt->bindParam(':habilitado', $habilitado, PDO::PARAM_BOOL);
         $stmt->bindParam(':ubicacion_id', $datos['ubicacion_id']);
         $stmt->bindParam(':direccion', $datos['direccion']);
+        $latitud = !empty($datos['latitud']) ? $datos['latitud'] : null;
+        $longitud = !empty($datos['longitud']) ? $datos['longitud'] : null;
+        $stmt->bindParam(':latitud', $latitud);
+        $stmt->bindParam(':longitud', $longitud);
         return $stmt->execute();
+    }
+
+    /**
+     * Obtiene todas las universidades que tienen coordenadas definidas
+     */
+    public function getAllConCoordenadas()
+    {
+        $query = "SELECT universidad_id, nombre, latitud, longitud
+                  FROM universidad
+                  WHERE latitud IS NOT NULL AND longitud IS NOT NULL AND habilitado = true";
+        $stmt = $this->db->query($query);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
