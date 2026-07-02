@@ -81,24 +81,47 @@ class AdminPerfilController extends Controller
 
             // Manejo de la subida de foto
             if (!empty($_FILES['foto_perfil']['name'])) {
-                $uploadDir = __DIR__ . '/../../public/uploads/usuarios/';
+                $basePublic = realpath(__DIR__ . '/../../public');
+                $uploadDir = ($basePublic ?: (__DIR__ . '/../../public')) . '/uploads/usuarios/';
                 if (!file_exists($uploadDir)) {
                     mkdir($uploadDir, 0777, true);
                 }
 
-                $maxSize = 2 * 1024 * 1024; // 2MB
+                $maxSize = 10 * 1024 * 1024; // 10MB (aumentado desde 2MB para evitar rechazos en fotos de celular/cámara)
                 $ext = strtolower(pathinfo($_FILES['foto_perfil']['name'], PATHINFO_EXTENSION));
-                $allowed = ['jpg', 'jpeg', 'png', 'webp'];
+                $allowed = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'jfif'];
 
-                if ($_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK && $_FILES['foto_perfil']['size'] <= $maxSize && in_array($ext, $allowed)) {
+                if ($_FILES['foto_perfil']['error'] !== UPLOAD_ERR_OK) {
+                    $errorMsg = 'Error en subida de imagen: ';
+                    if ($_FILES['foto_perfil']['error'] === UPLOAD_ERR_INI_SIZE || $_FILES['foto_perfil']['error'] === UPLOAD_ERR_FORM_SIZE) {
+                        $errorMsg .= 'La foto excede el tamaño máximo permitido por su servidor PHP (upload_max_filesize).';
+                    } elseif ($_FILES['foto_perfil']['error'] === UPLOAD_ERR_NO_TMP_DIR || $_FILES['foto_perfil']['error'] === UPLOAD_ERR_CANT_WRITE) {
+                        $errorMsg .= 'Problema de permisos o carpeta temporal no configurada en Windows (php.ini).';
+                    } else {
+                        $errorMsg .= 'Código de error PHP: ' . $_FILES['foto_perfil']['error'];
+                    }
+                    self::setFlash('error', $errorMsg);
+                    $this->redirect('/admin/perfil');
+                    return;
+                } elseif ($_FILES['foto_perfil']['size'] > $maxSize) {
+                    self::setFlash('error', 'La foto supera el tamaño máximo de 10 MB.');
+                    $this->redirect('/admin/perfil');
+                    return;
+                } elseif (!in_array($ext, $allowed)) {
+                    self::setFlash('error', 'Formato no válido (' . htmlspecialchars($ext) . '). Solo se admiten JPG, PNG, WEBP o GIF.');
+                    $this->redirect('/admin/perfil');
+                    return;
+                } else {
                     $newName = uniqid('user_') . '.' . $ext;
                     $destPath = $uploadDir . $newName;
 
                     if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $destPath)) {
                         $datos['url_foto'] = '/public/uploads/usuarios/' . $newName;
-                        
-                        // Actualizar la sesión para que se refleje inmediatamente en el navbar
                         $_SESSION['url_foto'] = $datos['url_foto'];
+                    } else {
+                        self::setFlash('error', 'Error al guardar el archivo en Windows. Verifique permisos de escritura en la carpeta public/uploads/usuarios.');
+                        $this->redirect('/admin/perfil');
+                        return;
                     }
                 }
             }

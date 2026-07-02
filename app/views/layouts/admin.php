@@ -166,40 +166,39 @@
             });
         }
 
-        // Interceptar formularios con clase .form-confirm para usar SweetAlert2
-        document.addEventListener('DOMContentLoaded', function () {
-            const confirmForms = document.querySelectorAll('.form-confirm');
-            confirmForms.forEach(form => {
-                form.addEventListener('submit', function (e) {
-                    e.preventDefault();
-                    Swal.fire({
-                        title: form.dataset.title || '¿Estás seguro?',
-                        text: form.dataset.text || 'Esta acción modificará el estado del registro.',
-                        icon: form.dataset.icon || 'warning',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: form.dataset.confirmText || 'Sí, continuar',
-                        cancelButtonText: 'Cancelar'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            form.submit();
-                        }
-                    });
+        // Interceptar formularios con clase .form-confirm (incluso en modales dinámicos) usando delegación de eventos
+        document.addEventListener('submit', function (e) {
+            const form = e.target.closest('.form-confirm');
+            if (form) {
+                e.preventDefault();
+                Swal.fire({
+                    title: form.dataset.title || '¿Estás seguro?',
+                    text: form.dataset.text || 'Esta acción modificará el estado del registro.',
+                    icon: form.dataset.icon || 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: form.dataset.confirmText || 'Sí, continuar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.submit();
+                    }
                 });
-            });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
 
             // Mostrar mensaje flash si existe
             <?php $flash = \App\Core\Controller::getFlash(); ?>
             <?php if ($flash): ?>
                 Swal.fire({
                     icon: '<?php echo $flash['tipo']; ?>',
-                    title: '<?php echo addslashes($flash['mensaje']); ?>',
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true
+                    title: '<?php echo $flash['tipo'] === 'success' ? '¡Operación exitosa!' : '¡Información!'; ?>',
+                    text: '<?php echo addslashes($flash['mensaje']); ?>',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Aceptar'
                 });
             <?php endif; ?>
         });
