@@ -54,8 +54,31 @@ $router->post('/admin/foros/comentario/restaurar', 'AdminForoController', 'resta
 $router->post('/admin/foros/ban-usuario', 'AdminForoController', 'toggleBanUsuario');
 $router->get('/admin/foros/editar-modal', 'AdminForoController', 'editarForoModal');
 $router->post('/admin/foros/actualizar', 'AdminForoController', 'actualizarForo');
-$router->get('/admin/foros/comentario/editar-modal', 'AdminForoController', 'editarComentarioModal');
 $router->post('/admin/foros/comentario/actualizar', 'AdminForoController', 'actualizarComentario');
+
+// Rutas de Administrador (Red Social - Reseñas)
+$router->get('/admin/resenas', 'AdminResenaController', 'index');
+$router->get('/admin/resenas/ver-modal', 'AdminResenaController', 'verModal');
+$router->post('/admin/resenas/toggle-estado', 'AdminResenaController', 'toggleEstado');
+$router->post('/admin/resenas/cambiar-estado', 'AdminResenaController', 'cambiarEstado');
+
+// Rutas de Administrador (Red Social - Blog)
+$router->get('/admin/blog', 'AdminBlogController', 'index');
+$router->get('/admin/blog/ver-modal', 'AdminBlogController', 'verModal');
+$router->get('/admin/blog/crear-modal', 'AdminBlogController', 'crearModal');
+$router->post('/admin/blog/guardar', 'AdminBlogController', 'guardar');
+$router->get('/admin/blog/editar-modal', 'AdminBlogController', 'editarModal');
+$router->post('/admin/blog/actualizar', 'AdminBlogController', 'actualizar');
+$router->post('/admin/blog/cambiar-estado', 'AdminBlogController', 'cambiarEstado');
+$router->post('/admin/blog/eliminar', 'AdminBlogController', 'eliminar');
+
+// Rutas de Administrador (Red Social - Gamificación y Puntos NIDO)
+$router->get('/admin/puntos', 'AdminPuntosController', 'index');
+$router->post('/admin/puntos/ajuste-manual', 'AdminPuntosController', 'ajusteManual');
+$router->post('/admin/puntos/referido/acreditar', 'AdminPuntosController', 'acreditarReferido');
+$router->post('/admin/puntos/referido/anular', 'AdminPuntosController', 'anularReferido');
+$router->get('/admin/puntos/ledger-modal', 'AdminPuntosController', 'ledgerModal');
+
 
 // Rutas de Administrador (Alojamientos)
 $router->get('/admin/alojamientos', 'AdminAlojamientoController', 'index');
@@ -119,5 +142,15 @@ $router->post('/admin/perfil/actualizar', 'AdminPerfilController', 'actualizar')
 $router->get('/admin/perfil/password', 'AdminPerfilController', 'password');
 $router->post('/admin/perfil/password/actualizar', 'AdminPerfilController', 'actualizarPassword');
 
+// Rutas de Administrador (Usuarios)
+$router->get('/admin/usuarios', 'AdminUsuarioController', 'index');
+$router->get('/admin/usuarios/ver-modal', 'AdminUsuarioController', 'verModal');
+$router->get('/admin/usuarios/crear-modal', 'AdminUsuarioController', 'crearModal');
+$router->post('/admin/usuarios/guardar', 'AdminUsuarioController', 'guardar');
+$router->get('/admin/usuarios/editar-modal', 'AdminUsuarioController', 'editarModal');
+$router->post('/admin/usuarios/actualizar', 'AdminUsuarioController', 'actualizar');
+$router->post('/admin/usuarios/toggle-estado', 'AdminUsuarioController', 'toggleEstado');
+
 // Ejecutar ruta
 $router->dispatch();
+
