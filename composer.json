@@ -1,0 +1,8 @@
+{
+    "name": "aaroncueva/rooms-frontend",
+    "description": "Nido Universitario Rooms Frontend (MVC custom PHP)",
+    "type": "project",
+    "require": {
+        "php": ">=8.2"
+    }
+}

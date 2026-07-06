@@ -377,6 +377,9 @@ class AdminAlojamientoController extends Controller
             }
 
             $uploadDir = __DIR__ . '/../../public/uploads/alojamientos/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
             $multimediaModel = new Multimedia();
             $maxSize = 5 * 1024 * 1024; // 5MB
 

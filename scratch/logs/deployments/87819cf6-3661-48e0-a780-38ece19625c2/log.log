@@ -1,0 +1,202 @@
+2026-07-06T06:32:14.3511270Z,Updating submodules.,d4d64ec4-01d7-4598-8517-247cf36d51f1,0
+2026-07-06T06:32:19.8710309Z,Preparing deployment for commit id '87819cf6-3'.,4eecfc6a-d700-478b-8b5a-19ecec16a8af,0
+2026-07-06T06:32:22.8500629Z,PreDeployment: context.CleanOutputPath False,d09de90c-7b93-4ae6-8a8d-b5c474997294,0
+2026-07-06T06:32:24.9360933Z,PreDeployment: context.OutputPath /home/site/wwwroot,151573aa-dc8a-4e7f-ae53-cd3c0445b311,0
+2026-07-06T06:32:26.9287662Z,Repository path is /tmp/zipdeploy/extracted,6685321b-46a4-4491-9c07-39304d54c5da,0
+2026-07-06T06:32:29.5014510Z,Running oryx build...,8ca1b76e-ed6d-4740-8bcf-6e22e0e3ab3e,0
+	2026-07-06T06:32:29.7073668Z,Command: oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform php --platform-version 8.3 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8dedb2855584d2c | tee /tmp/oryx-build.log,,0
+	2026-07-06T06:32:38.8623758Z,Operation performed by Microsoft Oryx&comma; https://github.com/Microsoft/Oryx,,0
+	2026-07-06T06:32:39.2463057Z,You can report issues at https://github.com/Microsoft/Oryx/issues,,0
+	2026-07-06T06:32:39.3160776Z,,,0
+	2026-07-06T06:32:39.3315515Z,Oryx Version: 0.2.20260513.1+5c94136d0d5c06204a00d688dc7aea902452e52c&comma; Commit: 5c94136d0d5c06204a00d688dc7aea902452e52c&comma; ReleaseTagName: 20260513.1,,0
+	2026-07-06T06:32:39.3565816Z,,,0
+	2026-07-06T06:32:39.5822382Z,Build Operation ID: 83bbfa1efb6b7b04,,0
+	2026-07-06T06:32:39.6565332Z,Repository Commit : 87819cf6-3661-48e0-a780-38ece19625c2,,0
+	2026-07-06T06:32:39.7634585Z,OS Type           : bookworm,,0
+	2026-07-06T06:32:39.8456751Z,Image Type        : githubactions,,0
+	2026-07-06T06:32:39.9257710Z,,,0
+	2026-07-06T06:32:40.0817795Z,Primary SDK Storage URL: https://oryx-cdn.microsoft.io,,0
+	2026-07-06T06:32:40.1391746Z,Backup SDK Storage URL: ,,0
+	2026-07-06T06:32:40.2143857Z,ACR SDK Registry URL: (not set),,0
+	2026-07-06T06:32:40.2848722Z,SDK provider status:,,0
+	2026-07-06T06:32:40.3100848Z,  External ACR SDK provider: Enabled,,0
+	2026-07-06T06:32:40.4121514Z,  External SDK provider: Enabled,,0
+	2026-07-06T06:32:40.4375221Z,  Direct ACR SDK provider: Disabled,,0
+	2026-07-06T06:32:40.5745941Z,  Blob SDK provider: Enabled,,0
+	2026-07-06T06:32:40.6134150Z,External ACR SDK provider is enabled. Only using user-specified platform: php,,0
+	2026-07-06T06:32:40.7236495Z,Detecting platforms...,,0
+	2026-07-06T06:32:40.7533787Z,External ACR provider resolved version '8.3.29' for php.,,0
+	2026-07-06T06:32:40.7724248Z,Version resolved using external ACR SDK provider.,,0
+	2026-07-06T06:32:40.8796997Z,Version resolved using external ACR SDK provider.,,0
+	2026-07-06T06:32:40.9032124Z,Detected following platforms:,,0
+	2026-07-06T06:32:40.9447555Z,  php: 8.3.29,,0
+	2026-07-06T06:32:41.0334346Z,Requesting SDK from ACR via external provider: php 8.3.29 (bookworm),,0
+	2026-07-06T06:32:44.1846896Z,Successfully pulled SDK from ACR via external provider: php 8.3.29,,0
+	2026-07-06T06:32:44.2303336Z,SDK for 'php' version '8.3.29' fetched via external ACR provider.,,0
+	2026-07-06T06:32:44.2506959Z,Requesting SDK from ACR via external provider: php-composer 2.6.2 (bookworm),,0
+	2026-07-06T06:32:49.7902428Z,Successfully pulled SDK from ACR via external provider: php-composer 2.6.2,,0
+	2026-07-06T06:32:49.8139106Z,SDK for 'php-composer' version '2.6.2' fetched via external ACR provider.,,0
+	2026-07-06T06:32:49.8388965Z,Version '8.3.29' of platform 'php' is not installed. Generating script to install it...,,0
+	2026-07-06T06:32:52.6652933Z,,,0
+	2026-07-06T06:32:54.2836624Z,Using intermediate directory '/tmp/8dedb2855584d2c'.,,0
+	2026-07-06T06:32:54.3102071Z,,,0
+	2026-07-06T06:32:54.3254053Z,Copying files to the intermediate directory...,,0
+	2026-07-06T06:32:56.5871554Z,Copying files to intermediate directory done in 3 sec(s).,,0
+	2026-07-06T06:32:56.7069898Z,,,0
+	2026-07-06T06:32:56.7582086Z,Source directory     : /tmp/8dedb2855584d2c,,0
+	2026-07-06T06:32:56.7856119Z,Destination directory: /home/site/wwwroot,,0
+	2026-07-06T06:32:56.8065779Z,,,0
+	2026-07-06T06:32:56.8262887Z,Installing platform...,,0
+	2026-07-06T06:32:56.8481501Z,,,0
+	2026-07-06T06:32:56.8873964Z,Downloading and extracting 'php' version '8.3.29' to '/tmp/oryx/platforms/php/8.3.29'...,,0
+	2026-07-06T06:32:56.9163904Z,Detected image debian flavor: bookworm.,,0
+	2026-07-06T06:32:56.9559050Z,SDK binary download was skipped. Looking for cached tarball...,,0
+	2026-07-06T06:32:56.9874077Z,Found tarball at /var/OryxAcrSdks/php/php-bookworm-8.3.29.tar.gz,,0
+	2026-07-06T06:32:59.9474178Z,Successfully extracted php version 8.3.29 from cached tarball.,,0
+	2026-07-06T06:32:59.9911956Z,,,0
+	2026-07-06T06:33:00.0212484Z,,,0
+	2026-07-06T06:33:00.0492709Z,Downloading and extracting 'php-composer' version '2.6.2' to '/tmp/oryx/platforms/php-composer/2.6.2'...,,0
+	2026-07-06T06:33:00.0821913Z,Detected image debian flavor: bookworm.,,0
+	2026-07-06T06:33:00.1089140Z,SDK binary download was skipped. Looking for cached tarball...,,0
+	2026-07-06T06:33:00.1515532Z,Found tarball at /var/OryxAcrSdks/php-composer/php-composer-bookworm-2.6.2.tar.gz,,0
+	2026-07-06T06:33:00.2405751Z,Successfully extracted php-composer version 2.6.2 from cached tarball.,,0
+	2026-07-06T06:33:00.2577861Z,,,0
+	2026-07-06T06:33:00.2875368Z,Platform installation done in 4 sec(s).,,0
+	2026-07-06T06:33:00.7654472Z,Running build script snippets...,,0
+	2026-07-06T06:33:01.2036267Z,PHP executable: /tmp/oryx/platforms/php/8.3.29/bin/php,,0
+	2026-07-06T06:33:01.3340839Z,Composer archive: /tmp/oryx/platforms/php-composer/2.6.2/composer.phar,,0
+	2026-07-06T06:33:01.3522561Z,Running 'composer install --ignore-platform-reqs --no-interaction'...,,0
+	2026-07-06T06:33:01.3735262Z,,,0
+	2026-07-06T06:33:06.8118080Z,Build script snippets done in 6 sec(s).,,0
+	2026-07-06T06:33:06.9888025Z,Preparing output...,,0
+	2026-07-06T06:33:07.2661118Z,No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.,,1
+	2026-07-06T06:33:07.3314109Z,Using standard output preparation...,,0
+	2026-07-06T06:33:07.5162419Z,Loading composer repositories with package information,,1
+	2026-07-06T06:33:07.5621154Z,,,0
+	2026-07-06T06:33:07.5933287Z,Updating dependencies,,1
+	2026-07-06T06:33:07.6397106Z,Copying files to destination directory '/home/site/wwwroot'...,,0
+	2026-07-06T06:33:07.6731154Z,Nothing to modify in lock file,,1
+	2026-07-06T06:33:07.7459339Z,Writing lock file,,1
+	2026-07-06T06:33:07.8304218Z,Installing dependencies from lock file (including require-dev),,1
+	2026-07-06T06:33:07.8801597Z,Nothing to install&comma; update or remove,,1
+	2026-07-06T06:33:07.8941780Z,Generating autoload files,,1
+	2026-07-06T06:33:08.3988470Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminAlojamientoController.php": Invalid argument (22),,1
+	2026-07-06T06:33:08.4484486Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminBlogController.php": Invalid argument (22),,1
+	2026-07-06T06:33:08.5362815Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminContratoController.php": Invalid argument (22),,1
+	2026-07-06T06:33:08.6436475Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminController.php": Invalid argument (22),,1
+	2026-07-06T06:33:08.7141230Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminForoController.php": Invalid argument (22),,1
+	2026-07-06T06:33:08.7619804Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminPerfilController.php": Invalid argument (22),,1
+	2026-07-06T06:33:08.7895738Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminPuntosController.php": Invalid argument (22),,1
+	2026-07-06T06:33:08.8303696Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminResenaController.php": Invalid argument (22),,1
+	2026-07-06T06:33:08.9040008Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminReservaController.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.0042916Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminRolController.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.0284606Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminUniversidadController.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.0849641Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminUsuarioController.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.1382060Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AuthController.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.2754353Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\core\Controller.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.3479133Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\core\Database.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.4089210Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\core\Router.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.5225787Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Alojamiento.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.5494941Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\AlojamientoPolitica.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.5893869Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\AlojamientoServicio.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.6193530Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\AlojamientoUniversidad.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.8084714Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Beneficio.php": Invalid argument (22),,1
+	2026-07-06T06:33:09.9787692Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Blog.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.0133685Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Catalogo.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.0669618Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Contrato.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.1862943Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\DashboardModel.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.2601766Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Descuento.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.3465609Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Favorito.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.4540246Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Foro.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.4710315Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\ForoComentario.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.5161657Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Menu.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.5365255Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\MenuMaestro.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.5740230Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\MenuRol.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.6289111Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Multimedia.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.6465069Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\PoliticaCasa.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.6639172Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\PuntoMovimiento.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.7017243Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Referido.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.7832700Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Resena.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.8056326Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\ReseniaAlojamiento.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.8240839Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Reserva.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.8406490Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Rol.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.8563693Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Servicio.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.8754889Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Ubicacion.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.8919155Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\UniversidadModel.php": Invalid argument (22),,1
+	2026-07-06T06:33:10.9118992Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Usuario.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.1824425Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\alojamiento\form.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.2116809Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\alojamiento\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.2375149Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\alojamiento\view.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.2526466Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\blog\form.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.2675377Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\blog\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.2813473Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\blog\view.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.2950959Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\contrato\form.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.3213206Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\contrato\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.3574534Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\contrato\view.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.3742498Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\dashboard.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.3874195Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\foro\comentario_form.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.4078458Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\foro\form.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.4464126Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\foro\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.4984061Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\foro\view.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.5120926Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\perfil\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.5385113Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\perfil\password.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.5646105Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\puntos\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.5803039Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\puntos\ledger_modal.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.5937728Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\resena\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.6073475Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\resena\view.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.6234851Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\reserva\form.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.6485608Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\reserva\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.6660126Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\reserva\view.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.6853001Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\rol\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.6986502Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\rol\permisos.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.7129192Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\universidad\form.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.7256412Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\universidad\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.7397166Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\universidad\modal_view.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.7548456Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\universidad\view.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.7684578Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\usuario\form_modal.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.7833383Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\usuario\index.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.7988645Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\usuario\view_modal.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.8142860Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\auth\login.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.8284233Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\auth\register.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.8434286Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\layouts\admin.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.8582997Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\layouts\auth.php": Invalid argument (22),,1
+	2026-07-06T06:33:11.8735057Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\README.md": Invalid argument (22),,1
+	2026-07-06T06:33:11.8900411Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\deploy.ps1": Invalid argument (22),,1
+	2026-07-06T06:33:11.9076777Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\deploy.sh": Invalid argument (22),,1
+	2026-07-06T06:33:11.9212784Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\nginx.conf": Invalid argument (22),,1
+	2026-07-06T06:33:11.9339935Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\startup.sh": Invalid argument (22),,1
+	2026-07-06T06:33:11.9488594Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\zip_deploy.ps1": Invalid argument (22),,1
+	2026-07-06T06:33:11.9625311Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/docs\DF-NidoUniversitario-v1.0.docx": Invalid argument (22),,1
+	2026-07-06T06:33:11.9769199Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/docs\DOCUMENTACION_BACKEND.md": Invalid argument (22),,1
+	2026-07-06T06:33:11.9934914Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/docs\ESTANDARES_FRONTEND.md": Invalid argument (22),,1
+	2026-07-06T06:33:12.0118479Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/docs\MODULOS_ADMIN_SOCIALES.md": Invalid argument (22),,1
+	2026-07-06T06:33:12.1354405Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/plan\infrastructure-azure-deployment-1.md": Invalid argument (22),,1
+	2026-07-06T06:33:12.1512390Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\assets\images\fondo.png": Invalid argument (22),,1
+	2026-07-06T06:33:12.1671757Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\css\admin-theme.css": Invalid argument (22),,1
+	2026-07-06T06:33:12.1809259Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\css\style.css": Invalid argument (22),,1
+	2026-07-06T06:33:12.2083931Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\alojamientos\.gitkeep": Invalid argument (22),,1
+	2026-07-06T06:33:12.2253177Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\alojamientos\aloj_6a41927db63e9.jpeg": Invalid argument (22),,1
+	2026-07-06T06:33:12.2533572Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\contratos\.gitkeep": Invalid argument (22),,1
+	2026-07-06T06:33:12.2894354Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\contratos\contrato_6a429c2828806.png": Invalid argument (22),,1
+	2026-07-06T06:33:12.3111991Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\usuarios\.gitkeep": Invalid argument (22),,1
+	2026-07-06T06:33:12.3310371Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\usuarios\user_6a42845797cd1.png": Invalid argument (22),,1
+	2026-07-06T06:33:12.3603202Z,rsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\usuarios\user_6a45ec742b0e5.jfif": Invalid argument (22),,1
+	2026-07-06T06:33:12.3849144Z,rsync: [generator] recv_generator: mkdir "/home/site/wwwroot/app\views\" failed: Invalid argument (22),,1
+	2026-07-06T06:33:12.4076027Z,*** Skipping any contents from this failed directory ***,,1
+	2026-07-06T06:33:12.4267464Z,rsync: [generator] recv_generator: mkdir "/home/site/wwwroot/public\assets\" failed: Invalid argument (22),,1
+	2026-07-06T06:33:12.4765539Z,*** Skipping any contents from this failed directory ***,,1
+	2026-07-06T06:33:12.4949845Z,rsync: [generator] recv_generator: mkdir "/home/site/wwwroot/public\uploads\" failed: Invalid argument (22),,1
+	2026-07-06T06:33:12.5245393Z,*** Skipping any contents from this failed directory ***,,1
+	2026-07-06T06:33:12.5747184Z,rsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7],,1
+	2026-07-06T06:33:12.7191778Z,No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.\nLoading composer repositories with package information\nUpdating dependencies\nNothing to modify in lock file\nWriting lock file\nInstalling dependencies from lock file (including require-dev)\nNothing to install&comma; update or remove\nGenerating autoload files\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminAlojamientoController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminBlogController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminContratoController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminForoController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminPerfilController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminPuntosController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminResenaController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminReservaController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminRolController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminUniversidadController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AdminUsuarioController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\controllers\AuthController.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\core\Controller.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\core\Database.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\core\Router.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Alojamiento.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\AlojamientoPolitica.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\AlojamientoServicio.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\AlojamientoUniversidad.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Beneficio.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Blog.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Catalogo.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Contrato.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\DashboardModel.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Descuento.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Favorito.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Foro.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\ForoComentario.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Menu.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\MenuMaestro.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\MenuRol.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Multimedia.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\PoliticaCasa.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\PuntoMovimiento.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Referido.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Resena.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\ReseniaAlojamiento.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Reserva.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Rol.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Servicio.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Ubicacion.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\UniversidadModel.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\models\Usuario.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\alojamiento\form.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\alojamiento\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\alojamiento\view.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\blog\form.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\blog\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\blog\view.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\contrato\form.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\contrato\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\contrato\view.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\dashboard.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\foro\comentario_form.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\foro\form.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\foro\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\foro\view.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\perfil\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\perfil\password.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\puntos\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\puntos\ledger_modal.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\resena\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\resena\view.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\reserva\form.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\reserva\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\reserva\view.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\rol\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\rol\permisos.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\universidad\form.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\universidad\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\universidad\modal_view.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\universidad\view.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\usuario\form_modal.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\usuario\index.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\admin\usuario\view_modal.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\auth\login.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\auth\register.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\layouts\admin.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/app\views\layouts\auth.php": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\README.md": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\deploy.ps1": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\deploy.sh": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\nginx.conf": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\startup.sh": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/azure\zip_deploy.ps1": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/docs\DF-NidoUniversitario-v1.0.docx": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/docs\DOCUMENTACION_BACKEND.md": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/docs\ESTANDARES_FRONTEND.md": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/docs\MODULOS_ADMIN_SOCIALES.md": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/plan\infrastructure-azure-deployment-1.md": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\assets\images\fondo.png": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\css\admin-theme.css": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\css\style.css": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\alojamientos\.gitkeep": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\alojamientos\aloj_6a41927db63e9.jpeg": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\contratos\.gitkeep": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\contratos\contrato_6a429c2828806.png": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\usuarios\.gitkeep": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\usuarios\user_6a42845797cd1.png": Invalid argument (22)\nrsync: [generator] recv_generator: failed to stat "/home/site/wwwroot/public\uploads\usuarios\user_6a45ec742b0e5.jfif": Invalid argument (22)\nrsync: [generator] recv_generator: mkdir "/home/site/wwwroot/app\views\" failed: Invalid argument (22)\n*** Skipping any contents from this failed directory ***\nrsync: [generator] recv_generator: mkdir "/home/site/wwwroot/public\assets\" failed: Invalid argument (22)\n*** Skipping any contents from this failed directory ***\nrsync: [generator] recv_generator: mkdir "/home/site/wwwroot/public\uploads\" failed: Invalid argument (22)\n*** Skipping any contents from this failed directory ***\nrsync error: some files/attrs were not transferred (see previous errors) (code 23) at main.c(1338) [sender=3.2.7]\n/bin/bash -c "oryx build /tmp/zipdeploy/extracted -o /home/site/wwwroot --platform php --platform-version 8.3 -p virtualenv_name= --log-file /tmp/build-debug.log  -i /tmp/8dedb2855584d2c | tee /tmp/oryx-build.log ; exit $PIPESTATUS ",,2
+2026-07-06T06:33:13.0516158Z,,524d6d73-fc2b-4bc6-a595-5247e6c16a21,0
+2026-07-06T06:33:13.3273004Z,Generating summary of Oryx build,16ea7fcc-d4a3-4783-8cae-538b71dbad4b,0
+2026-07-06T06:33:13.6238502Z,Parsing the build logs,aabf8fc1-d085-4c66-8a94-2e8fe01bcc14,0
+2026-07-06T06:33:13.8393568Z,Found 0 issue(s),cd21dc22-30d3-4850-accf-b185d1342e79,0
+2026-07-06T06:33:14.0651520Z,,f284cc74-b7f6-4004-aa78-4207c0f48306,0
+2026-07-06T06:33:14.2768695Z,Build Summary :,5e7fc0e8-407d-4770-8fd9-4ad2bfb6119c,0
+2026-07-06T06:33:14.4905690Z,===============,5c25fba6-1699-43bf-8f82-9a1b9b4f7902,0
+2026-07-06T06:33:14.7160724Z,Errors (0),ca4ca16e-5ad2-441a-be99-07445226591f,0
+2026-07-06T06:33:14.9189308Z,Warnings (0),295352f8-4f01-436e-ac61-f3303d58e46a,0
+2026-07-06T06:33:15.1398335Z,,f524ed3a-5606-476c-84d1-9a5ddd50f1c3,0
+2026-07-06T06:33:16.0529776Z,Deployment Failed. deployer = Push-Deployer deploymentPath = ZipDeploy. Extract zip. Remote build.,1da7a5e2-f0eb-42c1-a0ec-484525d06f32,0

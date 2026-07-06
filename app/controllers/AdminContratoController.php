@@ -152,6 +152,9 @@ class AdminContratoController extends Controller
             // Handle file upload
             if (!empty($_FILES['documento']['name'])) {
                 $uploadDir = __DIR__ . '/../../public/uploads/contratos/';
+                if (!file_exists($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
                 $maxSize = 5 * 1024 * 1024; // 5MB
                 
                 if ($_FILES['documento']['error'] === UPLOAD_ERR_OK && $_FILES['documento']['size'] <= $maxSize) {
@@ -207,6 +210,9 @@ class AdminContratoController extends Controller
                 // Handle file upload to replace document
                 if (!empty($_FILES['documento']['name'])) {
                     $uploadDir = __DIR__ . '/../../public/uploads/contratos/';
+                    if (!file_exists($uploadDir)) {
+                        mkdir($uploadDir, 0777, true);
+                    }
                     $maxSize = 5 * 1024 * 1024; // 5MB
                     
                     if ($_FILES['documento']['error'] === UPLOAD_ERR_OK && $_FILES['documento']['size'] <= $maxSize) {
