@@ -1,0 +1,597 @@
+2026-07-06T06:26:13.4899267+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:26:15.4644745+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:26:15.4784300+00:00 ContainerStatus: Container start method called.
+2026-07-06T06:26:15.4949632+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:26:15.4955505+00:00 ContainerStatus: Establishing network.
+2026-07-06T06:26:15.4961290+00:00 ContainerStatus: Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:27:46.7245640+00:00 ContainerStatus: Image appsvc/php:8.3-fpm_20260428.5.tuxprod is pulled from registry 10.1.0.4:13209
+2026-07-06T06:27:46.7724516+00:00 ContainerStatus: Container is starting.
+2026-07-06T06:27:46.7736193+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:27:46.7738185+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-07-06T06:27:46.7740152+00:00 ContainerStatus: Establishing network if not established already.
+2026-07-06T06:27:46.7742065+00:00 ContainerStatus: Mounting volumes.
+2026-07-06T06:27:46.7802672+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:27:46.8571377+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-07-06T06:27:46.8664070+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:27:46.8672240+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:27:46.9208336+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:27:46.9267095+00:00 ContainerStatus: Creating container.
+2026-07-06T06:27:46.9310184+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-07-06T06:27:46.9332268+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794.
+2026-07-06T06:27:46.9345091+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794.
+2026-07-06T06:27:46.9367790+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794 for reading in non-blocking mode.
+2026-07-06T06:27:46.9371338+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794.
+2026-07-06T06:27:46.9382859+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794.
+2026-07-06T06:27:46.9407384+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f.
+2026-07-06T06:27:46.9414828+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f.
+2026-07-06T06:27:46.9418511+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f for reading in non-blocking mode.
+2026-07-06T06:27:46.9421261+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f.
+2026-07-06T06:27:46.9441701+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f.
+2026-07-06T06:27:46.9555010+00:00 ContainerStatus: Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:27:49.1968080+00:00 ContainerStatus: Starting container: 5401dd57da61_rooms-frontend-4973.
+2026-07-06T06:27:49.4173887+00:00 ContainerStatus: Starting watchers and probes.
+2026-07-06T06:27:49.5225871+00:00 ContainerStatus: Starting metrics collection.
+2026-07-06T06:27:49.5466436+00:00 ContainerStatus: Container is running.
+2026-07-06T06:27:49.5497945+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:27:49.9324850+00:00 ContainerStatus: Container start method finished after 94453 ms.
+2026-07-06T06:27:49.9358636+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:27:49.9642612+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:27:50.6666256+00:00 ContainerStream:    _____                               
+2026-07-06T06:27:50.6727606+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-07-06T06:27:50.6728173+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-07-06T06:27:50.6728253+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-07-06T06:27:50.6728324+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-07-06T06:27:50.6728376+00:00 ContainerStream:         \/      \/                  \/ 
+2026-07-06T06:27:50.6728454+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-07-06T06:27:50.6728500+00:00 ContainerStream: 
+2026-07-06T06:27:50.6728578+00:00 ContainerStream: Documentation : http://aka.ms/webapp-linux
+2026-07-06T06:27:50.6728641+00:00 ContainerStream: PHP quickstart: https://aka.ms/php-qs
+2026-07-06T06:27:50.6733800+00:00 ContainerStream: PHP version   : 8.3.29
+2026-07-06T06:27:50.6734744+00:00 ContainerStream: Instance Name : 10-30-0-184
+2026-07-06T06:27:50.6734881+00:00 ContainerStream: Instance Id   : 06af00b7405ce01e92112d9236f57c70d8ff738bceef74cd316ed243ba044a77
+2026-07-06T06:27:50.6735221+00:00 ContainerStream: 
+2026-07-06T06:27:50.6735284+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-07-06T06:27:53.7997105+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-07-06T06:27:53.8807151+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-07-06T06:27:54.0131768+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-07-06T06:28:07.0084464+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-07-06T06:28:07.0095145+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-07-06T06:28:07.1411158+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-07-06T06:28:07.1678394+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-07-06T06:28:07.1755581+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-07-06T06:28:07.1795297+00:00 ContainerStream: done.
+2026-07-06T06:28:07.1977097+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-07-06T06:28:07.1982929+00:00 ContainerStream: Running oryx create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh     -bindPort 8080 -startupCommand '/home/site/wwwroot/azure/startup.sh; php-fpm;'
+2026-07-06T06:28:07.2968994+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-07-06T06:28:07.2969852+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-07-06T06:28:07.2982389+00:00 ContainerStream: Build Operation ID: b04c62ec-0d27-4b24-baff-00511889c0a2
+2026-07-06T06:28:07.4664425+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-07-06T06:28:07.8342490+00:00 ContainerStream: Starting nginx: nginx.
+2026-07-06T06:28:07.8405164+00:00 ContainerStream: /opt/startup/startup.sh: 13: /home/site/wwwroot/azure/startup.sh: not found
+2026-07-06T06:28:08.2665455+00:00 ContainerStatus: Site startup probe succeeded after 18.2105601 seconds.
+2026-07-06T06:28:08.5069457+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 18.2105601 seconds., DetailsLevel: INFO
+2026-07-06T06:28:08.9594156+00:00 ContainerStatus: Site started.
+2026-07-06T06:28:08.9634565+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:28:08 (UTC), DetailsLevel: INFO
+2026-07-06T06:28:09.0853010+00:00 ContainerStatus: Site is running with patch version PHP-8.3.29
+2026-07-06T06:28:09.0864643+00:00 ContainerStream: [06-Jul-2026 06:28:09] NOTICE: fpm is running, pid 1852
+2026-07-06T06:28:09.1071879+00:00 ContainerStream: [06-Jul-2026 06:28:09] NOTICE: ready to handle connections
+========== New Cold Start Attempt (2026-07-06T06:30:33.4216071+00:00) ==========
+2026-07-06T06:30:33.4216071+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:30:35.3456758+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:30:35.3459999+00:00 ContainerStatus: Container start method called.
+2026-07-06T06:30:35.3460693+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:30:35.3461952+00:00 ContainerStatus: Establishing network.
+2026-07-06T06:30:35.3462907+00:00 ContainerStatus: Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:30:36.3201075+00:00 ContainerStatus: Image appsvc/php:8.3-fpm_20260428.5.tuxprod is pulled from registry 10.1.0.6:13209
+2026-07-06T06:30:36.3202669+00:00 ContainerStatus: Container is starting.
+2026-07-06T06:30:36.3204126+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:30:36.3205428+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-07-06T06:30:36.3206978+00:00 ContainerStatus: Establishing network if not established already.
+2026-07-06T06:30:36.3208506+00:00 ContainerStatus: Mounting volumes.
+2026-07-06T06:30:36.3220168+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:30:36.3309686+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-07-06T06:30:36.3585759+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:30:36.3594873+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:30:36.3675169+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:30:36.3677771+00:00 ContainerStatus: Creating container.
+2026-07-06T06:30:36.3679179+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-07-06T06:30:36.3680511+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e.
+2026-07-06T06:30:36.3682812+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e.
+2026-07-06T06:30:36.3726211+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e for reading in non-blocking mode.
+2026-07-06T06:30:36.3732222+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e.
+2026-07-06T06:30:36.3736969+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e.
+2026-07-06T06:30:36.3739095+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5.
+2026-07-06T06:30:36.3741162+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5.
+2026-07-06T06:30:36.3742183+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5 for reading in non-blocking mode.
+2026-07-06T06:30:36.3812126+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5.
+2026-07-06T06:30:36.3814204+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5.
+2026-07-06T06:30:36.3816855+00:00 ContainerStatus: Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:30:36.7984647+00:00 ContainerStatus: Starting container: e7f19232b0b0_rooms-frontend-4973.
+2026-07-06T06:30:36.9007235+00:00 ContainerStatus: Starting watchers and probes.
+2026-07-06T06:30:36.9009836+00:00 ContainerStatus: Starting metrics collection.
+2026-07-06T06:30:36.9031680+00:00 ContainerStatus: Container is running.
+2026-07-06T06:30:36.9036877+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:30:36.9268131+00:00 ContainerStatus: Container start method finished after 1580 ms.
+2026-07-06T06:30:36.9271276+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:30:36.9271563+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:30:37.5731367+00:00 ContainerStream:    _____                               
+2026-07-06T06:30:37.5735991+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-07-06T06:30:37.5736129+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-07-06T06:30:37.5736169+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-07-06T06:30:37.5736311+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-07-06T06:30:37.5736356+00:00 ContainerStream:         \/      \/                  \/ 
+2026-07-06T06:30:37.5736392+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-07-06T06:30:37.5736423+00:00 ContainerStream: 
+2026-07-06T06:30:37.5736461+00:00 ContainerStream: Documentation : http://aka.ms/webapp-linux
+2026-07-06T06:30:37.5736509+00:00 ContainerStream: PHP quickstart: https://aka.ms/php-qs
+2026-07-06T06:30:37.5736543+00:00 ContainerStream: PHP version   : 8.3.29
+2026-07-06T06:30:37.5736592+00:00 ContainerStream: Instance Name : 10-30-0-184
+2026-07-06T06:30:37.5736637+00:00 ContainerStream: Instance Id   : 06af00b7405ce01e92112d9236f57c70d8ff738bceef74cd316ed243ba044a77
+2026-07-06T06:30:37.5736669+00:00 ContainerStream: 
+2026-07-06T06:30:37.5736706+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-07-06T06:30:39.8945240+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-07-06T06:30:39.9052804+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-07-06T06:30:39.9800233+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-07-06T06:31:07.4416846+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-07-06T06:31:07.4420739+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-07-06T06:31:07.7664295+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-07-06T06:31:07.8179994+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-07-06T06:31:07.8180750+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-07-06T06:31:07.8457062+00:00 ContainerStream: done.
+2026-07-06T06:31:07.8857485+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-07-06T06:31:07.8888896+00:00 ContainerStream: Running oryx create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh     -bindPort 8080 -startupCommand '/home/site/wwwroot/azure/startup.sh; php-fpm;'
+2026-07-06T06:31:08.0923397+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-07-06T06:31:08.0973064+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-07-06T06:31:08.0985801+00:00 ContainerStream: Build Operation ID: 91dadf42-e989-4318-b61c-2fc1aba8a950
+2026-07-06T06:31:08.2246729+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-07-06T06:31:08.8760865+00:00 ContainerStream: Starting nginx: nginx.
+2026-07-06T06:31:08.8884177+00:00 ContainerStream: /opt/startup/startup.sh: 13: /home/site/wwwroot/azure/startup.sh: not found
+2026-07-06T06:31:08.9659475+00:00 ContainerStatus: Site startup probe succeeded after 32.037275 seconds.
+2026-07-06T06:31:09.2399066+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 32.037275 seconds., DetailsLevel: INFO
+2026-07-06T06:31:09.7922246+00:00 ContainerStatus: Site is running with deployment version: 
+2026-07-06T06:31:09.7930022+00:00 ContainerStatus: Site started.
+2026-07-06T06:31:09.7932256+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:31:09 (UTC), DetailsLevel: INFO
+2026-07-06T06:31:09.7944742+00:00 ContainerStatus: Site is running with patch version PHP-8.3.29
+========== New Cold Start Attempt (2026-07-06T06:31:10.2042893+00:00) ==========
+2026-07-06T06:31:10.2042893+00:00 ContainerStream: [06-Jul-2026 06:31:10] NOTICE: fpm is running, pid 1853
+2026-07-06T06:31:10.2449055+00:00 ContainerStream: [06-Jul-2026 06:31:10] NOTICE: ready to handle connections
+2026-07-06T06:31:30.2240206+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:28:08 (UTC), DetailsLevel: INFO
+2026-07-06T06:31:30.2274970+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:28:08 (UTC), DetailsLevel: INFO
+2026-07-06T06:31:30.2280302+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:31:30.3965284+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-07-06T06:31:30.3966872+00:00 ContainerStatus: Stopping container: 5401dd57da61_rooms-frontend-4973.
+2026-07-06T06:31:35.3002952+00:00 ContainerStatus: Deleting container: 5401dd57da61_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:31:35.3920725+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-07-06T06:31:35.3928330+00:00 ContainerStatus: Container is terminated. Total time elapsed: 5164 ms.
+2026-07-06T06:31:35.4031994+00:00 ContainerStatus: Site: rooms-frontend-4973 stopped.
+2026-07-06T06:32:04.0074880+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:32:05.9957958+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:32:05.9961971+00:00 ContainerStatus: Container start method called.
+2026-07-06T06:32:05.9962743+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:32:05.9968926+00:00 ContainerStatus: Establishing network.
+2026-07-06T06:32:05.9977228+00:00 ContainerStatus: Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:32:10.1976154+00:00 ContainerStatus: Container is starting.
+2026-07-06T06:32:10.1977473+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:32:10.1978773+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-07-06T06:32:10.2113958+00:00 ContainerStatus: Establishing network if not established already.
+2026-07-06T06:32:10.2117707+00:00 ContainerStatus: Mounting volumes.
+2026-07-06T06:32:10.2120832+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:32:10.2452486+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-07-06T06:32:10.6933415+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:32:11.0539787+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:32:11.3208672+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:32:11.3248997+00:00 ContainerStatus: Creating container.
+2026-07-06T06:32:11.3905303+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-07-06T06:32:11.4482269+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4.
+2026-07-06T06:32:11.5721977+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4.
+2026-07-06T06:32:11.5769153+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4 for reading in non-blocking mode.
+2026-07-06T06:32:11.5773115+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4.
+2026-07-06T06:32:11.5942269+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4.
+2026-07-06T06:32:11.5946389+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0.
+2026-07-06T06:32:11.5948807+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0.
+2026-07-06T06:32:11.5951074+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0 for reading in non-blocking mode.
+2026-07-06T06:32:11.6000810+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0.
+2026-07-06T06:32:11.6002265+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0.
+2026-07-06T06:32:11.6004077+00:00 ContainerStatus: Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:32:23.3638895+00:00 ContainerStatus: Starting container: 70a9a98f443b_rooms-frontend-4973.
+2026-07-06T06:32:23.9216006+00:00 ContainerStatus: Starting watchers and probes.
+2026-07-06T06:32:23.9390971+00:00 ContainerStatus: Starting metrics collection.
+2026-07-06T06:32:23.9394949+00:00 ContainerStatus: Container is running.
+2026-07-06T06:32:23.9768861+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:32:24.7656552+00:00 ContainerStatus: Container start method finished after 18768 ms.
+2026-07-06T06:32:24.8668138+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:32:24.9201646+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:32:30.1443839+00:00 ContainerStream:    _____                               
+2026-07-06T06:32:30.1446705+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-07-06T06:32:30.1446786+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-07-06T06:32:30.1446863+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-07-06T06:32:30.1446897+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-07-06T06:32:30.1446938+00:00 ContainerStream:         \/      \/                  \/ 
+2026-07-06T06:32:30.1446997+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-07-06T06:32:30.1447030+00:00 ContainerStream: 
+2026-07-06T06:32:30.1447065+00:00 ContainerStream: Documentation : http://aka.ms/webapp-linux
+2026-07-06T06:32:30.1447100+00:00 ContainerStream: PHP quickstart: https://aka.ms/php-qs
+2026-07-06T06:32:30.1447134+00:00 ContainerStream: PHP version   : 8.3.29
+2026-07-06T06:32:30.1447167+00:00 ContainerStream: Instance Name : 10-30-0-184
+2026-07-06T06:32:30.1447210+00:00 ContainerStream: Instance Id   : 06af00b7405ce01e92112d9236f57c70d8ff738bceef74cd316ed243ba044a77
+2026-07-06T06:32:30.1447257+00:00 ContainerStream: 
+2026-07-06T06:32:30.1447293+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-07-06T06:32:46.8170131+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-07-06T06:32:46.9533719+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-07-06T06:32:47.4441523+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-07-06T06:33:18.1790126+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-07-06T06:33:18.1797332+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-07-06T06:33:18.2996681+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-07-06T06:33:18.3181610+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-07-06T06:33:18.3186556+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-07-06T06:33:18.3219838+00:00 ContainerStream: done.
+2026-07-06T06:33:18.3348391+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-07-06T06:33:18.3350246+00:00 ContainerStream: Running oryx create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh     -bindPort 8080 -startupCommand '/home/site/wwwroot/azure/startup.sh; php-fpm;'
+2026-07-06T06:33:18.4058992+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-07-06T06:33:18.4059753+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-07-06T06:33:18.4065883+00:00 ContainerStream: Build Operation ID: 9e417dcb-f161-4f0b-8721-5b9aadad70a5
+2026-07-06T06:33:18.4921542+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-07-06T06:33:18.7819250+00:00 ContainerStream: Starting nginx: nginx.
+2026-07-06T06:33:18.7869316+00:00 ContainerStream: /opt/startup/startup.sh: 13: /home/site/wwwroot/azure/startup.sh: not found
+2026-07-06T06:33:19.2163777+00:00 ContainerStream: [06-Jul-2026 06:33:19] NOTICE: fpm is running, pid 1853
+2026-07-06T06:33:19.2207418+00:00 ContainerStream: [06-Jul-2026 06:33:19] NOTICE: ready to handle connections
+2026-07-06T06:33:19.4261018+00:00 ContainerStatus: Site startup probe succeeded after 54.4793157 seconds.
+2026-07-06T06:33:19.5423515+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 54.4793157 seconds., DetailsLevel: INFO
+2026-07-06T06:33:19.8762947+00:00 ContainerStatus: Site is running with deployment version: 
+2026-07-06T06:33:19.8823655+00:00 ContainerStatus: Site started.
+========== New Cold Start Attempt (2026-07-06T06:33:40.0293146+00:00) ==========
+2026-07-06T06:33:40.0293146+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:31:09 (UTC), DetailsLevel: INFO
+2026-07-06T06:33:40.0294831+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:33:40.0374598+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-07-06T06:33:40.0377093+00:00 ContainerStatus: Stopping container: e7f19232b0b0_rooms-frontend-4973.
+2026-07-06T06:33:45.0705043+00:00 ContainerStatus: Deleting container: e7f19232b0b0_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:33:45.3504674+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-07-06T06:33:45.3526927+00:00 ContainerStatus: Container is terminated. Total time elapsed: 5321 ms.
+2026-07-06T06:33:45.3528376+00:00 ContainerStatus: Site: rooms-frontend-4973 stopped.
+2026-07-06T06:36:56.3520309+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:36:57.8039248+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:36:57.8046918+00:00 ContainerStatus: Container start method called.
+2026-07-06T06:36:57.8056209+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:36:57.8059023+00:00 ContainerStatus: Establishing network.
+2026-07-06T06:36:57.8061912+00:00 ContainerStatus: Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:37:00.4912446+00:00 ContainerStatus: Container is starting.
+2026-07-06T06:37:00.4933154+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:37:00.4935671+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-07-06T06:37:00.4938082+00:00 ContainerStatus: Establishing network if not established already.
+2026-07-06T06:37:00.4939602+00:00 ContainerStatus: Mounting volumes.
+2026-07-06T06:37:00.4942698+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:37:00.5092318+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-07-06T06:37:00.5254717+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:37:00.5264808+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:37:00.5816768+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:37:00.5821392+00:00 ContainerStatus: Creating container.
+2026-07-06T06:37:00.5823182+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-07-06T06:37:00.5824784+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678.
+2026-07-06T06:37:00.6060624+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678.
+2026-07-06T06:37:00.6087353+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678 for reading in non-blocking mode.
+2026-07-06T06:37:00.6143496+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678.
+2026-07-06T06:37:00.6150193+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678.
+2026-07-06T06:37:00.6168631+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de.
+2026-07-06T06:37:00.6266081+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de.
+2026-07-06T06:37:00.6267798+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de for reading in non-blocking mode.
+2026-07-06T06:37:00.6272141+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de.
+2026-07-06T06:37:00.6273523+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de.
+2026-07-06T06:37:00.6280336+00:00 ContainerStatus: Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:37:01.9952406+00:00 ContainerStream: 127.0.0.1 -  06/Jul/2026:06:37:01 +0000 "GET /index.php" 200
+2026-07-06T06:37:04.0303081+00:00 ContainerStatus: Starting container: 9f76e3b671b8_rooms-frontend-4973.
+2026-07-06T06:37:04.2875554+00:00 ContainerStatus: Starting watchers and probes.
+2026-07-06T06:37:04.2879691+00:00 ContainerStatus: Starting metrics collection.
+2026-07-06T06:37:04.2885897+00:00 ContainerStatus: Container is running.
+2026-07-06T06:37:04.2888184+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:37:04.3674344+00:00 ContainerStatus: Container start method finished after 6560 ms.
+2026-07-06T06:37:04.3681406+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:37:04.3683814+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:37:04.6518406+00:00 ContainerStream:    _____                               
+2026-07-06T06:37:04.6526994+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-07-06T06:37:04.6527112+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-07-06T06:37:04.6527153+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-07-06T06:37:04.6527192+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-07-06T06:37:04.6527245+00:00 ContainerStream:         \/      \/                  \/ 
+2026-07-06T06:37:04.6527289+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-07-06T06:37:04.6527325+00:00 ContainerStream: 
+2026-07-06T06:37:04.6527375+00:00 ContainerStream: Documentation : http://aka.ms/webapp-linux
+2026-07-06T06:37:04.6527428+00:00 ContainerStream: PHP quickstart: https://aka.ms/php-qs
+2026-07-06T06:37:04.6527472+00:00 ContainerStream: PHP version   : 8.3.29
+2026-07-06T06:37:04.6527512+00:00 ContainerStream: Instance Name : 10-30-0-184
+2026-07-06T06:37:04.6527554+00:00 ContainerStream: Instance Id   : 06af00b7405ce01e92112d9236f57c70d8ff738bceef74cd316ed243ba044a77
+2026-07-06T06:37:04.6527590+00:00 ContainerStream: 
+2026-07-06T06:37:04.6527628+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-07-06T06:37:06.0983884+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-07-06T06:37:06.1058368+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-07-06T06:37:06.1357035+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-07-06T06:37:38.7245481+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-07-06T06:37:38.7251687+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-07-06T06:37:38.7755943+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-07-06T06:37:38.7889792+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-07-06T06:37:38.7890842+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-07-06T06:37:38.7934988+00:00 ContainerStream: done.
+2026-07-06T06:37:38.8043824+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-07-06T06:37:38.8059430+00:00 ContainerStream: Running oryx create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh     -bindPort 8080 -startupCommand '/home/site/wwwroot/azure/startup.sh; php-fpm;'
+2026-07-06T06:37:38.8953152+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-07-06T06:37:38.8954711+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-07-06T06:37:38.8962622+00:00 ContainerStream: Build Operation ID: 8bb2766d-bd39-4630-b1e1-bc2c4c714af6
+2026-07-06T06:37:39.0030095+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-07-06T06:37:39.3384587+00:00 ContainerStream: Starting nginx: nginx.
+2026-07-06T06:37:39.3685493+00:00 ContainerStream: /opt/startup/startup.sh: 13: /home/site/wwwroot/azure/startup.sh: not found
+2026-07-06T06:37:39.3861981+00:00 ContainerStatus: Site startup probe succeeded after 35.0171723 seconds.
+2026-07-06T06:37:39.4662341+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 35.0171723 seconds., DetailsLevel: INFO
+2026-07-06T06:37:39.5859111+00:00 ContainerStream: [06-Jul-2026 06:37:39] NOTICE: fpm is running, pid 1853
+2026-07-06T06:37:39.5936894+00:00 ContainerStream: [06-Jul-2026 06:37:39] NOTICE: ready to handle connections
+2026-07-06T06:37:39.6120555+00:00 ContainerStatus: Site is running with deployment version: 269574cc-7f8f-473e-be7e-185123ce444a
+2026-07-06T06:37:39.6122566+00:00 ContainerStatus: Site started.
+2026-07-06T06:37:39.6123218+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:37:39 (UTC), DetailsLevel: INFO
+2026-07-06T06:37:39.6127197+00:00 ContainerStatus: Site is running with patch version PHP-8.3.29
+========== New Cold Start Attempt (2026-07-06T06:37:59.7486397+00:00) ==========
+2026-07-06T06:37:59.7486397+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:33:19 (UTC), DetailsLevel: INFO
+2026-07-06T06:37:59.7494146+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:37:59.7526312+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-07-06T06:37:59.7527832+00:00 ContainerStatus: Stopping container: 70a9a98f443b_rooms-frontend-4973.
+2026-07-06T06:38:04.8037857+00:00 ContainerStatus: Deleting container: 70a9a98f443b_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:38:04.9083366+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-07-06T06:38:04.9085522+00:00 ContainerStatus: Container is terminated. Total time elapsed: 5158 ms.
+2026-07-06T06:38:04.9087206+00:00 ContainerStatus: Site: rooms-frontend-4973 stopped.
+2026-07-06T06:39:09.0604250+00:00 ContainerStream: 127.0.0.1 -  06/Jul/2026:06:39:08 +0000 "GET /index.php" 200
+2026-07-06T06:44:00.1348176+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:44:01.6857967+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:44:01.6859751+00:00 ContainerStatus: Container start method called.
+2026-07-06T06:44:01.6860534+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:44:01.6861973+00:00 ContainerStatus: Establishing network.
+2026-07-06T06:44:01.6863481+00:00 ContainerStatus: Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:44:02.8035694+00:00 ContainerStatus: Container is starting.
+2026-07-06T06:44:02.8036829+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:44:02.8038045+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-07-06T06:44:02.8039580+00:00 ContainerStatus: Establishing network if not established already.
+2026-07-06T06:44:02.8041102+00:00 ContainerStatus: Mounting volumes.
+2026-07-06T06:44:02.8042867+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:44:02.8089818+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-07-06T06:44:02.8160455+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:44:02.8216058+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:44:02.8336342+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:44:02.8348427+00:00 ContainerStatus: Creating container.
+2026-07-06T06:44:02.8349961+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-07-06T06:44:02.8351359+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8.
+2026-07-06T06:44:02.8366568+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8.
+2026-07-06T06:44:02.8368091+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8 for reading in non-blocking mode.
+2026-07-06T06:44:02.8382616+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8.
+2026-07-06T06:44:02.8384190+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8.
+2026-07-06T06:44:02.8397516+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037.
+2026-07-06T06:44:02.8399490+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037.
+2026-07-06T06:44:02.8400756+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037 for reading in non-blocking mode.
+2026-07-06T06:44:02.8402131+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037.
+2026-07-06T06:44:02.8403326+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037.
+2026-07-06T06:44:02.8432621+00:00 ContainerStatus: Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:44:03.4914520+00:00 ContainerStatus: Starting container: 61543503ae02_rooms-frontend-4973.
+2026-07-06T06:44:03.8813077+00:00 ContainerStatus: Starting watchers and probes.
+2026-07-06T06:44:03.8824159+00:00 ContainerStatus: Starting metrics collection.
+2026-07-06T06:44:03.8830224+00:00 ContainerStatus: Container is running.
+2026-07-06T06:44:03.8831742+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:44:04.4032544+00:00 ContainerStatus: Container start method finished after 2717 ms.
+2026-07-06T06:44:04.4035879+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:44:04.4036178+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:44:04.9906081+00:00 ContainerStream:    _____                               
+2026-07-06T06:44:04.9907868+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-07-06T06:44:04.9907951+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-07-06T06:44:04.9907996+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-07-06T06:44:04.9908036+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-07-06T06:44:04.9908083+00:00 ContainerStream:         \/      \/                  \/ 
+2026-07-06T06:44:04.9908165+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-07-06T06:44:04.9908200+00:00 ContainerStream: 
+2026-07-06T06:44:04.9908328+00:00 ContainerStream: Documentation : http://aka.ms/webapp-linux
+2026-07-06T06:44:04.9908369+00:00 ContainerStream: PHP quickstart: https://aka.ms/php-qs
+2026-07-06T06:44:04.9908405+00:00 ContainerStream: PHP version   : 8.3.29
+2026-07-06T06:44:04.9908442+00:00 ContainerStream: Instance Name : 10-30-0-184
+2026-07-06T06:44:04.9908500+00:00 ContainerStream: Instance Id   : 06af00b7405ce01e92112d9236f57c70d8ff738bceef74cd316ed243ba044a77
+2026-07-06T06:44:04.9908537+00:00 ContainerStream: 
+2026-07-06T06:44:04.9908575+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-07-06T06:44:06.3900819+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-07-06T06:44:06.4048140+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-07-06T06:44:06.4465095+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-07-06T06:44:19.1445612+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-07-06T06:44:19.1454051+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-07-06T06:44:19.3962927+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-07-06T06:44:19.4378337+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-07-06T06:44:19.4379400+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-07-06T06:44:19.4412767+00:00 ContainerStream: done.
+2026-07-06T06:44:19.4546749+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-07-06T06:44:19.4559456+00:00 ContainerStream: Running oryx create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh     -bindPort 8080 -startupCommand 'bash /home/site/wwwroot/azure/startup.sh; php-fpm;'
+2026-07-06T06:44:19.5188439+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-07-06T06:44:19.5189619+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-07-06T06:44:19.5189670+00:00 ContainerStream: Build Operation ID: c264ecad-fad2-4074-8474-33b1b0a538ec
+2026-07-06T06:44:19.5901598+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-07-06T06:44:19.8904973+00:00 ContainerStream: Starting nginx: nginx.
+2026-07-06T06:44:19.9284305+00:00 ContainerStream: /home/site/wwwroot/azure/startup.sh: line 4: $'\r': command not found
+2026-07-06T06:44:19.9306693+00:00 ContainerStream: /home/site/wwwroot/azure/startup.sh: line 6: $'\r': command not found
+2026-07-06T06:44:19.9371212+00:00 ContainerStream: === [Rooms Frontend] Iniciando Startup Script en Azure App Service ===
+2026-07-06T06:44:19.9384913+00:00 ContainerStream: /home/site/wwwroot/azure/startup.sh: line 25: syntax error: unexpected end of file
+2026-07-06T06:44:20.6383642+00:00 ContainerStatus: Site startup probe succeeded after 16.2342599 seconds.
+2026-07-06T06:44:20.8365243+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 16.2342599 seconds., DetailsLevel: INFO
+2026-07-06T06:44:20.9940529+00:00 ContainerStream: [06-Jul-2026 06:44:20] NOTICE: fpm is running, pid 1855
+2026-07-06T06:44:20.9983157+00:00 ContainerStream: [06-Jul-2026 06:44:20] NOTICE: ready to handle connections
+2026-07-06T06:44:21.2514420+00:00 ContainerStatus: Site is running with deployment version: 269574cc-7f8f-473e-be7e-185123ce444a
+2026-07-06T06:44:21.2518740+00:00 ContainerStatus: Site started.
+2026-07-06T06:44:21.2524172+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:44:21 (UTC), DetailsLevel: INFO
+2026-07-06T06:44:21.2527347+00:00 ContainerStatus: Site is running with patch version PHP-8.3.29
+========== New Cold Start Attempt (2026-07-06T06:44:41.4355981+00:00) ==========
+2026-07-06T06:44:41.4355981+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:37:39 (UTC), DetailsLevel: INFO
+2026-07-06T06:44:41.4357984+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:44:41.4462790+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-07-06T06:44:41.4465188+00:00 ContainerStatus: Stopping container: 9f76e3b671b8_rooms-frontend-4973.
+2026-07-06T06:44:46.4852634+00:00 ContainerStatus: Deleting container: 9f76e3b671b8_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:44:46.6107883+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-07-06T06:44:46.6112924+00:00 ContainerStatus: Container is terminated. Total time elapsed: 5175 ms.
+2026-07-06T06:44:46.6114476+00:00 ContainerStatus: Site: rooms-frontend-4973 stopped.
+2026-07-06T06:44:51.7424419+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:44:52.1417362+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:44:52.1422247+00:00 ContainerStatus: Container start method called.
+2026-07-06T06:44:52.1423494+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:44:52.1427282+00:00 ContainerStatus: Establishing network.
+2026-07-06T06:44:52.1428776+00:00 ContainerStatus: Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:44:52.4426194+00:00 ContainerStatus: Container is starting.
+2026-07-06T06:44:52.4427236+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:44:52.4428622+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-07-06T06:44:52.4429954+00:00 ContainerStatus: Establishing network if not established already.
+2026-07-06T06:44:52.4433600+00:00 ContainerStatus: Mounting volumes.
+2026-07-06T06:44:52.4435582+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:44:52.5877090+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-07-06T06:44:52.5913742+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:44:52.5922884+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:44:52.6034624+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:44:52.6039472+00:00 ContainerStatus: Creating container.
+2026-07-06T06:44:52.6045015+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-07-06T06:44:52.6051948+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123.
+2026-07-06T06:44:52.6057148+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123.
+2026-07-06T06:44:52.6063317+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123 for reading in non-blocking mode.
+2026-07-06T06:44:52.6064945+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123.
+2026-07-06T06:44:52.6070869+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123.
+2026-07-06T06:44:52.6081485+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d.
+2026-07-06T06:44:52.6083762+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d.
+2026-07-06T06:44:52.6085243+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d for reading in non-blocking mode.
+2026-07-06T06:44:52.6094962+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d.
+2026-07-06T06:44:52.6099054+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d.
+2026-07-06T06:44:52.6107414+00:00 ContainerStatus: Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:44:53.2677255+00:00 ContainerStatus: Starting container: f1955caa22bf_rooms-frontend-4973.
+2026-07-06T06:44:53.2970966+00:00 ContainerStatus: Starting watchers and probes.
+2026-07-06T06:44:53.3001305+00:00 ContainerStatus: Starting metrics collection.
+2026-07-06T06:44:53.3013886+00:00 ContainerStatus: Container is running.
+2026-07-06T06:44:53.3016745+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:44:53.3675169+00:00 ContainerStatus: Container start method finished after 1222 ms.
+2026-07-06T06:44:53.3678262+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:44:53.3678567+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:44:53.4537563+00:00 ContainerStream:    _____                               
+2026-07-06T06:44:53.4539185+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-07-06T06:44:53.4539258+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-07-06T06:44:53.4539299+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-07-06T06:44:53.4539339+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-07-06T06:44:53.4539386+00:00 ContainerStream:         \/      \/                  \/ 
+2026-07-06T06:44:53.4539438+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-07-06T06:44:53.4539474+00:00 ContainerStream: 
+2026-07-06T06:44:53.4539515+00:00 ContainerStream: Documentation : http://aka.ms/webapp-linux
+2026-07-06T06:44:53.4539555+00:00 ContainerStream: PHP quickstart: https://aka.ms/php-qs
+2026-07-06T06:44:53.4539592+00:00 ContainerStream: PHP version   : 8.3.29
+2026-07-06T06:44:53.4539626+00:00 ContainerStream: Instance Name : 10-30-0-184
+2026-07-06T06:44:53.4539665+00:00 ContainerStream: Instance Id   : 06af00b7405ce01e92112d9236f57c70d8ff738bceef74cd316ed243ba044a77
+2026-07-06T06:44:53.4539714+00:00 ContainerStream: 
+2026-07-06T06:44:53.4539750+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-07-06T06:44:54.2609688+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-07-06T06:44:54.2703397+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-07-06T06:44:54.2937648+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-07-06T06:44:59.5018353+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-07-06T06:44:59.5025253+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-07-06T06:44:59.5721581+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-07-06T06:44:59.5881397+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-07-06T06:44:59.5882152+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-07-06T06:44:59.5882215+00:00 ContainerStream: done.
+2026-07-06T06:44:59.5964947+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-07-06T06:44:59.5965263+00:00 ContainerStream: Running oryx create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh     -bindPort 8080 -startupCommand 'bash /home/site/wwwroot/azure/startup.sh; php-fpm;'
+2026-07-06T06:44:59.6545073+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-07-06T06:44:59.6545949+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-07-06T06:44:59.6546005+00:00 ContainerStream: Build Operation ID: d8158316-6d01-4401-ae1e-2226f7f6b44d
+2026-07-06T06:45:00.0516351+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-07-06T06:45:00.9523214+00:00 ContainerStream: Starting nginx: nginx.
+2026-07-06T06:45:00.9745964+00:00 ContainerStream: /home/site/wwwroot/azure/startup.sh: line 4: $'\r': command not found
+2026-07-06T06:45:00.9753115+00:00 ContainerStream: /home/site/wwwroot/azure/startup.sh: line 6: $'\r': command not found
+2026-07-06T06:45:00.9755203+00:00 ContainerStream: === [Rooms Frontend] Iniciando Startup Script en Azure App Service ===
+2026-07-06T06:45:00.9758566+00:00 ContainerStream: /home/site/wwwroot/azure/startup.sh: line 27: syntax error: unexpected end of file
+2026-07-06T06:45:01.1306607+00:00 ContainerStream: [06-Jul-2026 06:45:01] NOTICE: fpm is running, pid 1855
+2026-07-06T06:45:01.1358494+00:00 ContainerStream: [06-Jul-2026 06:45:01] NOTICE: ready to handle connections
+2026-07-06T06:45:01.3844364+00:00 ContainerStatus: Site startup probe succeeded after 8.0161388 seconds.
+2026-07-06T06:45:01.4972779+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 8.0161388 seconds., DetailsLevel: INFO
+2026-07-06T06:45:01.6726202+00:00 ContainerStatus: Site is running with deployment version: 9d5f1f05-f374-4410-aa2c-7573158beae3
+2026-07-06T06:45:01.6729947+00:00 ContainerStatus: Site started.
+2026-07-06T06:45:01.6733511+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:45:01 (UTC), DetailsLevel: INFO
+2026-07-06T06:45:01.6736434+00:00 ContainerStatus: Site is running with patch version PHP-8.3.29
+========== New Cold Start Attempt (2026-07-06T06:45:08.7219003+00:00) ==========
+2026-07-06T06:45:08.7219003+00:00 ContainerStream: 127.0.0.1 -  06/Jul/2026:06:45:08 +0000 "GET /index.php" 200
+2026-07-06T06:45:21.9831862+00:00 ContainerStatus: State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:44:21 (UTC), DetailsLevel: INFO
+2026-07-06T06:45:21.9835959+00:00 ContainerStatus: State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:44:21 (UTC), DetailsLevel: INFO
+2026-07-06T06:45:21.9840249+00:00 ContainerStatus: Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:45:21.9934777+00:00 ContainerStatus: Stop and delete container. Retry count = 0
+2026-07-06T06:45:21.9937307+00:00 ContainerStatus: Stopping container: 61543503ae02_rooms-frontend-4973.
+2026-07-06T06:45:27.0623492+00:00 ContainerStatus: Deleting container: 61543503ae02_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:45:27.1522301+00:00 ContainerStatus: Container spec TerminationMessagePolicy  path 
+2026-07-06T06:45:27.1524318+00:00 ContainerStatus: Container is terminated. Total time elapsed: 5168 ms.
+2026-07-06T06:45:27.1525768+00:00 ContainerStatus: Site: rooms-frontend-4973 stopped.
+2026-07-06T06:49:22.6682338+00:00 ContainerStatus: State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:49:23.6396948+00:00 ContainerStatus: State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:49:23.6399291+00:00 ContainerStatus: Container start method called.
+2026-07-06T06:49:23.6399729+00:00 ContainerStatus: State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:49:23.6400904+00:00 ContainerStatus: Establishing network.
+2026-07-06T06:49:23.6402210+00:00 ContainerStatus: Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:49:24.1557771+00:00 ContainerStatus: Container is starting.
+2026-07-06T06:49:24.1559338+00:00 ContainerStatus: State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:49:24.1560891+00:00 ContainerStatus: Establishing user namespace if not established already.
+2026-07-06T06:49:24.1562799+00:00 ContainerStatus: Establishing network if not established already.
+2026-07-06T06:49:24.1564382+00:00 ContainerStatus: Mounting volumes.
+2026-07-06T06:49:24.1566071+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:49:24.1941405+00:00 ContainerStatus: Nested mountpoint volatile/logs
+2026-07-06T06:49:24.2027129+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:49:24.2045181+00:00 ContainerStatus: Nested mountpoint 
+2026-07-06T06:49:24.2253492+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:49:24.2255294+00:00 ContainerStatus: Creating container.
+2026-07-06T06:49:24.2258596+00:00 ContainerStatus: Creating pipes for streaming container io.
+2026-07-06T06:49:24.2259972+00:00 ContainerStatus: Creating stdout named pipe at /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stdout_21ea1ae593024264a20694cb376ff4b0.
+2026-07-06T06:49:24.2263518+00:00 ContainerStatus: Successfully created stdout named pipe at: /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stdout_21ea1ae593024264a20694cb376ff4b0.
+2026-07-06T06:49:24.2265006+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stdout_21ea1ae593024264a20694cb376ff4b0 for reading in non-blocking mode.
+2026-07-06T06:49:24.2266521+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stdout_21ea1ae593024264a20694cb376ff4b0.
+2026-07-06T06:49:24.2267821+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stdout_21ea1ae593024264a20694cb376ff4b0.
+2026-07-06T06:49:24.2295417+00:00 ContainerStatus: Creating stderr named pipe at /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stderr_89fb9bb005b9449988269a779857b0a7.
+2026-07-06T06:49:24.2297544+00:00 ContainerStatus: Successfully created stderr named pipe at: /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stderr_89fb9bb005b9449988269a779857b0a7.
+2026-07-06T06:49:24.2298759+00:00 ContainerStatus: Opening named pipe /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stderr_89fb9bb005b9449988269a779857b0a7 for reading in non-blocking mode.
+2026-07-06T06:49:24.2300086+00:00 ContainerStatus: Successfully opened named pipe: /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stderr_89fb9bb005b9449988269a779857b0a7.
+2026-07-06T06:49:24.2301298+00:00 ContainerStatus: Successfully removed non-blocking flag from /podr/container/pipe/6e7af258ae9e_rooms-frontend-4973/stderr_89fb9bb005b9449988269a779857b0a7.
+2026-07-06T06:49:24.2303088+00:00 ContainerStatus: Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:49:25.6686281+00:00 ContainerStatus: Starting container: 6e7af258ae9e_rooms-frontend-4973.
+2026-07-06T06:49:25.6936540+00:00 ContainerStatus: Starting watchers and probes.
+2026-07-06T06:49:25.6944624+00:00 ContainerStatus: Starting metrics collection.
+2026-07-06T06:49:25.6955448+00:00 ContainerStatus: Container is running.
+2026-07-06T06:49:25.6956586+00:00 ContainerStatus: State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:49:25.7356099+00:00 ContainerStatus: Container start method finished after 2095 ms.
+2026-07-06T06:49:25.7358430+00:00 ContainerStatus: State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:49:25.7358696+00:00 ContainerStatus: State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:49:26.5474237+00:00 ContainerStream:    _____                               
+2026-07-06T06:49:26.5476170+00:00 ContainerStream:   /  _  \ __________ _________   ____  
+2026-07-06T06:49:26.5476242+00:00 ContainerStream:  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2026-07-06T06:49:26.5476284+00:00 ContainerStream: /    |    \/    /|  |  /|  | \/\  ___/ 
+2026-07-06T06:49:26.5476321+00:00 ContainerStream: \____|__  /_____ \____/ |__|    \___  >
+2026-07-06T06:49:26.5476366+00:00 ContainerStream:         \/      \/                  \/ 
+2026-07-06T06:49:26.5476403+00:00 ContainerStream: A P P   S E R V I C E   O N   L I N U X
+2026-07-06T06:49:26.5476451+00:00 ContainerStream: 
+2026-07-06T06:49:26.5476494+00:00 ContainerStream: Documentation : http://aka.ms/webapp-linux
+2026-07-06T06:49:26.5476535+00:00 ContainerStream: PHP quickstart: https://aka.ms/php-qs
+2026-07-06T06:49:26.5476572+00:00 ContainerStream: PHP version   : 8.3.29
+2026-07-06T06:49:26.5476608+00:00 ContainerStream: Instance Name : 10-30-0-184
+2026-07-06T06:49:26.5476647+00:00 ContainerStream: Instance Id   : 06af00b7405ce01e92112d9236f57c70d8ff738bceef74cd316ed243ba044a77
+2026-07-06T06:49:26.5476695+00:00 ContainerStream: 
+2026-07-06T06:49:26.5476733+00:00 ContainerStream: Note: Any data outside '/home' is not persisted
+2026-07-06T06:49:28.2259441+00:00 ContainerStream: Starting OpenBSD Secure Shell server: sshd.
+2026-07-06T06:49:28.2352221+00:00 ContainerStream: WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2026-07-06T06:49:28.2673787+00:00 ContainerStream: Updating certificates in /etc/ssl/certs...
+2026-07-06T06:49:36.9372968+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_ECC_Root_CA_2022.pem
+2026-07-06T06:49:36.9381802+00:00 ContainerStream: rehash: warning: skipping duplicate certificate in azl_SSL.com_TLS_RSA_Root_CA_2022.pem
+2026-07-06T06:49:37.0768961+00:00 ContainerStream: rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2026-07-06T06:49:37.1223208+00:00 ContainerStream: 4 added, 0 removed; done.
+2026-07-06T06:49:37.1234690+00:00 ContainerStream: Running hooks in /etc/ca-certificates/update.d...
+2026-07-06T06:49:37.1366081+00:00 ContainerStream: done.
+2026-07-06T06:49:37.1538958+00:00 ContainerStream: CA certificates copied and updated successfully.
+2026-07-06T06:49:37.1548117+00:00 ContainerStream: Running oryx create-script -appPath /home/site/wwwroot -output /opt/startup/startup.sh     -bindPort 8080 -startupCommand 'bash /home/site/wwwroot/azure/startup.sh; php-fpm;'
+2026-07-06T06:49:37.2037373+00:00 ContainerStream: Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2026-07-06T06:49:37.2038027+00:00 ContainerStream: Could not find operation ID in manifest. Generating an operation id...
+2026-07-06T06:49:37.2038088+00:00 ContainerStream: Build Operation ID: 6771dae1-2099-4d10-87e2-e48321826375
+2026-07-06T06:49:37.4326985+00:00 ContainerStream: Writing output script to '/opt/startup/startup.sh'
+2026-07-06T06:49:37.8598511+00:00 ContainerStream: Starting nginx: nginx.
+2026-07-06T06:49:37.9100175+00:00 ContainerStream: /home/site/wwwroot/azure/startup.sh: line 4: $'\r': command not found
+2026-07-06T06:49:37.9131004+00:00 ContainerStream: === [Rooms Frontend] Iniciando Startup Script en Azure App Service ===
+2026-07-06T06:49:37.9148513+00:00 ContainerStream: /home/site/wwwroot/azure/startup.sh: line 6: $'\r': command not found
+2026-07-06T06:49:37.9211078+00:00 ContainerStream: /home/site/wwwroot/azure/startup.sh: line 27: syntax error: unexpected end of file
+2026-07-06T06:49:38.2414807+00:00 ContainerStream: [06-Jul-2026 06:49:38] NOTICE: fpm is running, pid 1854
+2026-07-06T06:49:38.2484958+00:00 ContainerStream: [06-Jul-2026 06:49:38] NOTICE: ready to handle connections
+2026-07-06T06:49:38.7662006+00:00 ContainerStatus: Site startup probe succeeded after 13.0293789 seconds.
+2026-07-06T06:49:39.1135912+00:00 ContainerStatus: State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 13.0293789 seconds., DetailsLevel: INFO
+2026-07-06T06:49:39.9453888+00:00 ContainerStatus: Site is running with deployment version: 9d5f1f05-f374-4410-aa2c-7573158beae3
+2026-07-06T06:49:39.9459595+00:00 ContainerStatus: Site started.
+2026-07-06T06:49:39.9460437+00:00 ContainerStatus: State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:49:39 (UTC), DetailsLevel: INFO

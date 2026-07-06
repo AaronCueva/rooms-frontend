@@ -1,0 +1,304 @@
+2026-07-06T06:26:13.4899267Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:26:15.4644745Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:26:15.4784300Z Container start method called.
+2026-07-06T06:26:15.4949632Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:26:15.4955505Z Establishing network.
+2026-07-06T06:26:15.4961290Z Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:27:46.7245640Z Image appsvc/php:8.3-fpm_20260428.5.tuxprod is pulled from registry 10.1.0.4:13209
+2026-07-06T06:27:46.7724516Z Container is starting.
+2026-07-06T06:27:46.7736193Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:27:46.7738185Z Establishing user namespace if not established already.
+2026-07-06T06:27:46.7740152Z Establishing network if not established already.
+2026-07-06T06:27:46.7742065Z Mounting volumes.
+2026-07-06T06:27:46.7802672Z Nested mountpoint 
+2026-07-06T06:27:46.8571377Z Nested mountpoint volatile/logs
+2026-07-06T06:27:46.8664070Z Nested mountpoint 
+2026-07-06T06:27:46.8672240Z Nested mountpoint 
+2026-07-06T06:27:46.9208336Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:27:46.9267095Z Creating container.
+2026-07-06T06:27:46.9310184Z Creating pipes for streaming container io.
+2026-07-06T06:27:46.9332268Z Creating stdout named pipe at /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794.
+2026-07-06T06:27:46.9345091Z Successfully created stdout named pipe at: /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794.
+2026-07-06T06:27:46.9367790Z Opening named pipe /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794 for reading in non-blocking mode.
+2026-07-06T06:27:46.9371338Z Successfully opened named pipe: /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794.
+2026-07-06T06:27:46.9382859Z Successfully removed non-blocking flag from /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stdout_c08f1d7368e94cd6aa3b1252ea5a3794.
+2026-07-06T06:27:46.9407384Z Creating stderr named pipe at /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f.
+2026-07-06T06:27:46.9414828Z Successfully created stderr named pipe at: /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f.
+2026-07-06T06:27:46.9418511Z Opening named pipe /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f for reading in non-blocking mode.
+2026-07-06T06:27:46.9421261Z Successfully opened named pipe: /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f.
+2026-07-06T06:27:46.9441701Z Successfully removed non-blocking flag from /podr/container/pipe/5401dd57da61_rooms-frontend-4973/stderr_eca1a798287448fa9e00b33d3bf4d30f.
+2026-07-06T06:27:46.9555010Z Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:27:49.1968080Z Starting container: 5401dd57da61_rooms-frontend-4973.
+2026-07-06T06:27:49.4173887Z Starting watchers and probes.
+2026-07-06T06:27:49.5225871Z Starting metrics collection.
+2026-07-06T06:27:49.5466436Z Container is running.
+2026-07-06T06:27:49.5497945Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:27:49.9324850Z Container start method finished after 94453 ms.
+2026-07-06T06:27:49.9358636Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:27:49.9642612Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:28:08.2665455Z Site startup probe succeeded after 18.2105601 seconds.
+2026-07-06T06:28:08.5069457Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 18.2105601 seconds., DetailsLevel: INFO
+2026-07-06T06:28:08.9594156Z Site started.
+2026-07-06T06:28:08.9634565Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:28:08 (UTC), DetailsLevel: INFO
+2026-07-06T06:28:09.0853010Z Site is running with patch version PHP-8.3.29
+2026-07-06T06:30:33.4216071Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:30:35.3456758Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:30:35.3459999Z Container start method called.
+2026-07-06T06:30:35.3460693Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:30:35.3461952Z Establishing network.
+2026-07-06T06:30:35.3462907Z Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:30:36.3201075Z Image appsvc/php:8.3-fpm_20260428.5.tuxprod is pulled from registry 10.1.0.6:13209
+2026-07-06T06:30:36.3202669Z Container is starting.
+2026-07-06T06:30:36.3204126Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:30:36.3205428Z Establishing user namespace if not established already.
+2026-07-06T06:30:36.3206978Z Establishing network if not established already.
+2026-07-06T06:30:36.3208506Z Mounting volumes.
+2026-07-06T06:30:36.3220168Z Nested mountpoint 
+2026-07-06T06:30:36.3309686Z Nested mountpoint volatile/logs
+2026-07-06T06:30:36.3585759Z Nested mountpoint 
+2026-07-06T06:30:36.3594873Z Nested mountpoint 
+2026-07-06T06:30:36.3675169Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:30:36.3677771Z Creating container.
+2026-07-06T06:30:36.3679179Z Creating pipes for streaming container io.
+2026-07-06T06:30:36.3680511Z Creating stdout named pipe at /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e.
+2026-07-06T06:30:36.3682812Z Successfully created stdout named pipe at: /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e.
+2026-07-06T06:30:36.3726211Z Opening named pipe /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e for reading in non-blocking mode.
+2026-07-06T06:30:36.3732222Z Successfully opened named pipe: /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e.
+2026-07-06T06:30:36.3736969Z Successfully removed non-blocking flag from /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stdout_9f9a973ad04643e2a6ecb05021b0d57e.
+2026-07-06T06:30:36.3739095Z Creating stderr named pipe at /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5.
+2026-07-06T06:30:36.3741162Z Successfully created stderr named pipe at: /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5.
+2026-07-06T06:30:36.3742183Z Opening named pipe /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5 for reading in non-blocking mode.
+2026-07-06T06:30:36.3812126Z Successfully opened named pipe: /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5.
+2026-07-06T06:30:36.3814204Z Successfully removed non-blocking flag from /podr/container/pipe/e7f19232b0b0_rooms-frontend-4973/stderr_e012896fd7cd41a4b68a5cc6e68c81f5.
+2026-07-06T06:30:36.3816855Z Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:30:36.7984647Z Starting container: e7f19232b0b0_rooms-frontend-4973.
+2026-07-06T06:30:36.9007235Z Starting watchers and probes.
+2026-07-06T06:30:36.9009836Z Starting metrics collection.
+2026-07-06T06:30:36.9031680Z Container is running.
+2026-07-06T06:30:36.9036877Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:30:36.9268131Z Container start method finished after 1580 ms.
+2026-07-06T06:30:36.9271276Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:30:36.9271563Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:31:08.9659475Z Site startup probe succeeded after 32.037275 seconds.
+2026-07-06T06:31:09.2399066Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 32.037275 seconds., DetailsLevel: INFO
+2026-07-06T06:31:09.7922246Z Site is running with deployment version: 
+2026-07-06T06:31:09.7930022Z Site started.
+2026-07-06T06:31:09.7932256Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:31:09 (UTC), DetailsLevel: INFO
+2026-07-06T06:31:09.7944742Z Site is running with patch version PHP-8.3.29
+2026-07-06T06:31:30.2240206Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:28:08 (UTC), DetailsLevel: INFO
+2026-07-06T06:31:30.2274970Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:28:08 (UTC), DetailsLevel: INFO
+2026-07-06T06:31:30.2280302Z Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:31:30.3965284Z Stop and delete container. Retry count = 0
+2026-07-06T06:31:30.3966872Z Stopping container: 5401dd57da61_rooms-frontend-4973.
+2026-07-06T06:31:35.3002952Z Deleting container: 5401dd57da61_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:31:35.3920725Z Container spec TerminationMessagePolicy  path 
+2026-07-06T06:31:35.3928330Z Container is terminated. Total time elapsed: 5164 ms.
+2026-07-06T06:31:35.4031994Z Site: rooms-frontend-4973 stopped.
+2026-07-06T06:32:04.0074880Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:32:05.9957958Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:32:05.9961971Z Container start method called.
+2026-07-06T06:32:05.9962743Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:32:05.9968926Z Establishing network.
+2026-07-06T06:32:05.9977228Z Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:32:10.1976154Z Container is starting.
+2026-07-06T06:32:10.1977473Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:32:10.1978773Z Establishing user namespace if not established already.
+2026-07-06T06:32:10.2113958Z Establishing network if not established already.
+2026-07-06T06:32:10.2117707Z Mounting volumes.
+2026-07-06T06:32:10.2120832Z Nested mountpoint 
+2026-07-06T06:32:10.2452486Z Nested mountpoint volatile/logs
+2026-07-06T06:32:10.6933415Z Nested mountpoint 
+2026-07-06T06:32:11.0539787Z Nested mountpoint 
+2026-07-06T06:32:11.3208672Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:32:11.3248997Z Creating container.
+2026-07-06T06:32:11.3905303Z Creating pipes for streaming container io.
+2026-07-06T06:32:11.4482269Z Creating stdout named pipe at /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4.
+2026-07-06T06:32:11.5721977Z Successfully created stdout named pipe at: /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4.
+2026-07-06T06:32:11.5769153Z Opening named pipe /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4 for reading in non-blocking mode.
+2026-07-06T06:32:11.5773115Z Successfully opened named pipe: /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4.
+2026-07-06T06:32:11.5942269Z Successfully removed non-blocking flag from /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stdout_157c64b7724c430a9966c12dacaa27c4.
+2026-07-06T06:32:11.5946389Z Creating stderr named pipe at /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0.
+2026-07-06T06:32:11.5948807Z Successfully created stderr named pipe at: /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0.
+2026-07-06T06:32:11.5951074Z Opening named pipe /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0 for reading in non-blocking mode.
+2026-07-06T06:32:11.6000810Z Successfully opened named pipe: /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0.
+2026-07-06T06:32:11.6002265Z Successfully removed non-blocking flag from /podr/container/pipe/70a9a98f443b_rooms-frontend-4973/stderr_2c4d86922c284035984c8f63475f17a0.
+2026-07-06T06:32:11.6004077Z Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:32:23.3638895Z Starting container: 70a9a98f443b_rooms-frontend-4973.
+2026-07-06T06:32:23.9216006Z Starting watchers and probes.
+2026-07-06T06:32:23.9390971Z Starting metrics collection.
+2026-07-06T06:32:23.9394949Z Container is running.
+2026-07-06T06:32:23.9768861Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:32:24.7656552Z Container start method finished after 18768 ms.
+2026-07-06T06:32:24.8668138Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:32:24.9201646Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:33:19.4261018Z Site startup probe succeeded after 54.4793157 seconds.
+2026-07-06T06:33:19.5423515Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 54.4793157 seconds., DetailsLevel: INFO
+2026-07-06T06:33:19.8762947Z Site is running with deployment version: 
+2026-07-06T06:33:19.8823655Z Site started.
+2026-07-06T06:33:19.8824976Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:33:19 (UTC), DetailsLevel: INFO
+2026-07-06T06:33:19.8840124Z Site is running with patch version PHP-8.3.29
+2026-07-06T06:33:40.0288812Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:31:09 (UTC), DetailsLevel: INFO
+2026-07-06T06:33:40.0293146Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:31:09 (UTC), DetailsLevel: INFO
+2026-07-06T06:33:40.0294831Z Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:33:40.0374598Z Stop and delete container. Retry count = 0
+2026-07-06T06:33:40.0377093Z Stopping container: e7f19232b0b0_rooms-frontend-4973.
+2026-07-06T06:33:45.0705043Z Deleting container: e7f19232b0b0_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:33:45.3504674Z Container spec TerminationMessagePolicy  path 
+2026-07-06T06:33:45.3526927Z Container is terminated. Total time elapsed: 5321 ms.
+2026-07-06T06:33:45.3528376Z Site: rooms-frontend-4973 stopped.
+2026-07-06T06:36:56.3520309Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:36:57.8039248Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:36:57.8046918Z Container start method called.
+2026-07-06T06:36:57.8056209Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:36:57.8059023Z Establishing network.
+2026-07-06T06:36:57.8061912Z Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:37:00.4912446Z Container is starting.
+2026-07-06T06:37:00.4933154Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:37:00.4935671Z Establishing user namespace if not established already.
+2026-07-06T06:37:00.4938082Z Establishing network if not established already.
+2026-07-06T06:37:00.4939602Z Mounting volumes.
+2026-07-06T06:37:00.4942698Z Nested mountpoint 
+2026-07-06T06:37:00.5092318Z Nested mountpoint volatile/logs
+2026-07-06T06:37:00.5254717Z Nested mountpoint 
+2026-07-06T06:37:00.5264808Z Nested mountpoint 
+2026-07-06T06:37:00.5816768Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:37:00.5821392Z Creating container.
+2026-07-06T06:37:00.5823182Z Creating pipes for streaming container io.
+2026-07-06T06:37:00.5824784Z Creating stdout named pipe at /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678.
+2026-07-06T06:37:00.6060624Z Successfully created stdout named pipe at: /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678.
+2026-07-06T06:37:00.6087353Z Opening named pipe /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678 for reading in non-blocking mode.
+2026-07-06T06:37:00.6143496Z Successfully opened named pipe: /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678.
+2026-07-06T06:37:00.6150193Z Successfully removed non-blocking flag from /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stdout_4f84f7bc764d4d6eb1aee4f7c0c8e678.
+2026-07-06T06:37:00.6168631Z Creating stderr named pipe at /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de.
+2026-07-06T06:37:00.6266081Z Successfully created stderr named pipe at: /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de.
+2026-07-06T06:37:00.6267798Z Opening named pipe /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de for reading in non-blocking mode.
+2026-07-06T06:37:00.6272141Z Successfully opened named pipe: /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de.
+2026-07-06T06:37:00.6273523Z Successfully removed non-blocking flag from /podr/container/pipe/9f76e3b671b8_rooms-frontend-4973/stderr_e1be18c5df0543a681b0ee7c6abd93de.
+2026-07-06T06:37:00.6280336Z Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:37:04.0303081Z Starting container: 9f76e3b671b8_rooms-frontend-4973.
+2026-07-06T06:37:04.2875554Z Starting watchers and probes.
+2026-07-06T06:37:04.2879691Z Starting metrics collection.
+2026-07-06T06:37:04.2885897Z Container is running.
+2026-07-06T06:37:04.2888184Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:37:04.3674344Z Container start method finished after 6560 ms.
+2026-07-06T06:37:04.3681406Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:37:04.3683814Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:37:39.3861981Z Site startup probe succeeded after 35.0171723 seconds.
+2026-07-06T06:37:39.4662341Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 35.0171723 seconds., DetailsLevel: INFO
+2026-07-06T06:37:39.6120555Z Site is running with deployment version: 269574cc-7f8f-473e-be7e-185123ce444a
+2026-07-06T06:37:39.6122566Z Site started.
+2026-07-06T06:37:39.6123218Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:37:39 (UTC), DetailsLevel: INFO
+2026-07-06T06:37:39.6127197Z Site is running with patch version PHP-8.3.29
+2026-07-06T06:37:59.7473996Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:33:19 (UTC), DetailsLevel: INFO
+2026-07-06T06:37:59.7486397Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:33:19 (UTC), DetailsLevel: INFO
+2026-07-06T06:37:59.7494146Z Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:37:59.7526312Z Stop and delete container. Retry count = 0
+2026-07-06T06:37:59.7527832Z Stopping container: 70a9a98f443b_rooms-frontend-4973.
+2026-07-06T06:38:04.8037857Z Deleting container: 70a9a98f443b_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:38:04.9083366Z Container spec TerminationMessagePolicy  path 
+2026-07-06T06:38:04.9085522Z Container is terminated. Total time elapsed: 5158 ms.
+2026-07-06T06:38:04.9087206Z Site: rooms-frontend-4973 stopped.
+2026-07-06T06:44:00.1348176Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:44:01.6857967Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:44:01.6859751Z Container start method called.
+2026-07-06T06:44:01.6860534Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:44:01.6861973Z Establishing network.
+2026-07-06T06:44:01.6863481Z Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:44:02.8035694Z Container is starting.
+2026-07-06T06:44:02.8036829Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:44:02.8038045Z Establishing user namespace if not established already.
+2026-07-06T06:44:02.8039580Z Establishing network if not established already.
+2026-07-06T06:44:02.8041102Z Mounting volumes.
+2026-07-06T06:44:02.8042867Z Nested mountpoint 
+2026-07-06T06:44:02.8089818Z Nested mountpoint volatile/logs
+2026-07-06T06:44:02.8160455Z Nested mountpoint 
+2026-07-06T06:44:02.8216058Z Nested mountpoint 
+2026-07-06T06:44:02.8336342Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:44:02.8348427Z Creating container.
+2026-07-06T06:44:02.8349961Z Creating pipes for streaming container io.
+2026-07-06T06:44:02.8351359Z Creating stdout named pipe at /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8.
+2026-07-06T06:44:02.8366568Z Successfully created stdout named pipe at: /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8.
+2026-07-06T06:44:02.8368091Z Opening named pipe /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8 for reading in non-blocking mode.
+2026-07-06T06:44:02.8382616Z Successfully opened named pipe: /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8.
+2026-07-06T06:44:02.8384190Z Successfully removed non-blocking flag from /podr/container/pipe/61543503ae02_rooms-frontend-4973/stdout_dbf3304e08d64abf96dbcdd2005258e8.
+2026-07-06T06:44:02.8397516Z Creating stderr named pipe at /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037.
+2026-07-06T06:44:02.8399490Z Successfully created stderr named pipe at: /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037.
+2026-07-06T06:44:02.8400756Z Opening named pipe /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037 for reading in non-blocking mode.
+2026-07-06T06:44:02.8402131Z Successfully opened named pipe: /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037.
+2026-07-06T06:44:02.8403326Z Successfully removed non-blocking flag from /podr/container/pipe/61543503ae02_rooms-frontend-4973/stderr_165008abbd9e4b50bb8ba1ea2a2d8037.
+2026-07-06T06:44:02.8432621Z Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:44:03.4914520Z Starting container: 61543503ae02_rooms-frontend-4973.
+2026-07-06T06:44:03.8813077Z Starting watchers and probes.
+2026-07-06T06:44:03.8824159Z Starting metrics collection.
+2026-07-06T06:44:03.8830224Z Container is running.
+2026-07-06T06:44:03.8831742Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:44:04.4032544Z Container start method finished after 2717 ms.
+2026-07-06T06:44:04.4035879Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:44:04.4036178Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:44:20.6383642Z Site startup probe succeeded after 16.2342599 seconds.
+2026-07-06T06:44:20.8365243Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 16.2342599 seconds., DetailsLevel: INFO
+2026-07-06T06:44:21.2514420Z Site is running with deployment version: 269574cc-7f8f-473e-be7e-185123ce444a
+2026-07-06T06:44:21.2518740Z Site started.
+2026-07-06T06:44:21.2524172Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:44:21 (UTC), DetailsLevel: INFO
+2026-07-06T06:44:21.2527347Z Site is running with patch version PHP-8.3.29
+2026-07-06T06:44:41.4343172Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:37:39 (UTC), DetailsLevel: INFO
+2026-07-06T06:44:41.4355981Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:37:39 (UTC), DetailsLevel: INFO
+2026-07-06T06:44:41.4357984Z Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:44:41.4462790Z Stop and delete container. Retry count = 0
+2026-07-06T06:44:41.4465188Z Stopping container: 9f76e3b671b8_rooms-frontend-4973.
+2026-07-06T06:44:46.4852634Z Deleting container: 9f76e3b671b8_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:44:46.6107883Z Container spec TerminationMessagePolicy  path 
+2026-07-06T06:44:46.6112924Z Container is terminated. Total time elapsed: 5175 ms.
+2026-07-06T06:44:46.6114476Z Site: rooms-frontend-4973 stopped.
+2026-07-06T06:44:51.7424419Z State: Starting, Action: EstablishingSiteNetworks, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:44:52.1417362Z State: Starting, Action: StartingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: , DetailsLevel: INFO
+2026-07-06T06:44:52.1422247Z Container start method called.
+2026-07-06T06:44:52.1423494Z State: Starting, Action: PullingImage, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pulling image 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:44:52.1427282Z Establishing network.
+2026-07-06T06:44:52.1428776Z Pulling image: appsvc/php:8.3-fpm_20260428.5.tuxprod.
+2026-07-06T06:44:52.4426194Z Container is starting.
+2026-07-06T06:44:52.4427236Z State: Starting, Action: MountingVolumes, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Mounting volumes for rooms-frontend-4973., DetailsLevel: INFO
+2026-07-06T06:44:52.4428622Z Establishing user namespace if not established already.
+2026-07-06T06:44:52.4429954Z Establishing network if not established already.
+2026-07-06T06:44:52.4433600Z Mounting volumes.
+2026-07-06T06:44:52.4435582Z Nested mountpoint 
+2026-07-06T06:44:52.5877090Z Nested mountpoint volatile/logs
+2026-07-06T06:44:52.5913742Z Nested mountpoint 
+2026-07-06T06:44:52.5922884Z Nested mountpoint 
+2026-07-06T06:44:52.6034624Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Finished pulling container image and mounting volumes for rooms-frontend-4973. Allocatinng the rest of the container resources to finish container creation., DetailsLevel: INFO
+2026-07-06T06:44:52.6039472Z Creating container.
+2026-07-06T06:44:52.6045015Z Creating pipes for streaming container io.
+2026-07-06T06:44:52.6051948Z Creating stdout named pipe at /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123.
+2026-07-06T06:44:52.6057148Z Successfully created stdout named pipe at: /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123.
+2026-07-06T06:44:52.6063317Z Opening named pipe /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123 for reading in non-blocking mode.
+2026-07-06T06:44:52.6064945Z Successfully opened named pipe: /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123.
+2026-07-06T06:44:52.6070869Z Successfully removed non-blocking flag from /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stdout_049f48e629894feea198fbe8400a7123.
+2026-07-06T06:44:52.6081485Z Creating stderr named pipe at /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d.
+2026-07-06T06:44:52.6083762Z Successfully created stderr named pipe at: /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d.
+2026-07-06T06:44:52.6085243Z Opening named pipe /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d for reading in non-blocking mode.
+2026-07-06T06:44:52.6094962Z Successfully opened named pipe: /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d.
+2026-07-06T06:44:52.6099054Z Successfully removed non-blocking flag from /podr/container/pipe/f1955caa22bf_rooms-frontend-4973/stderr_bbf8edb815294cf380d272eccf907f7d.
+2026-07-06T06:44:52.6107414Z Creating container with image: appsvc/php:8.3-fpm_20260428.5.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/php:8.3-fpm_20260428.5.tuxprod
+2026-07-06T06:44:53.2677255Z Starting container: f1955caa22bf_rooms-frontend-4973.
+2026-07-06T06:44:53.2970966Z Starting watchers and probes.
+2026-07-06T06:44:53.3001305Z Starting metrics collection.
+2026-07-06T06:44:53.3013886Z Container is running.
+2026-07-06T06:44:53.3016745Z State: Starting, Action: CreatingContainer, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:44:53.3675169Z Container start method finished after 1222 ms.
+2026-07-06T06:44:53.3678262Z State: Starting, Action: InitiatingSiteWarmUpProbe, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Container rooms-frontend-4973 successfully created and is running., DetailsLevel: INFO
+2026-07-06T06:44:53.3678567Z State: Starting, Action: WaitingForSiteWarmUpProbeSuccess, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Pinging warmup path to ensure container is ready to receive requests., DetailsLevel: INFO
+2026-07-06T06:45:01.3844364Z Site startup probe succeeded after 8.0161388 seconds.
+2026-07-06T06:45:01.4972779Z State: Starting, Action: WarmUpProbeSucceeded, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site startup probe succeeded after 8.0161388 seconds., DetailsLevel: INFO
+2026-07-06T06:45:01.6726202Z Site is running with deployment version: 9d5f1f05-f374-4410-aa2c-7573158beae3
+2026-07-06T06:45:01.6729947Z Site started.
+2026-07-06T06:45:01.6733511Z State: Started, Action: None, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:45:01 (UTC), DetailsLevel: INFO
+2026-07-06T06:45:01.6736434Z Site is running with patch version PHP-8.3.29
+2026-07-06T06:45:21.9831862Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:44:21 (UTC), DetailsLevel: INFO
+2026-07-06T06:45:21.9835959Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:44:21 (UTC), DetailsLevel: INFO
+2026-07-06T06:45:21.9840249Z Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:45:21.9934777Z Stop and delete container. Retry count = 0
+2026-07-06T06:45:21.9937307Z Stopping container: 61543503ae02_rooms-frontend-4973.
+2026-07-06T06:45:27.0623492Z Deleting container: 61543503ae02_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:45:27.1522301Z Container spec TerminationMessagePolicy  path 
+2026-07-06T06:45:27.1524318Z Container is terminated. Total time elapsed: 5168 ms.
+2026-07-06T06:45:27.1525768Z Site: rooms-frontend-4973 stopped.

@@ -4,9 +4,9 @@
 
 echo "=== [Rooms Frontend] Iniciando Startup Script en Azure App Service ==="
 
-# 1. Aplicar configuración personalizada de Nginx para el enrutador MVC (try_files -> index.php)
+# 1. Aplicar configuraciÃ³n personalizada de Nginx para el enrutador MVC (try_files -> index.php)
 if [ -f "/home/site/wwwroot/azure/nginx.conf" ]; then
-    echo "Aplicando archivo de configuración Nginx personalizado..."
+    echo "Aplicando archivo de configuraciÃ³n Nginx personalizado..."
     cp -f /home/site/wwwroot/azure/nginx.conf /etc/nginx/sites-available/default 2>/dev/null
     cp -f /home/site/wwwroot/azure/nginx.conf /etc/nginx/sites-enabled/default 2>/dev/null
     cp -f /home/site/wwwroot/azure/nginx.conf /etc/nginx/conf.d/default.conf 2>/dev/null
@@ -23,4 +23,4 @@ mkdir -p /home/site/wwwroot/public/uploads/usuarios
 # Asignar permisos de lectura y escritura para el servidor web en Linux
 chmod -R 777 /home/site/wwwroot/public/uploads
 
-echo "=== [Rooms Frontend] Configuración finalizada. Servidor listo ==="
+echo "=== [Rooms Frontend] ConfiguraciÃ³n finalizada. Servidor listo ==="

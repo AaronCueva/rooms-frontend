@@ -1,0 +1,9 @@
+2026-07-06T06:45:21.9831862Z State: Stopping, Action: StoppingSite, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:44:21 (UTC), DetailsLevel: INFO
+2026-07-06T06:45:21.9835959Z State: Stopping, Action: StoppingSiteContainers, LastError: , LastErrorTimestamp: 01/01/0001 00:00:00, LastErrorDetails: , Details: Site started at 07/06/2026 06:44:21 (UTC), DetailsLevel: INFO
+2026-07-06T06:45:21.9840249Z Container is terminating. Grace period: 5 seconds.
+2026-07-06T06:45:21.9934777Z Stop and delete container. Retry count = 0
+2026-07-06T06:45:21.9937307Z Stopping container: 61543503ae02_rooms-frontend-4973.
+2026-07-06T06:45:27.0623492Z Deleting container: 61543503ae02_rooms-frontend-4973. Retry count = 0
+2026-07-06T06:45:27.1522301Z Container spec TerminationMessagePolicy  path 
+2026-07-06T06:45:27.1524318Z Container is terminated. Total time elapsed: 5168 ms.
+2026-07-06T06:45:27.1525768Z Site: rooms-frontend-4973 stopped.
