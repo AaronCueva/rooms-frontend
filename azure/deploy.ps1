@@ -46,7 +46,7 @@ az webapp config appsettings set --name $AppName --resource-group $ResourceGroup
 Write-Host "   Application Settings configuradas exitosamente." -ForegroundColor Green
 
 Write-Host "`n6. Configurando Script de Inicio para enrutamiento Nginx..." -ForegroundColor Yellow
-az webapp config set --name $AppName --resource-group $ResourceGroup --startup-file "/home/site/wwwroot/azure/startup.sh" --output none
+az webapp config set --name $AppName --resource-group $ResourceGroup --startup-file "bash /home/site/wwwroot/azure/startup.sh" --output none
 Write-Host "   Startup script asignado." -ForegroundColor Green
 
 Write-Host "`n===================================================================" -ForegroundColor Green

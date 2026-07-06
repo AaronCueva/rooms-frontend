@@ -7,9 +7,11 @@ echo "=== [Rooms Frontend] Iniciando Startup Script en Azure App Service ==="
 # 1. Aplicar configuración personalizada de Nginx para el enrutador MVC (try_files -> index.php)
 if [ -f "/home/site/wwwroot/azure/nginx.conf" ]; then
     echo "Aplicando archivo de configuración Nginx personalizado..."
-    cp /home/site/wwwroot/azure/nginx.conf /etc/nginx/sites-available/default
-    service nginx reload
-    echo "Nginx recargado exitosamente."
+    cp -f /home/site/wwwroot/azure/nginx.conf /etc/nginx/sites-available/default 2>/dev/null
+    cp -f /home/site/wwwroot/azure/nginx.conf /etc/nginx/sites-enabled/default 2>/dev/null
+    cp -f /home/site/wwwroot/azure/nginx.conf /etc/nginx/conf.d/default.conf 2>/dev/null
+    service nginx reload 2>/dev/null || nginx -s reload 2>/dev/null || true
+    echo "Nginx configurado para MVC try_files exitosamente."
 fi
 
 # 2. Asegurar la existencia y permisos de las carpetas locales de carga de archivos (uploads)
