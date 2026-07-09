@@ -375,8 +375,6 @@ class AdminAlojamientoController extends Controller
                 $this->redirect('/admin/alojamientos/ver?id=' . $alojamiento_id);
                 return;
             }
-
-            $uploadDir = __DIR__ . '/../../public/uploads/alojamientos/';
             $multimediaModel = new Multimedia();
             $maxSize = 5 * 1024 * 1024; // 5MB
 
@@ -387,12 +385,20 @@ class AdminAlojamientoController extends Controller
                 $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
                 if (!in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'])) continue;
 
-                $newName = uniqid('aloj_') . '.' . $ext;
-                $destPath = $uploadDir . $newName;
+                $newName = 'alojamientos/' . uniqid('aloj_') . '_' . time() . '.' . $ext;
+                
+                $mimeType = 'image/jpeg';
+                if (function_exists('mime_content_type')) {
+                    $mimeType = mime_content_type($_FILES['imagenes']['tmp_name'][$i]);
+                }
+                if (!$mimeType) $mimeType = 'image/jpeg';
 
-                if (move_uploaded_file($_FILES['imagenes']['tmp_name'][$i], $destPath)) {
+                // Subir a Azure
+                $azureUrl = \App\Core\AzureStorage::uploadFile($_FILES['imagenes']['tmp_name'][$i], $newName, $mimeType);
+
+                if ($azureUrl) {
                     $multimediaModel->create([
-                        'url'            => '/public/uploads/alojamientos/' . $newName,
+                        'url'            => $azureUrl,
                         'tipo_codigo'    => 'IMAGEN',
                         'nombre'         => $name,
                         'orden'          => $i,
@@ -415,13 +421,8 @@ class AdminAlojamientoController extends Controller
 
             if ($multimedia_id) {
                 $multimediaModel = new Multimedia();
-                $media = $multimediaModel->findById($multimedia_id);
-                if ($media && !empty($media['url'])) {
-                    $filePath = __DIR__ . '/../../' . ltrim($media['url'], '/');
-                    if (file_exists($filePath)) {
-                        unlink($filePath);
-                    }
-                }
+                // Simplemente eliminamos el registro de la BD (o lo marcamos inactivo)
+                // de acuerdo a lo solicitado (no se borra físicamente el archivo en Azure)
                 $multimediaModel->hardDelete($multimedia_id);
             }
 

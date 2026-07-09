@@ -79,15 +79,9 @@ class AdminPerfilController extends Controller
                 'universidad_id' => !empty($_POST['universidad_id']) ? $_POST['universidad_id'] : null,
             ];
 
-            // Manejo de la subida de foto
+            // Manejo de la subida de foto — Azure Blob Storage
             if (!empty($_FILES['foto_perfil']['name'])) {
-                $basePublic = realpath(__DIR__ . '/../../public');
-                $uploadDir = ($basePublic ?: (__DIR__ . '/../../public')) . '/uploads/usuarios/';
-                if (!file_exists($uploadDir)) {
-                    mkdir($uploadDir, 0777, true);
-                }
-
-                $maxSize = 10 * 1024 * 1024; // 10MB (aumentado desde 2MB para evitar rechazos en fotos de celular/cámara)
+                $maxSize = 10 * 1024 * 1024; // 10MB
                 $ext = strtolower(pathinfo($_FILES['foto_perfil']['name'], PATHINFO_EXTENSION));
                 $allowed = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'jfif'];
 
@@ -112,14 +106,21 @@ class AdminPerfilController extends Controller
                     $this->redirect('/admin/perfil');
                     return;
                 } else {
-                    $newName = uniqid('user_') . '.' . $ext;
-                    $destPath = $uploadDir . $newName;
-
-                    if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $destPath)) {
-                        $datos['url_foto'] = '/public/uploads/usuarios/' . $newName;
-                        $_SESSION['url_foto'] = $datos['url_foto'];
+                    $newName = 'usuarios/perfil_' . $usuario_id . '_' . time() . '.' . $ext;
+                    
+                    $mimeType = 'image/jpeg';
+                    if (function_exists('mime_content_type')) {
+                        $mimeType = mime_content_type($_FILES['foto_perfil']['tmp_name']);
+                    }
+                    if (!$mimeType) $mimeType = 'image/jpeg';
+                    
+                    $azureUrl = \App\Core\AzureStorage::uploadFile($_FILES['foto_perfil']['tmp_name'], $newName, $mimeType);
+                    
+                    if ($azureUrl) {
+                        $datos['url_foto'] = $azureUrl;
+                        $_SESSION['url_foto'] = $azureUrl;
                     } else {
-                        self::setFlash('error', 'Error al guardar el archivo en Windows. Verifique permisos de escritura en la carpeta public/uploads/usuarios.');
+                        self::setFlash('error', 'Error al subir la imagen a Azure.');
                         $this->redirect('/admin/perfil');
                         return;
                     }
