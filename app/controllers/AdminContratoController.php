@@ -149,21 +149,27 @@ class AdminContratoController extends Controller
             
             $multimedia_id = null;
             
-            // Handle file upload
+            // Handle file upload — Azure Blob Storage
             if (!empty($_FILES['documento']['name'])) {
-                $uploadDir = __DIR__ . '/../../public/uploads/contratos/';
                 $maxSize = 5 * 1024 * 1024; // 5MB
                 
                 if ($_FILES['documento']['error'] === UPLOAD_ERR_OK && $_FILES['documento']['size'] <= $maxSize) {
                     $ext = strtolower(pathinfo($_FILES['documento']['name'], PATHINFO_EXTENSION));
                     if (in_array($ext, ['pdf', 'jpg', 'jpeg', 'png', 'webp'])) {
-                        $newName = uniqid('contrato_') . '.' . $ext;
-                        $destPath = $uploadDir . $newName;
-
-                        if (move_uploaded_file($_FILES['documento']['tmp_name'], $destPath)) {
+                        $newName = 'contratos/' . uniqid('contrato_') . '_' . time() . '.' . $ext;
+                        
+                        $mimeType = 'application/octet-stream';
+                        if (function_exists('mime_content_type')) {
+                            $mimeType = mime_content_type($_FILES['documento']['tmp_name']);
+                        }
+                        if (!$mimeType) $mimeType = 'application/octet-stream';
+                        
+                        $azureUrl = \App\Core\AzureStorage::uploadFile($_FILES['documento']['tmp_name'], $newName, $mimeType);
+                        
+                        if ($azureUrl) {
                             $multimediaModel = new Multimedia();
                             $multimedia_id = $multimediaModel->create([
-                                'url'            => '/public/uploads/contratos/' . $newName,
+                                'url'            => $azureUrl,
                                 'tipo_codigo'    => 'DOCUMENTO',
                                 'nombre'         => $_FILES['documento']['name'],
                                 'orden'          => 1,
@@ -204,34 +210,33 @@ class AdminContratoController extends Controller
                 $contratoActual = $contratoModel->findById($id);
                 $multimedia_id = $contratoActual['multimedia_id'] ?? null;
 
-                // Handle file upload to replace document
+                // Handle file upload to replace document — Azure Blob Storage
                 if (!empty($_FILES['documento']['name'])) {
-                    $uploadDir = __DIR__ . '/../../public/uploads/contratos/';
                     $maxSize = 5 * 1024 * 1024; // 5MB
                     
                     if ($_FILES['documento']['error'] === UPLOAD_ERR_OK && $_FILES['documento']['size'] <= $maxSize) {
                         $ext = strtolower(pathinfo($_FILES['documento']['name'], PATHINFO_EXTENSION));
                         if (in_array($ext, ['pdf', 'jpg', 'jpeg', 'png', 'webp'])) {
-                            $newName = uniqid('contrato_') . '.' . $ext;
-                            $destPath = $uploadDir . $newName;
-
-                            if (move_uploaded_file($_FILES['documento']['tmp_name'], $destPath)) {
+                            $newName = 'contratos/' . uniqid('contrato_') . '_' . time() . '.' . $ext;
+                            
+                            $mimeType = 'application/octet-stream';
+                            if (function_exists('mime_content_type')) {
+                                $mimeType = mime_content_type($_FILES['documento']['tmp_name']);
+                            }
+                            if (!$mimeType) $mimeType = 'application/octet-stream';
+                            
+                            $azureUrl = \App\Core\AzureStorage::uploadFile($_FILES['documento']['tmp_name'], $newName, $mimeType);
+                            
+                            if ($azureUrl) {
                                 $multimediaModel = new Multimedia();
                                 
-                                // Optional: delete old file if it exists (requires more complex logic, let's just update DB for now or delete physical file)
+                                // Eliminar registro antiguo de BD si existe
                                 if ($multimedia_id) {
-                                    $oldMedia = $multimediaModel->findById($multimedia_id);
-                                    if ($oldMedia && !empty($oldMedia['url'])) {
-                                        $oldFilePath = __DIR__ . '/../../' . ltrim($oldMedia['url'], '/');
-                                        if (file_exists($oldFilePath)) {
-                                            unlink($oldFilePath);
-                                        }
-                                    }
                                     $multimediaModel->hardDelete($multimedia_id);
                                 }
 
                                 $multimedia_id = $multimediaModel->create([
-                                    'url'            => '/public/uploads/contratos/' . $newName,
+                                    'url'            => $azureUrl,
                                     'tipo_codigo'    => 'DOCUMENTO',
                                     'nombre'         => $_FILES['documento']['name'],
                                     'orden'          => 1,

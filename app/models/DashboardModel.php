@@ -14,11 +14,11 @@ class DashboardModel
     }
 
     /**
-     * Cuenta total de reservas activas (EPA001, EPA003)
+     * Cuenta total de reservas activas (ESRE001, ESRE002)
      */
     public function getTotalReservasActivas()
     {
-        $query = "SELECT COUNT(*) FROM reserva WHERE estado_codigo IN ('EPA001', 'EPA003')";
+        $query = "SELECT COUNT(*) FROM reserva WHERE estado_codigo IN ('ESRE001', 'ESRE002')";
         $stmt = $this->db->query($query);
         return $stmt->fetchColumn() ?: 0;
     }

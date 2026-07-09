@@ -180,13 +180,13 @@ class Reserva {
      * Obtiene todos los usuarios y alojamientos para los select del formulario
      */
     public function getUsuarios() {
-        $query = "SELECT usuario_id, nombres, apellido_paterno, correo FROM usuario WHERE habilitado = true ORDER BY nombres ASC";
+        $query = "SELECT usuario_id, nombres, apellido_paterno, correo FROM usuario WHERE habilitado = true AND rol_id = 'b42b5b64-ad4a-4ab5-b669-d5bd38ae349e' ORDER BY nombres ASC";
         $stmt = $this->db->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAlojamientos() {
-        $query = "SELECT alojamiento_id, titulo, codigo FROM alojamiento WHERE habilitado = true ORDER BY titulo ASC";
+        $query = "SELECT alojamiento_id, titulo, codigo FROM alojamiento WHERE habilitado = true AND estado_codigo not in ('EPA002', 'EPA003', 'EPA004') ORDER BY titulo ASC";
         $stmt = $this->db->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
