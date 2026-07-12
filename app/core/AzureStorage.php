@@ -5,16 +5,24 @@ class AzureStorage
 {
     private static function getEnvVariables()
     {
-        $envFile = dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . '.env'; // Apunta a WS-ROOMS/.env
         $env = [];
-        
-        if (file_exists($envFile)) {
+        // 1) .env del propio proyecto (prioridad)
+        $localEnv  = dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . '.env';
+        // 2) .env compartido en WS-ROOMS/ (fallback para claves que falten)
+        $sharedEnv = dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . '.env';
+
+        foreach ([$localEnv, $sharedEnv] as $envFile) {
+            if (!file_exists($envFile)) continue;
             $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
             foreach ($lines as $line) {
                 if (strpos(trim($line), '#') === 0) continue;
                 if (strpos($line, '=') !== false) {
                     list($name, $value) = explode('=', $line, 2);
-                    $env[trim($name)] = trim($value, '"\'');
+                    $name = trim($name);
+                    if ($name === '') continue;
+                    if (!isset($env[$name])) {
+                        $env[$name] = trim($value, '"\'');
+                    }
                 }
             }
         }
