@@ -115,15 +115,32 @@
 
                                     // Avatar por defecto o foto real
                                     $avatarUrl = !empty($u['url_foto']) ? $u['url_foto'] : 'https://ui-avatars.com/api/?name=' . urlencode($u['nombres'] . ' ' . $u['apellido_paterno']) . '&background=random&color=fff&size=128';
+
+                                    // ¿Es estudiante/inquilino? (para badges/botón de verificación)
+                                    $esEst = stripos($rolNombre, 'Estudiante') !== false
+                                          || stripos($rolNombre, 'Inquilino') !== false
+                                          || in_array($u['rol_codigo'] ?? '', ['EST', 'INQUILINO', 'ESTUDIANTE']);
                                 ?>
                                 <tr class="<?= !$u['habilitado'] ? 'bg-light opacity-75' : '' ?>">
                                     <td class="ps-4 py-3">
                                         <div class="d-flex align-items-center gap-3">
                                             <img src="<?= $avatarUrl ?>" alt="Avatar" class="rounded-circle shadow-sm object-fit-cover" width="45" height="45" onerror="this.src='https://ui-avatars.com/api/?name=User&background=6c757d&color=fff'">
                                             <div>
-                                                <div class="fw-bold text-dark d-flex align-items-center gap-1">
+                                                <div class="fw-bold text-dark d-flex align-items-center gap-1 flex-wrap">
                                                     <?= htmlspecialchars($u['nombres'] . ' ' . $u['apellido_paterno']) ?>
-                                                    <?php if (!empty($u['verificado'])): ?>
+                                                    <?php if ($esEst && !empty($u['verificado'])): ?>
+                                                        <span class="badge bg-success bg-opacity-10 text-success border border-success" style="font-size:.7rem;" title="Estudiante verificado" data-bs-toggle="tooltip">
+                                                            <i class="fas fa-check-circle me-1"></i>Verificado
+                                                        </span>
+                                                    <?php elseif ($esEst && !empty($u['url_verificacion_estudiante'])): ?>
+                                                        <span class="badge bg-warning bg-opacity-10 text-warning border border-warning" style="font-size:.7rem;" title="Documento en revisión" data-bs-toggle="tooltip">
+                                                            <i class="fas fa-hourglass-half me-1"></i>En revisión
+                                                        </span>
+                                                    <?php elseif ($esEst): ?>
+                                                        <span class="badge bg-secondary bg-opacity-10 text-secondary border border-secondary" style="font-size:.7rem;" title="Sin verificar" data-bs-toggle="tooltip">
+                                                            <i class="fas fa-clock me-1"></i>No verificado
+                                                        </span>
+                                                    <?php elseif (!empty($u['verificado'])): ?>
                                                         <i class="fas fa-check-circle text-primary small" title="Cuenta Verificada" data-bs-toggle="tooltip"></i>
                                                     <?php endif; ?>
                                                 </div>
@@ -173,11 +190,18 @@
                                             <button type="button" class="btn btn-sm btn-outline-info" title="Ver Detalle" onclick="verUsuario('<?= $u['usuario_id'] ?>')">
                                                 <i class="fas fa-eye"></i>
                                             </button>
+                                            <?php if ($esEst && !empty($u['url_verificacion_estudiante'])): ?>
+                                                <button type="button" class="btn btn-sm <?= !empty($u['verificado']) ? 'btn-outline-secondary' : 'btn-outline-success' ?>"
+                                                        title="<?= !empty($u['verificado']) ? 'Revisar / quitar verificación' : 'Verificar estudiante' ?>"
+                                                        onclick="verUsuario('<?= $u['usuario_id'] ?>')">
+                                                    <i class="fas fa-shield-alt"></i>
+                                                </button>
+                                            <?php endif; ?>
                                             <button type="button" class="btn btn-sm btn-outline-warning" title="Editar Usuario" onclick="editarUsuario('<?= $u['usuario_id'] ?>')">
                                                 <i class="fas fa-edit"></i>
                                             </button>
-                                            <button type="button" class="btn btn-sm <?= $u['habilitado'] ? 'btn-outline-danger' : 'btn-outline-success' ?>" 
-                                                    title="<?= $u['habilitado'] ? 'Inhabilitar / Banear' : 'Reactivar acceso' ?>" 
+                                            <button type="button" class="btn btn-sm <?= $u['habilitado'] ? 'btn-outline-danger' : 'btn-outline-success' ?>"
+                                                    title="<?= $u['habilitado'] ? 'Inhabilitar / Banear' : 'Reactivar acceso' ?>"
                                                     onclick="toggleEstadoUsuario('<?= $u['usuario_id'] ?>', <?= $u['habilitado'] ? 'true' : 'false' ?>, '<?= htmlspecialchars(addslashes($u['nombres'])) ?>')">
                                                 <i class="fas <?= $u['habilitado'] ? 'fa-user-slash' : 'fa-user-check' ?>"></i>
                                             </button>
@@ -303,8 +327,8 @@ function editarUsuario(id) {
 
 function toggleEstadoUsuario(id, esActivo, nombreUsuario) {
     const accion = esActivo ? 'Inhabilitar (Banear)' : 'Reactivar acceso';
-    const desc = esActivo ? 
-        `El usuario "${nombreUsuario}" perderá acceso temporalmente a la plataforma Nido Universitario.` : 
+    const desc = esActivo ?
+        `El usuario "${nombreUsuario}" perderá acceso temporalmente a la plataforma Nido Universitario.` :
         `El usuario "${nombreUsuario}" podrá volver a iniciar sesión y utilizar la plataforma.`;
     const btnColor = esActivo ? '#d33' : '#198754';
     const btnText = esActivo ? 'Sí, inhabilitar' : 'Sí, reactivar';
@@ -352,6 +376,82 @@ function toggleEstadoUsuario(id, esActivo, nombreUsuario) {
                 window.location.reload();
             });
         }
+    });
+}
+
+// === Verificación de identidad de estudiantes/inquilinos ===
+function verificarEstudianteAdmin(id, nombre) {
+    Swal.fire({
+        title: '¿Verificar estudiante?',
+        text: 'Se marcará a "' + nombre + '" como estudiante verificado.',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#198754',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, verificar',
+        cancelButtonText: 'Cancelar'
+    }).then((r) => {
+        if (!r.isConfirmed) return;
+        const fd = new FormData(); fd.append('id', id);
+        fetch('/admin/usuarios/verificar', {
+            method: 'POST',
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            body: fd
+        })
+        .then(res => res.json())
+        .then(d => {
+            Swal.fire({
+                icon: d.success ? 'success' : 'error',
+                title: d.success ? 'Verificado' : 'Error',
+                text: d.mensaje,
+                timer: 1500,
+                showConfirmButton: false
+            }).then(() => { if (d.success) window.location.reload(); });
+        })
+        .catch(() => { window.location.reload(); });
+    });
+}
+
+function desverificarEstudianteAdmin(id, nombre) {
+    Swal.fire({
+        title: '¿Quitar verificación?',
+        text: 'Se retirará el estado de verificado a "' + nombre + '".',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, quitar',
+        cancelButtonText: 'Cancelar'
+    }).then((r) => {
+        if (!r.isConfirmed) return;
+        const fd = new FormData(); fd.append('id', id);
+        fetch('/admin/usuarios/desverificar', {
+            method: 'POST',
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            body: fd
+        })
+        .then(res => res.json())
+        .then(d => {
+            Swal.fire({
+                icon: d.success ? 'success' : 'error',
+                title: d.success ? 'Actualizado' : 'Error',
+                text: d.mensaje,
+                timer: 1500,
+                showConfirmButton: false
+            }).then(() => { if (d.success) window.location.reload(); });
+        })
+        .catch(() => { window.location.reload(); });
+    });
+}
+
+function abrirVisorDocumento(url) {
+    Swal.fire({
+        title: 'Documento de verificación',
+        html: '<img src="' + url + '" alt="documento" style="max-width:100%;max-height:70vh;border-radius:8px;">',
+        width: 700,
+        showCloseButton: true,
+        showConfirmButton: false,
+        background: '#fff'
     });
 }
 </script>

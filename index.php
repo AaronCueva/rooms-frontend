@@ -151,6 +151,8 @@ $router->post('/admin/usuarios/guardar', 'AdminUsuarioController', 'guardar');
 $router->get('/admin/usuarios/editar-modal', 'AdminUsuarioController', 'editarModal');
 $router->post('/admin/usuarios/actualizar', 'AdminUsuarioController', 'actualizar');
 $router->post('/admin/usuarios/toggle-estado', 'AdminUsuarioController', 'toggleEstado');
+$router->post('/admin/usuarios/verificar', 'AdminUsuarioController', 'verificarEstudiante');
+$router->post('/admin/usuarios/desverificar', 'AdminUsuarioController', 'desverificarEstudiante');
 
 // Ejecutar ruta
 $router->dispatch();

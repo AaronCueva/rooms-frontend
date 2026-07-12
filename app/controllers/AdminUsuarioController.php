@@ -209,4 +209,80 @@ class AdminUsuarioController extends Controller
         }
         $this->redirect('/admin/usuarios');
     }
+
+    /**
+     * POST /admin/usuarios/verificar — aprueba la verificación de identidad de un estudiante.
+     * Acepta AJAX (devuelve JSON) o form normal (flash + redirect).
+     */
+    public function verificarEstudiante()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirect('/admin/usuarios');
+        }
+
+        $id = $_POST['id'] ?? $_POST['usuario_id'] ?? null;
+        if (!$id) {
+            $this->json(['success' => false, 'mensaje' => 'Identificador de usuario inválido.']);
+        }
+
+        $usuarioModel = new Usuario();
+        $ok = $usuarioModel->setVerificado($id, true);
+
+        if ($this->esAjax()) {
+            $this->json([
+                'success' => $ok,
+                'mensaje' => $ok ? 'Estudiante verificado correctamente.' : 'No se pudo verificar al estudiante.'
+            ]);
+        }
+
+        self::setFlash($ok ? 'success' : 'error', $ok ? 'Estudiante verificado correctamente.' : 'No se pudo verificar al estudiante.');
+        $this->redirect('/admin/usuarios');
+    }
+
+    /**
+     * POST /admin/usuarios/desverificar — revoca la verificación de un estudiante.
+     */
+    public function desverificarEstudiante()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            $this->redirect('/admin/usuarios');
+        }
+
+        $id = $_POST['id'] ?? $_POST['usuario_id'] ?? null;
+        if (!$id) {
+            $this->json(['success' => false, 'mensaje' => 'Identificador de usuario inválido.']);
+        }
+
+        $usuarioModel = new Usuario();
+        $ok = $usuarioModel->setVerificado($id, false);
+
+        if ($this->esAjax()) {
+            $this->json([
+                'success' => $ok,
+                'mensaje' => $ok ? 'Verificación retirada.' : 'No se pudo actualizar el estado de verificación.'
+            ]);
+        }
+
+        self::setFlash($ok ? 'success' : 'error', $ok ? 'Verificación retirada.' : 'No se pudo actualizar el estado de verificación.');
+        $this->redirect('/admin/usuarios');
+    }
+
+    /**
+     * ¿La petición actual es AJAX?
+     */
+    private function esAjax(): bool
+    {
+        return (strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'xmlhttprequest')
+            || (strpos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') !== false);
+    }
+
+    /**
+     * Devuelve JSON y termina.
+     */
+    private function json(array $payload): void
+    {
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($payload);
+        exit;
+    }
 }
