@@ -18,7 +18,7 @@ class DashboardModel
      */
     public function getTotalReservasActivas()
     {
-        $query = "SELECT COUNT(*) FROM reserva WHERE estado_codigo IN ('ESRE001', 'ESRE002')";
+        $query = "SELECT COUNT(*) FROM reserva WHERE estado_codigo IN ('ESRE006', 'ESRE002')";
         $stmt = $this->db->query($query);
         return $stmt->fetchColumn() ?: 0;
     }

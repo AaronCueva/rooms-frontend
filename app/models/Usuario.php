@@ -330,4 +330,17 @@ class Usuario
         }
         return null;
     }
+
+    /**
+     * Marca a un usuario como verificado (true) o no verificado (false).
+     * Usado por el admin para aprobar la verificación de identidad de un estudiante.
+     */
+    public function setVerificado($id, bool $verificado): bool
+    {
+        $query = "UPDATE usuario SET verificado = :v, modificado = CURRENT_TIMESTAMP WHERE usuario_id = :id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindValue(':v', $verificado, PDO::PARAM_BOOL);
+        $stmt->bindValue(':id', $id);
+        return $stmt->execute();
+    }
 }

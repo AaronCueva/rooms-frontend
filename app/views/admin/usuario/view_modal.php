@@ -80,6 +80,59 @@
             </ul>
         </div>
     </div>
+
+    <?php
+    // Sección de verificación de identidad — sólo para estudiantes/inquilinos
+    $esEstudiante = stripos($usuario['rol_nombre'] ?? '', 'Estudiante') !== false
+                 || stripos($usuario['rol_nombre'] ?? '', 'Inquilino') !== false
+                 || in_array($usuario['rol_codigo'] ?? '', ['EST', 'INQUILINO', 'ESTUDIANTE']);
+    ?>
+    <?php if ($esEstudiante): ?>
+        <div class="col-12 mt-2">
+            <h6 class="text-uppercase small fw-bold text-secondary border-bottom pb-2 mb-3">
+                <i class="fas fa-shield-alt text-success me-2"></i>Verificación de identidad
+            </h6>
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 p-3 rounded-3 border bg-light">
+                <div class="d-flex align-items-center gap-2">
+                    <?php if (!empty($usuario['verificado'])): ?>
+                        <span class="badge bg-success px-3 py-2"><i class="fas fa-check-circle me-1"></i>Verificado</span>
+                    <?php elseif (!empty($usuario['url_verificacion_estudiante'])): ?>
+                        <span class="badge bg-warning text-dark px-3 py-2"><i class="fas fa-hourglass-half me-1"></i>En revisión</span>
+                    <?php else: ?>
+                        <span class="badge bg-secondary px-3 py-2"><i class="fas fa-clock me-1"></i>Sin documento</span>
+                    <?php endif; ?>
+                    <span class="text-muted small">Documento de verificación del estudiante</span>
+                </div>
+                <div class="d-flex gap-2 flex-wrap">
+                    <?php if (!empty($usuario['url_verificacion_estudiante'])):
+                        $urlDoc = $usuario['url_verificacion_estudiante'];
+                        $esImg  = preg_match('/\.(jpg|jpeg|png|webp|gif)(\?|$)/i', $urlDoc);
+                    ?>
+                        <?php if ($esImg): ?>
+                            <button type="button" class="btn btn-outline-info btn-sm" onclick="abrirVisorDocumento('<?= htmlspecialchars($urlDoc, ENT_QUOTES) ?>')">
+                                <i class="fas fa-eye me-1"></i> Ver documento
+                            </button>
+                        <?php else: ?>
+                            <a href="<?= htmlspecialchars($urlDoc) ?>" target="_blank" rel="noopener" class="btn btn-outline-info btn-sm">
+                                <i class="fas fa-file-pdf me-1"></i> Abrir documento
+                            </a>
+                        <?php endif; ?>
+                        <?php if (empty($usuario['verificado'])): ?>
+                            <button type="button" class="btn btn-success btn-sm fw-semibold" onclick="verificarEstudianteAdmin('<?= $usuario['usuario_id'] ?>', '<?= htmlspecialchars(addslashes($usuario['nombres'] ?? ''), ENT_QUOTES) ?>')">
+                                <i class="fas fa-check me-1"></i> Aprobar verificación
+                            </button>
+                        <?php else: ?>
+                            <button type="button" class="btn btn-outline-danger btn-sm" onclick="desverificarEstudianteAdmin('<?= $usuario['usuario_id'] ?>', '<?= htmlspecialchars(addslashes($usuario['nombres'] ?? ''), ENT_QUOTES) ?>')">
+                                <i class="fas fa-times me-1"></i> Quitar verificación
+                            </button>
+                        <?php endif; ?>
+                    <?php else: ?>
+                        <span class="text-muted small align-self-center">El estudiante aún no ha subido su documento.</span>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>
 <div class="modal-footer bg-light px-4 py-3 d-flex justify-content-between">
     <button type="button" class="btn btn-outline-secondary btn-sm px-3" data-bs-dismiss="modal">Cerrar</button>
