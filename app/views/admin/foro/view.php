@@ -99,11 +99,6 @@
                         <div class="list-group list-group-flush">
                             <?php foreach ($comentarios_padres as $comentario): ?>
                                 <?php echo renderComentario($comentario, $comentarios_hijos, $foro); ?>
-                                <?php if (isset($comentarios_hijos[$comentario['foro_comentario_id']])): ?>
-                                    <?php foreach ($comentarios_hijos[$comentario['foro_comentario_id']] as $hijo): ?>
-                                        <?php echo renderComentario($hijo, $comentarios_hijos, $foro, 'ms-4 border-start ps-3'); ?>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
                     <?php else: ?>

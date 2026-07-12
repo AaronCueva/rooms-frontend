@@ -53,6 +53,7 @@ $router->post('/admin/foros/comentario/eliminar', 'AdminForoController', 'elimin
 $router->post('/admin/foros/comentario/restaurar', 'AdminForoController', 'restaurarComentario');
 $router->post('/admin/foros/ban-usuario', 'AdminForoController', 'toggleBanUsuario');
 $router->get('/admin/foros/editar-modal', 'AdminForoController', 'editarForoModal');
+$router->get('/admin/foros/comentario/editar-modal', 'AdminForoController', 'editarComentarioModal');
 $router->post('/admin/foros/actualizar', 'AdminForoController', 'actualizarForo');
 $router->post('/admin/foros/comentario/actualizar', 'AdminForoController', 'actualizarComentario');
 
