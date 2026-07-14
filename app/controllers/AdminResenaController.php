@@ -32,7 +32,7 @@ class AdminResenaController extends Controller
         $pagina = min($pagina, $total_paginas);
 
         $resenas = $resenaModel->buscar($filtros, $pagina, $por_pagina);
-        $estados = $catalogoModel->obtenerPorReferencia('ESTADO_RESENA');
+        $estados = $catalogoModel->obtenerPorReferencia('ESTADO_RESENIA_ALOJAMIENTO');
 
         $data = [
             'titulo' => 'Gestión de Reseñas',

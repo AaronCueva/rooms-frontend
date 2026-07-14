@@ -93,10 +93,10 @@
                         <?php 
                             $cod = $item['estado_codigo'] ?? '';
                             $hab = $item['habilitado'] ?? true;
-                            if (!$hab || $cod === 'ESRS003' || $cod === 'ESRA004'):
+                            if (!$hab || $cod === 'ESRA004'):
                         ?>
                             <span class="badge bg-dark">Oculto</span>
-                        <?php elseif ($cod === 'ESRS002' || $cod === 'ESRA003'): ?>
+                        <?php elseif ($cod === 'ESRA003'): ?>
                             <span class="badge bg-danger">Reportado</span>
                         <?php elseif ($cod === 'ESRS004'): ?>
                             <span class="badge bg-warning text-dark">Pendiente</span>
@@ -129,30 +129,30 @@
                 </div>
                 
                 <div class="d-flex flex-wrap gap-2">
-                    <?php if ($cod !== 'ESRS001' || !$hab): ?>
+                    <?php if ($cod !== 'ESRA001' || !$hab): ?>
                         <form action="/admin/resenas/cambiar-estado" method="POST" class="form-confirm mb-0" data-title="¿Aprobar reseña?" data-text="La reseña se marcará como ACTIVA y será visible públicamente en la plataforma." data-icon="question" data-confirm-text="Sí, activar">
                             <input type="hidden" name="id" value="<?php echo $item['resena_id']; ?>">
-                            <input type="hidden" name="estado_codigo" value="ESRS001">
+                            <input type="hidden" name="estado_codigo" value="ESRA001">
                             <button type="submit" class="btn btn-sm btn-success fw-semibold py-1 px-2" style="font-size: 0.8rem;">
                                 <i class="fas fa-check-circle me-1"></i> Aprobar / Activar
                             </button>
                         </form>
                     <?php endif; ?>
 
-                    <?php if ($cod !== 'ESRS002'): ?>
+                    <?php if ($cod !== 'ESRA003'): ?>
                         <form action="/admin/resenas/cambiar-estado" method="POST" class="form-confirm mb-0" data-title="¿Marcar como reportada?" data-text="La reseña se marcará en revisión por reporte." data-icon="question" data-confirm-text="Sí, reportar">
                             <input type="hidden" name="id" value="<?php echo $item['resena_id']; ?>">
-                            <input type="hidden" name="estado_codigo" value="ESRS002">
+                            <input type="hidden" name="estado_codigo" value="ESRA003">
                             <button type="submit" class="btn btn-sm btn-outline-warning text-dark fw-semibold py-1 px-2" style="font-size: 0.8rem;">
                                 <i class="fas fa-exclamation-triangle me-1"></i> Marcar Reportada
                             </button>
                         </form>
                     <?php endif; ?>
 
-                    <?php if ($cod !== 'ESRS003' && $hab): ?>
+                    <?php if ($cod !== 'ESRA004' && $hab): ?>
                         <form action="/admin/resenas/cambiar-estado" method="POST" class="form-confirm mb-0" data-title="¿Ocultar reseña?" data-text="La reseña será retirada inmediatamente de la vista pública por violar las normas." data-icon="question" data-confirm-text="Sí, ocultar">
                             <input type="hidden" name="id" value="<?php echo $item['resena_id']; ?>">
-                            <input type="hidden" name="estado_codigo" value="ESRS003">
+                            <input type="hidden" name="estado_codigo" value="ESRA004">
                             <button type="submit" class="btn btn-sm btn-danger fw-semibold py-1 px-2" style="font-size: 0.8rem;">
                                 <i class="fas fa-eye-slash me-1"></i> Ocultar
                             </button>

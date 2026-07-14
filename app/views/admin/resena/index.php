@@ -41,9 +41,9 @@
                                 </option>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <option value="ESRS001" <?php echo (isset($filtros['estado']) && $filtros['estado'] === 'ESRS001') ? 'selected' : ''; ?>>Activo</option>
-                            <option value="ESRS002" <?php echo (isset($filtros['estado']) && $filtros['estado'] === 'ESRS002') ? 'selected' : ''; ?>>Reportado</option>
-                            <option value="ESRS003" <?php echo (isset($filtros['estado']) && $filtros['estado'] === 'ESRS003') ? 'selected' : ''; ?>>Oculto</option>
+                            <option value="ESRA001" <?php echo (isset($filtros['estado']) && $filtros['estado'] === 'ESRA001') ? 'selected' : ''; ?>>Activo</option>
+                            <option value="ESRA003" <?php echo (isset($filtros['estado']) && $filtros['estado'] === 'ESRA003') ? 'selected' : ''; ?>>Reportado</option>
+                            <option value="ESRA004" <?php echo (isset($filtros['estado']) && $filtros['estado'] === 'ESRA004') ? 'selected' : ''; ?>>Oculto</option>
                         <?php endif; ?>
                     </select>
                 </div>
@@ -141,12 +141,12 @@
                                         <?php 
                                             $cod = $item['estado_codigo'] ?? '';
                                             $hab = $item['habilitado'] ?? true;
-                                            if (!$hab || $cod === 'ESRS003' || $cod === 'ESRA004'):
+                                            if (!$hab || $cod === 'ESRA004'):
                                         ?>
                                             <span class="badge bg-dark text-white px-2 py-1">
                                                 <i class="fas fa-eye-slash me-1"></i> Oculto
                                             </span>
-                                        <?php elseif ($cod === 'ESRS002' || $cod === 'ESRA003'): ?>
+                                        <?php elseif ($cod === 'ESRA003'): ?>
                                             <span class="badge bg-danger text-white px-2 py-1 animate__animated animate__pulse animate__infinite">
                                                 <i class="fas fa-exclamation-triangle me-1"></i> Reportado
                                             </span>
@@ -166,20 +166,20 @@
                                                 <i class="fas fa-eye"></i>
                                             </button>
 
-                                            <?php if ($cod === 'ESRS002' || $cod === 'ESRA003'): ?>
+                                            <?php if ($cod === 'ESRA003'): ?>
                                                 <!-- Si está reportado, botón rápido para aprobar -->
                                                 <form action="/admin/resenas/cambiar-estado" method="POST" class="d-inline form-confirm" data-title="¿Aprobar reseña reportada?" data-text="La reseña volverá al estado Activo y será visible en la plataforma." data-icon="question" data-confirm-text="Sí, aprobar">
                                                     <input type="hidden" name="id" value="<?php echo $item['resena_id']; ?>">
-                                                    <input type="hidden" name="estado_codigo" value="ESRS001">
+                                                    <input type="hidden" name="estado_codigo" value="ESRA001">
                                                     <button type="submit" class="btn btn-sm btn-outline-success" title="Aprobar y retirar reporte">
                                                         <i class="fas fa-check"></i>
                                                     </button>
                                                 </form>
                                             <?php endif; ?>
 
-                                            <form action="/admin/resenas/toggle-estado" method="POST" class="d-inline form-confirm" data-title="<?php echo ($hab && $cod !== 'ESRS003') ? '¿Ocultar reseña?' : '¿Restaurar reseña?'; ?>" data-text="<?php echo ($hab && $cod !== 'ESRS003') ? 'La reseña ya no será visible para los estudiantes en el alojamiento.' : 'La reseña volverá a estar visible públicamente en el alojamiento.'; ?>" data-icon="question" data-confirm-text="<?php echo ($hab && $cod !== 'ESRS003') ? 'Sí, ocultar' : 'Sí, restaurar'; ?>">
+                                            <form action="/admin/resenas/toggle-estado" method="POST" class="d-inline form-confirm" data-title="<?php echo ($hab && $cod !== 'ESRA004') ? '¿Ocultar reseña?' : '¿Restaurar reseña?'; ?>" data-text="<?php echo ($hab && $cod !== 'ESRA004') ? 'La reseña ya no será visible para los estudiantes en el alojamiento.' : 'La reseña volverá a estar visible públicamente en el alojamiento.'; ?>" data-icon="question" data-confirm-text="<?php echo ($hab && $cod !== 'ESRA004') ? 'Sí, ocultar' : 'Sí, restaurar'; ?>">
                                                 <input type="hidden" name="id" value="<?php echo $item['resena_id']; ?>">
-                                                <?php if ($hab && $cod !== 'ESRS003'): ?>
+                                                <?php if ($hab && $cod !== 'ESRA004'): ?>
                                                     <button type="submit" class="btn btn-sm btn-outline-danger btn-accion btn-accion-hide" title="Ocultar reseña">
                                                         <i class="fas fa-eye-slash"></i>
                                                     </button>

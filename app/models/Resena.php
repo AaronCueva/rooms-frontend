@@ -12,20 +12,16 @@ class Resena {
     }
 
     /**
-     * Obtiene las reseñas de un alojamiento (a través del contrato -> reserva -> alojamiento)
+     * Obtiene las reseñas de un alojamiento
      */
     public function getByAlojamientoId($alojamiento_id) {
         $query = "
-            SELECT r.*, 
-                   c.contrato_id, c.fecha_inicio AS contrato_fecha_inicio, c.fecha_fin AS contrato_fecha_fin,
-                   res.reserva_id, 
+            SELECT r.resenia_alojamiento_id AS resena_id, r.calificacion, r.comentario, r.respuesta_propietario, r.habilitado, r.estado_codigo, r.creado AS fecha_creado,
                    u.nombres, u.apellido_paterno, u.correo, u.url_foto AS usuario_foto
-            FROM resena r
-            INNER JOIN contrato c ON r.contrato_id = c.contrato_id
-            INNER JOIN reserva res ON c.reserva_id = res.reserva_id
-            INNER JOIN usuario u ON res.usuario_id = u.usuario_id
-            WHERE res.alojamiento_id = :alojamiento_id
-            ORDER BY r.fecha_creado DESC
+            FROM resenia_alojamiento r
+            LEFT JOIN usuario u ON r.estudiante_id = u.usuario_id
+            WHERE r.alojamiento_id = :alojamiento_id
+            ORDER BY r.creado DESC
         ";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':alojamiento_id' => $alojamiento_id]);
@@ -33,14 +29,28 @@ class Resena {
     }
 
     public function getByContratoId($contrato_id) {
-        $query = "SELECT * FROM resena WHERE contrato_id = :contrato_id ORDER BY fecha_creado DESC";
+        // En esta nueva estructura, las reseñas son al alojamiento y no al contrato.
+        // Podríamos obtener la reserva del contrato y con eso el alojamiento y el estudiante
+        // para encontrar la reseña correspondiente.
+        $query = "
+            SELECT r.resenia_alojamiento_id AS resena_id, r.*, r.creado AS fecha_creado
+            FROM resenia_alojamiento r
+            INNER JOIN reserva res ON r.alojamiento_id = res.alojamiento_id AND r.estudiante_id = res.usuario_id
+            INNER JOIN contrato c ON res.reserva_id = c.reserva_id
+            WHERE c.contrato_id = :contrato_id
+            ORDER BY r.creado DESC
+        ";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':contrato_id' => $contrato_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function findById($id) {
-        $query = "SELECT * FROM resena WHERE resena_id = :id";
+        $query = "
+            SELECT r.*, r.resenia_alojamiento_id AS resena_id, r.creado AS fecha_creado
+            FROM resenia_alojamiento r 
+            WHERE r.resenia_alojamiento_id = :id
+        ";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -48,21 +58,19 @@ class Resena {
 
     public function findDetalleById($id) {
         $query = "
-            SELECT r.*, 
-                   c.contrato_id, c.fecha_inicio AS contrato_fecha_inicio, c.fecha_fin AS contrato_fecha_fin, c.monto_renta,
-                   res.reserva_id, res.alojamiento_id,
+            SELECT r.resenia_alojamiento_id AS resena_id, r.calificacion, r.comentario, r.respuesta_propietario, r.habilitado, r.estado_codigo, r.creado AS fecha_creado,
+                   NULL AS contrato_id, NULL AS contrato_fecha_inicio, NULL AS contrato_fecha_fin, NULL AS monto_renta,
+                   NULL AS reserva_id, r.alojamiento_id,
                    a.titulo AS alojamiento_titulo, a.direccion AS alojamiento_direccion, a.precio_mensual,
                    u.usuario_id AS estudiante_id, u.nombres, u.apellido_paterno, u.correo, u.url_foto AS usuario_foto, u.celular,
                    prop.nombres AS prop_nombres, prop.apellido_paterno AS prop_ap, prop.correo AS prop_correo, prop.celular AS prop_celular,
                    cat.nombre AS estado_nombre
-            FROM resena r
-            LEFT JOIN contrato c ON r.contrato_id = c.contrato_id
-            LEFT JOIN reserva res ON c.reserva_id = res.reserva_id
-            LEFT JOIN alojamiento a ON res.alojamiento_id = a.alojamiento_id
-            LEFT JOIN usuario u ON res.usuario_id = u.usuario_id
-            LEFT JOIN usuario prop ON a.usuario_id = prop.usuario_id
-            LEFT JOIN catalogo cat ON r.estado_codigo = cat.codigo AND cat.referencia_codigo = 'ESTADO_RESENA'
-            WHERE r.resena_id = :id
+            FROM resenia_alojamiento r
+            LEFT JOIN alojamiento a ON r.alojamiento_id = a.alojamiento_id
+            LEFT JOIN usuario u ON r.estudiante_id = u.usuario_id
+            LEFT JOIN usuario prop ON r.propietario_id = prop.usuario_id
+            LEFT JOIN catalogo cat ON r.estado_codigo = cat.codigo AND cat.referencia_codigo = 'ESTADO_RESENIA_ALOJAMIENTO'
+            WHERE r.resenia_alojamiento_id = :id
         ";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':id' => $id]);
@@ -86,8 +94,14 @@ class Resena {
                 $condiciones[] = "r.habilitado = :hab";
                 $params[':hab'] = $filtros['estado'];
             } else {
+                // Mapear filtros si vienen con códigos ESRS a códigos ESRA si es necesario
+                $estadoFiltro = $filtros['estado'];
+                if ($estadoFiltro === 'ESRS001') $estadoFiltro = 'ESRA001';
+                if ($estadoFiltro === 'ESRS002') $estadoFiltro = 'ESRA003';
+                if ($estadoFiltro === 'ESRS003') $estadoFiltro = 'ESRA004';
+
                 $condiciones[] = "r.estado_codigo = :estado";
-                $params[':estado'] = $filtros['estado'];
+                $params[':estado'] = $estadoFiltro;
             }
         }
 
@@ -99,20 +113,18 @@ class Resena {
         $offset = ($pagina - 1) * $por_pagina;
 
         $query = "
-            SELECT r.*, 
-                   c.contrato_id, c.fecha_inicio AS contrato_fecha_inicio, c.fecha_fin AS contrato_fecha_fin,
-                   res.reserva_id, res.alojamiento_id,
+            SELECT r.resenia_alojamiento_id AS resena_id, r.calificacion, r.comentario, r.respuesta_propietario, r.habilitado, r.estado_codigo, r.creado AS fecha_creado,
+                   NULL AS contrato_id, NULL AS contrato_fecha_inicio, NULL AS contrato_fecha_fin,
+                   NULL AS reserva_id, r.alojamiento_id,
                    a.titulo AS alojamiento_titulo,
                    u.nombres, u.apellido_paterno, u.correo, u.url_foto AS usuario_foto,
                    cat.nombre AS estado_nombre
-            FROM resena r
-            LEFT JOIN contrato c ON r.contrato_id = c.contrato_id
-            LEFT JOIN reserva res ON c.reserva_id = res.reserva_id
-            LEFT JOIN alojamiento a ON res.alojamiento_id = a.alojamiento_id
-            LEFT JOIN usuario u ON res.usuario_id = u.usuario_id
-            LEFT JOIN catalogo cat ON r.estado_codigo = cat.codigo AND cat.referencia_codigo = 'ESTADO_RESENA'
+            FROM resenia_alojamiento r
+            LEFT JOIN alojamiento a ON r.alojamiento_id = a.alojamiento_id
+            LEFT JOIN usuario u ON r.estudiante_id = u.usuario_id
+            LEFT JOIN catalogo cat ON r.estado_codigo = cat.codigo AND cat.referencia_codigo = 'ESTADO_RESENIA_ALOJAMIENTO'
             $where
-            ORDER BY r.fecha_creado DESC
+            ORDER BY r.creado DESC
             LIMIT $por_pagina OFFSET $offset
         ";
         $stmt = $this->db->prepare($query);
@@ -137,8 +149,13 @@ class Resena {
                 $condiciones[] = "r.habilitado = :hab";
                 $params[':hab'] = $filtros['estado'];
             } else {
+                $estadoFiltro = $filtros['estado'];
+                if ($estadoFiltro === 'ESRS001') $estadoFiltro = 'ESRA001';
+                if ($estadoFiltro === 'ESRS002') $estadoFiltro = 'ESRA003';
+                if ($estadoFiltro === 'ESRS003') $estadoFiltro = 'ESRA004';
+
                 $condiciones[] = "r.estado_codigo = :estado";
-                $params[':estado'] = $filtros['estado'];
+                $params[':estado'] = $estadoFiltro;
             }
         }
 
@@ -149,11 +166,9 @@ class Resena {
 
         $query = "
             SELECT COUNT(*) 
-            FROM resena r
-            LEFT JOIN contrato c ON r.contrato_id = c.contrato_id
-            LEFT JOIN reserva res ON c.reserva_id = res.reserva_id
-            LEFT JOIN alojamiento a ON res.alojamiento_id = a.alojamiento_id
-            LEFT JOIN usuario u ON res.usuario_id = u.usuario_id
+            FROM resenia_alojamiento r
+            LEFT JOIN alojamiento a ON r.alojamiento_id = a.alojamiento_id
+            LEFT JOIN usuario u ON r.estudiante_id = u.usuario_id
             $where
         ";
         $stmt = $this->db->prepare($query);
@@ -166,41 +181,22 @@ class Resena {
         if (!$resena) return;
 
         $nuevoHab = !$resena['habilitado'];
-        $nuevoEstado = $nuevoHab ? 'ESRS001' : 'ESRS003'; // ACTIVO vs OCULTO
+        $nuevoEstado = $nuevoHab ? 'ESRA001' : 'ESRA004'; // ACTIVO vs OCULTO
 
-        $query = "UPDATE resena SET habilitado = :hab, estado_codigo = :est, modificado = CURRENT_TIMESTAMP WHERE resena_id = :id";
+        $query = "UPDATE resenia_alojamiento SET habilitado = :hab, estado_codigo = :est, modificado = CURRENT_TIMESTAMP WHERE resenia_alojamiento_id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':hab' => $nuevoHab ? 'true' : 'false', ':est' => $nuevoEstado, ':id' => $id]);
-
-        // Sincronizar con resenia_alojamiento si existe
-        try {
-            if (!empty($resena['comentario'])) {
-                $estadoAloj = $nuevoHab ? 'ESRA001' : 'ESRA004';
-                $qSync = "UPDATE resenia_alojamiento SET habilitado = :hab, estado_codigo = :est, modificado = CURRENT_TIMESTAMP WHERE comentario = :coment AND calificacion = :calif";
-                $stmtSync = $this->db->prepare($qSync);
-                $stmtSync->execute([':hab' => $nuevoHab ? 'true' : 'false', ':est' => $estadoAloj, ':coment' => $resena['comentario'], ':calif' => $resena['calificacion']]);
-            }
-        } catch (\Exception $e) {}
     }
 
     public function cambiarEstado($id, $estado_codigo) {
-        $hab = ($estado_codigo !== 'ESRS003'); // Si es OCULTO, habilitado = false, de lo contrario true
-        $query = "UPDATE resena SET estado_codigo = :estado, habilitado = :hab, modificado = CURRENT_TIMESTAMP WHERE resena_id = :id";
+        // Adaptar el estado_codigo que viene desde la vista si envian codigo ESRS
+        if ($estado_codigo === 'ESRS001') $estado_codigo = 'ESRA001';
+        if ($estado_codigo === 'ESRS002') $estado_codigo = 'ESRA003';
+        if ($estado_codigo === 'ESRS003') $estado_codigo = 'ESRA004';
+
+        $hab = ($estado_codigo !== 'ESRA004'); // Si es OCULTO, habilitado = false, de lo contrario true
+        $query = "UPDATE resenia_alojamiento SET estado_codigo = :estado, habilitado = :hab, modificado = CURRENT_TIMESTAMP WHERE resenia_alojamiento_id = :id";
         $stmt = $this->db->prepare($query);
         $stmt->execute([':estado' => $estado_codigo, ':hab' => $hab ? 'true' : 'false', ':id' => $id]);
-
-        // Sincronizar con resenia_alojamiento si existe
-        try {
-            $resena = $this->findById($id);
-            if ($resena && !empty($resena['comentario'])) {
-                $estadoAloj = 'ESRA001';
-                if ($estado_codigo === 'ESRS002') $estadoAloj = 'ESRA003';
-                if ($estado_codigo === 'ESRS003') $estadoAloj = 'ESRA004';
-                
-                $qSync = "UPDATE resenia_alojamiento SET estado_codigo = :estado_aloj, habilitado = :hab, modificado = CURRENT_TIMESTAMP WHERE comentario = :coment AND calificacion = :calif";
-                $stmtSync = $this->db->prepare($qSync);
-                $stmtSync->execute([':estado_aloj' => $estadoAloj, ':hab' => $hab ? 'true' : 'false', ':coment' => $resena['comentario'], ':calif' => $resena['calificacion']]);
-            }
-        } catch (\Exception $e) {}
     }
 }
